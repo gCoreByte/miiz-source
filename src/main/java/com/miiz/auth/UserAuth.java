@@ -1,28 +1,55 @@
 package com.miiz.auth;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-
 /**
  * General user authentication class
  */
 public class UserAuth {
 
-    // user cookie - "remember me"
-    private String userCookie;
+    // user token and secret - "remember me"
+    private String userToken;
+    private String userSecret;
 
-    private static byte[] getSalt() throws NoSuchAlgorithmException {
-        SecureRandom random = new SecureRandom();
-        byte[] salt = new byte[16];
-        random.nextBytes(salt);
-        return salt;
+    public UserAuth(String userToken, String userSecret) {
+        this.userToken = userToken;
+        this.userSecret = userSecret;
+    }
+    //TODO
+
+    /**
+     * Tries to log the user in.
+     *
+     * @param email - user email to log in with
+     * @param password - user password to log in with
+     * @return boolean - true if success, false if error
+     */
+    public boolean userLogin(String email, String password) {
+        return false;
     }
 
-    public static boolean userLogin(String email, String password, String url) throws NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-        byte[] salt = getSalt();
-        md.update(salt);
+    /**
+     * Tries to register an account.
+     *
+     * @param email - user email to register with
+     * @param password - user password to log in with
+     * @return boolean - true if succes, false if error
+     */
+    public boolean userRegister(String email, String password) {
+        return false;
+    }
 
+    public String getUserToken() {
+        return userToken;
+    }
+
+    public void setUserToken(String userToken) {
+        this.userToken = userToken;
+    }
+
+    public String getUserSecret() {
+        return userSecret;
+    }
+
+    public void setUserSecret(String userSecret) {
+        this.userSecret = userSecret;
     }
 }
