@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'com.miiz'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+run {
+    standardInput = System.in
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:1.7.0'
+}
+
+application {
+    mainClass = 'com.miiz.App'
+}
+
+test {
+    useJUnitPlatform()
+}
