@@ -1,6 +1,5 @@
 package com.miiz.todolist;
 
-import com.miiz.database.Database;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +11,9 @@ public class ToDoList {
     private long id;
     private long ownerid;
 
-    public ToDoList(String listName) {
+    public ToDoList(String listName, long ownerid) {
         this.listName = listName;
+        this.ownerid = ownerid;
     }
 
     public ToDoList(List<ListLine> listLines, String listName, long id, long ownerid) {
@@ -52,6 +52,14 @@ public class ToDoList {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getOwnerid() {
+        return ownerid;
+    }
+
+    public void setOwnerid(long ownerid) {
+        this.ownerid = ownerid;
     }
 
     public void addListLineInit(ListLine line) {

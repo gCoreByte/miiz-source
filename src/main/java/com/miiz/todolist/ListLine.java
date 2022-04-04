@@ -3,16 +3,16 @@ package com.miiz.todolist;
 public class ListLine {
     private long id;
     private String content;
-    private long parent_id;
+    private long parentid;
 
     public ListLine(String content) {
         this.content = content;
     }
 
-    public ListLine(long id, String content, long parent_id) {
+    public ListLine(long id, String content, long parentid) {
         this.id = id;
         this.content = content;
-        this.parent_id = parent_id;
+        this.parentid = parentid;
     }
 
     public ListLine(long id) {
@@ -31,7 +31,7 @@ public class ListLine {
         return id;
     }
 
-    public long getParent_id() {
-        return parent_id;
+    public long getParentid() {
+        return parentid;
     }
 }

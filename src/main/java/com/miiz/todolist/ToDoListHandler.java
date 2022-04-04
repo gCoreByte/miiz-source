@@ -1,13 +1,24 @@
 package com.miiz.todolist;
 
+import com.miiz.auth.User;
 import com.miiz.database.Database;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 import java.util.Scanner;
 
 public class ToDoListHandler {
 
-    Database database = new Database();
+    private final Database database;
+    private final Scanner scan;
+    private final User user;
+
+    public ToDoListHandler(Database database, Scanner scan, User user) {
+        this.database = database;
+        this.scan = scan;
+        this.user = user;
+    }
+
 
     public void main() {
 
@@ -32,7 +43,7 @@ public class ToDoListHandler {
                     while (name.contains("false input")) {
                         name = scanInputString("Sisesta lühem nimekirja pealkiri");
                     }
-                    ToDoList newList = new ToDoList(name);
+                    ToDoList newList = new ToDoList(name, user.getId());
                     newList = database.addTodoList(newList);
                     lists.add(newList);
                 }
@@ -71,9 +82,6 @@ public class ToDoListHandler {
     }
 
     public int scanInputInt(String task){
-
-        Scanner scan = new Scanner(System.in);
-
         System.out.println(task);
 
         String input = scan.nextLine();
@@ -92,11 +100,7 @@ public class ToDoListHandler {
     }
 
     public String scanInputString(String task){
-
-        Scanner scan = new Scanner(System.in);
-
         System.out.println(task);
-
         return scan.nextLine();
     }
 
