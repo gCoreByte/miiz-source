@@ -9,19 +9,22 @@ public class ToDoList {
 
     private List<ListLine> listLines;
     private String listName;
-    private Long id;
+    private long id;
+    private long ownerid;
 
 
-    public ToDoList(List<ListLine> listLines, String listName, Long id) {
+    public ToDoList(List<ListLine> listLines, String listName, long id, long ownerid) {
         this.listLines = listLines;
         this.listName = listName;
         this.id = id;
+        this.ownerid = ownerid;
     }
 
-    public ToDoList(String listName, Long id) {
+    public ToDoList(String listName, long id, long ownerid) {
         this.listLines = new ArrayList<>();
         this.listName = listName;
         this.id = id;
+        this.ownerid = ownerid;
     }
 
     public List<ListLine> getListLines() {
