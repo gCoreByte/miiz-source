@@ -1,5 +1,6 @@
 package com.miiz.database;
 
+import com.miiz.auth.User;
 import com.miiz.todolist.ListLine;
 import com.miiz.todolist.ToDoList;
 import com.miiz.group.WindowGroup;
@@ -16,16 +17,17 @@ public class Database extends DatabaseInit {
         super();
     }
 
-    public List<ToDoList> getToDoLists() {
+    public List<ToDoList> getToDoLists(long userid) {
         isValid();
-        String sql1 = "SELECT * FROM ToDoList";
+        String sql1 = "SELECT * FROM ToDoList WHERE ownerid = ?";
         String sql2 = "SELECT * FROM ListLine WHERE parentid = ?";
         List<ToDoList> toDoLists = new ArrayList<>();
 
-        try (Statement statement = createStatement();
-             ResultSet rs = statement.executeQuery(sql1)) {
+        try (PreparedStatement statement = createPrepStatement(sql1)) {
+             statement.setLong(1, userid);
+             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                ToDoList toDoList = new ToDoList(rs.getString("title"), rs.getLong("id"));
+                ToDoList toDoList = new ToDoList(rs.getString("title"), rs.getLong("id"), rs.getLong("ownerid"));
                 toDoLists.add(toDoList);
             }
         } catch (Exception e) {
@@ -129,10 +131,31 @@ public class Database extends DatabaseInit {
         // TODO
     }
     // used later when auth is implemented
-/*
-    public User getUser() {
-        super.isValid();
-        // TODO
+
+    public User getUserByUsername(String username) {
+        isValid();
+        String sql = "SELECT * FROM User WHERE username = ?";
+        try (PreparedStatement statement = createPrepStatement(sql)) {
+            statement.setString(1, username);
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+            return new User(rs.getLong("id"), rs.getString("username"), rs.getString("hashedPw"));
+        } catch (Exception e) {
+            System.out.println("Something went wrong.");
+            return new User();
+        }
+    }
+
+    public void addUser(User user) {
+        isValid();
+        String sql = "INSERT INTO User (username, hashedPw) VALUES (?, ?)";
+        try (PreparedStatement statement = createPrepStatement(sql)) {
+            statement.setString(1, user.getUsername());
+            statement.setString(2, user.getHashedPw());
+            statement.executeQuery();
+        } catch (Exception e) {
+            System.out.println("Something went wrong.");
+        }
     }
 
     public void removeUser() {
@@ -140,5 +163,5 @@ public class Database extends DatabaseInit {
         // TODO
     }
 
- */
+
 }
