@@ -13,7 +13,7 @@ public class WindowGroup {
 
     public WindowGroup(String name) {
         this.name = name;
-        urls = new ArrayList<>();
+        this.urls = new ArrayList<>();
     }
 
     // constructor for entries gotten from db

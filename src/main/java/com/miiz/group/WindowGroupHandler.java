@@ -40,31 +40,36 @@ public class WindowGroupHandler {
             String input = inputReader.nextLine().strip();
             switch (input) {
                 // uus grupp
-                case "1":
+                case "1" -> {
                     System.out.println("Sisesta uue grupi nimi:");
                     input = inputReader.nextLine().strip();
                     if (input.length() != 0) {
                         newGroup(input);
-                        break;
-                    }
-                    else {
+                    } else {
                         System.out.println("See ei ole sobiv nimi.");
-                        break;
                     }
-
+                }
                 // ava grupp
-                case "2":
+                case "2" -> {
+                    System.out.println("Vali millist gruppi avada:");
+                    for (int i = 0; i < groupList.size(); i++) {
+                        System.out.println(i + 1 + ". " + groupList.get(i).getName());
+                    }
+                }
+                case "3" -> {
                     // todo
-                case "3":
+                }
+                case "4" -> {
                     // todo
-                case "4":
+                }
+                case "5" -> {
                     // todo
-                case "5":
+                }
+                case "6" -> {
                     // todo
-                case "6":
-                    return;
-                default:
-                    continue;
+                }
+                default -> {
+                }
             }
         }
     }
