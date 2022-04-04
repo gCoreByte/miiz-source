@@ -1,6 +1,5 @@
 package com.miiz.todolist;
 
-import com.miiz.auth.User;
 import com.miiz.database.Database;
 
 import java.util.List;
@@ -8,13 +7,11 @@ import java.util.Scanner;
 
 public class ToDoListHandler {
 
-    private User user;
     Database database = new Database();
 
     public void main() {
 
-        long userid = user.getId();
-        List<ToDoList> lists = database.getToDoLists(userid);
+        List<ToDoList> lists = database.getToDoLists();
         boolean invalid_input = true;
 
         while (invalid_input) {
@@ -35,7 +32,9 @@ public class ToDoListHandler {
                     while (name.contains("false input")) {
                         name = scanInputString("Sisesta lühem nimekirja pealkiri");
                     }
-
+                    ToDoList newList = new ToDoList(name);
+                    newList = database.addTodoList(newList);
+                    lists.add(newList);
                 }
                 case 2 -> {
                     System.out.println("Valisid To Do nimekirja muutmise");
@@ -129,13 +128,13 @@ public class ToDoListHandler {
         while (true){
             switch (pick) {
                 case 1 -> {
-                    String newLine = scanInputString("Sisesta lisatav rida");
-                    while (newLine.equals("false input")) {
-                        newLine = scanInputString("Sisesta lühem lisatav rida");
+                    String newLineC = scanInputString("Sisesta lisatav rida");
+                    while (newLineC.equals("false input")) {
+                        newLineC = scanInputString("Sisesta lühem lisatav rida");
                     }
-                    // add to database
-                    // get from database
-                    // add line with id
+                    ListLine newLine = new ListLine(newLineC);
+                    list.addListLineInit(newLine);
+                    database.editToDoList(list);
                 }
                 case 2 -> {
                     int lineIndex = scanInputInt("Sisesta kustutava rea number");
