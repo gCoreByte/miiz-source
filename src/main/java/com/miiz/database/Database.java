@@ -13,6 +13,10 @@ import java.util.List;
 
 public class Database extends DatabaseInit {
 
+    public Database() {
+        super();
+    }
+
     public List<ToDoList> getToDoLists(long userid) {
         isValid();
         String sql1 = "SELECT * FROM ToDoList WHERE ownerid = ?";
@@ -44,7 +48,6 @@ public class Database extends DatabaseInit {
         }
         return toDoLists;
     }
-
 
     public void deleteToDoList(ToDoList toDoList) {
         isValid();
