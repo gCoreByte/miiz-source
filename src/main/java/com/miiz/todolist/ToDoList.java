@@ -47,12 +47,15 @@ public class ToDoList {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public void addListLineInit(ListLine line) {
         listLines.add(line);
     }
 
-    public void addLine(String lineContent, Long lineId, Long listId){
-        // Lisan andmebaasi rea ja sealt saan ta ide
+    public void addLine(String lineContent, Long lineId){
         ListLine newLine = new ListLine(lineId, lineContent, id);
         listLines.add(newLine);
     }
@@ -65,5 +68,9 @@ public class ToDoList {
         listLines.remove(lineNumber-1);
     }
 
-
+    public void printListLines(){
+        for (int i = 1; i < listLines.size(); i++) {
+            System.out.println("  " + i + ". " + listLines.get(i-1).getContent());
+        }
+    }
 }
