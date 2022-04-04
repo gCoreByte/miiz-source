@@ -1,14 +1,22 @@
 package com.miiz.song;
 
+import com.miiz.database.Database;
 
 import java.awt.*;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class SongHandler {
+
+    private final Database database;
+    private final Scanner inputReader;
+
+    public SongHandler(Database database, Scanner inputReader) {
+        this.database = database;
+        this.inputReader = inputReader;
+    }
 
     public void printSongs(List<Song> songsList){
         for (int i = 1; i < songsList.size(); i++) {
@@ -32,12 +40,14 @@ public class SongHandler {
 
     public void main(){
 
-        Scanner inputReader = new Scanner(System.in);
-        List<Song> songs = new ArrayList<>();
+        List<Song> songs = database.getSongs();
+
         System.out.println("Vali tegevus:");
         System.out.println();
         System.out.println("1 - mängi juhuslik lugu");
         System.out.println("2 - vali lugu");
+        System.out.println("3 - vali žanr");
+        System.out.println("4 - tagasi");
         System.out.println("Sisesta tegevusele vastav number: ");
         System.out.println();
 
@@ -58,6 +68,23 @@ public class SongHandler {
                     int pick = Integer.parseInt(inputReader.nextLine().strip());
                     play(songs.get(pick -1));
                 }
+
+                case "3" -> {
+                    System.out.println("Vali žanr:");
+                    for (int i = 1; i < Genre.genres.size() + 1; i++) {
+                        System.out.println(i + ". " + Genre.genres.get(i-1));
+                    }
+                    int pick = Integer.parseInt(inputReader.nextLine().strip());
+                    List<Song> songsByGenre = database.getSongsByGenre(pick -1 );
+                    int rand = (int) (Math.random() * songsByGenre.size());
+                    play(songsByGenre.get(rand));
+                }
+                case "4" -> {
+                    return;
+                }
+
+                default -> System.out.println("Pole valiidne sisend");
+
             }
         }
     }

@@ -80,7 +80,7 @@ public class ToDoList {
     }
 
     public void printListLines(){
-        for (int i = 1; i < listLines.size(); i++) {
+        for (int i = 1; i < listLines.size() + 1; i++) {
             System.out.println("  " + i + ". " + listLines.get(i-1).getContent());
         }
     }

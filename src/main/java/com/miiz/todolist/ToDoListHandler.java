@@ -19,7 +19,6 @@ public class ToDoListHandler {
         this.scan = scan;
     }
 
-
     public void main() {
 
         List<ToDoList> lists = database.getToDoLists();
