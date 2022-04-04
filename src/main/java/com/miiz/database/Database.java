@@ -147,9 +147,10 @@ public class Database extends DatabaseInit {
 
     public WindowGroup addWindowGroup(WindowGroup group) {
         isValid();
-        String sql = "INSERT INTO WindowGroup (name) VALUES (?)";
+        String sql = "INSERT INTO WindowGroup (name, ownerid) VALUES (?, ?)";
         try (PreparedStatement statement = createPrepStatement(sql)) {
             statement.setString(1, group.getName());
+            statement.setLong(2, group.getOwnerid());
             statement.executeUpdate();
             group.setId(getLastRowId());
             return group;

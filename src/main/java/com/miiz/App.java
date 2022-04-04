@@ -27,35 +27,36 @@ public class App {
 
         System.out.println("Sissejuhatav/ selgitav tekst");
         System.out.println();
-        boolean invalid_input = true;
-
-        while (invalid_input){
-            invalid_input = false;
+        while (true){
             System.out.println("Palun vali tegevus!");
             System.out.println();
             System.out.println("Kuva To Do nimekiri:        1");
             System.out.println("Ava focus-mode:             2");
             System.out.println("Ava notepad:                3");
             System.out.println("Kuva workspaceide valik:    4");
+            System.out.println("Sulge programm:             5");
             System.out.println("Sisesta tegevusele vastav number: ");
             String str_input = scan.nextLine();
             String[] arr_input = str_input.split(" ");
             String user_input = arr_input[0];
 
             switch (user_input) {
-                case "1" -> System.out.println("Valisid To Do nimekirja");
+                case "1" -> toDoListHandler.main();
                 // To Do list
 
                 case "2" -> System.out.println("Valisid muusika");
                 // Music
 
-                case "3" -> System.out.println("Valisid workspacei");
+                case "3" -> System.out.println("Not implemented.");
+
+                case "4" -> windowGroupHandler.main();
                 //workspace
+
+                case "5" -> System.exit(0);
 
                 default -> {
                     System.out.println("Vigane sisend!");
                     System.out.println("Sisesta valik uuesti");
-                    invalid_input = true;
                 }
             }
         }

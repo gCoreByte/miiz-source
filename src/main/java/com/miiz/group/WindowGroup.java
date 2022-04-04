@@ -79,6 +79,10 @@ public class WindowGroup {
         return id;
     }
 
+    public long getOwnerid() {
+        return ownerid;
+    }
+
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();

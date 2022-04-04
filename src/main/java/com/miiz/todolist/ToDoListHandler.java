@@ -68,9 +68,9 @@ public class ToDoListHandler {
                     } else {
                         database.deleteToDoList(lists.get(listIndex));
                     }
-
                 }
                 case 4 -> {
+                    return;
                 }
                 default -> {
                     System.out.println("Vigane sisend!");
@@ -90,7 +90,7 @@ public class ToDoListHandler {
 
         try {
             if (Integer.parseInt(firstNr) > 0)
-                return Integer.parseInt(firstNr) - 1;
+                return Integer.parseInt(firstNr);
             else return -1;
         }
         catch(Exception e) {
