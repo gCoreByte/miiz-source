@@ -1,5 +1,6 @@
 package com.miiz.todolist;
 
+import com.miiz.auth.User;
 import com.miiz.database.Database;
 
 import javax.xml.crypto.Data;
@@ -10,10 +11,12 @@ public class ToDoListHandler {
 
     private final Database database;
     private final Scanner scan;
+    private final User user;
 
-    public ToDoListHandler(Database database, Scanner scan) {
+    public ToDoListHandler(Database database, Scanner scan, User user) {
         this.database = database;
         this.scan = scan;
+        this.user = user;
     }
 
 
@@ -40,7 +43,7 @@ public class ToDoListHandler {
                     while (name.contains("false input")) {
                         name = scanInputString("Sisesta lühem nimekirja pealkiri");
                     }
-                    ToDoList newList = new ToDoList(name);
+                    ToDoList newList = new ToDoList(name, user.getId());
                     newList = database.addTodoList(newList);
                     lists.add(newList);
                 }
