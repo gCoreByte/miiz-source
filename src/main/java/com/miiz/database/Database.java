@@ -29,7 +29,7 @@ public class Database extends DatabaseInit {
     public List<ToDoList> getToDoLists() {
         isValid();
         String sql1 = "SELECT * FROM ToDoList WHERE ownerid = ?";
-        String sql2 = "SELECT * FROM ListLine WHERE parentid = ?";
+        String sql2 = "SELECT * FROM ListLine WHERE ownerid = ?";
         List<ToDoList> toDoLists = new ArrayList<>();
 
         try (PreparedStatement statement = createPrepStatement(sql1)) {

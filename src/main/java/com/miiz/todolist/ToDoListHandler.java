@@ -23,10 +23,8 @@ public class ToDoListHandler {
     public void main() {
 
         List<ToDoList> lists = database.getToDoLists();
-        boolean invalid_input = true;
 
-        while (invalid_input) {
-            invalid_input = false;
+        while (true) {
             System.out.println("Palun vali tegevus:");
             System.out.println();
             System.out.println("1 - Loo uus To Do nimekiri");
@@ -40,7 +38,7 @@ public class ToDoListHandler {
                     System.out.println("Valisid To Do nimekirja loomise");
                     System.out.println();
                     String name = scanInputString("Sisesta uue nimekirja pealkiri");
-                    while (name.contains("false input")) {
+                    while (name.equals("false input")) {
                         name = scanInputString("Sisesta lühem nimekirja pealkiri");
                     }
                     ToDoList newList = new ToDoList(name, user.getId());
@@ -75,7 +73,6 @@ public class ToDoListHandler {
                 default -> {
                     System.out.println("Vigane sisend!");
                     System.out.println("Sisesta valik uuesti");
-                    invalid_input = true;
                 }
             }
         }
@@ -101,7 +98,11 @@ public class ToDoListHandler {
 
     public String scanInputString(String task){
         System.out.println(task);
-        return scan.nextLine();
+        String line = scan.nextLine();
+        if (line.length() > 255)
+            return "false input";
+        else
+            return line;
     }
 
     public int pickToDoList(List<ToDoList> lists, String task){

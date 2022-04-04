@@ -58,7 +58,7 @@ public class DatabaseInit {
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name varchar(255) NOT NULL,
                 url text NOT NULL,
-                genre int DEFAULT 0,
+                genre int DEFAULT 1,
                 FOREIGN KEY (genre) REFERENCES Genre(id)
                 )
                 """;
