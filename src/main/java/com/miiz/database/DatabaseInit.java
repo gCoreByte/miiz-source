@@ -1,9 +1,6 @@
 package com.miiz.database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class DatabaseInit {
     private final String connectionString = "jdbc:sqlite:sqlite.db";
@@ -29,8 +26,13 @@ public class DatabaseInit {
         }
     }
 
-    public Statement createStatement() throws SQLException {
+    protected Statement createStatement() throws SQLException {
         isValid();
         return conn.createStatement();
+    }
+
+    protected PreparedStatement createPrepStatement(String sql) throws SQLException {
+        isValid();
+        return conn.prepareStatement(sql);
     }
 }
