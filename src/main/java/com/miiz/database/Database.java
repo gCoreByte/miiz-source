@@ -10,7 +10,6 @@ import com.miiz.group.WindowGroup;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -168,13 +167,29 @@ public class Database extends DatabaseInit {
     }
 
     public void deleteWindowGroup(WindowGroup group) {
-        super.isValid();
-        // TODO
+        isValid();
+        String sql = "DELETE FROM WindowGroup WHERE id = ?";
+        try (PreparedStatement statement = createPrepStatement(sql)) {
+            statement.setLong(1, group.getId());
+            statement.executeQuery();
+        } catch (Exception e) {
+            System.out.println("Something went wrong.");
+        }
     }
 
-    public void addWindowGroupUrl(WindowGroup group, String url) {
-        super.isValid();
-        // TODO
+    public WindowURL addWindowGroupUrl(WindowURL windowURL) {
+        isValid();
+        String sql = "INSERT INTO WindowGroupUrl (ownerid, url) VALUES (?, ?)";
+        try (PreparedStatement statement = createPrepStatement(sql)) {
+            statement.setLong(1, windowURL.getOwnerid());
+            statement.setString(2, windowURL.getUrl());
+            statement.executeQuery();
+            windowURL.setId(getLastRowId());
+            return windowURL;
+        } catch (Exception e) {
+            System.out.println("Something went wrong.");
+            return windowURL;
+        }
     }
 
     public void editWindowGroupUrl(WindowGroup group, String url) {
@@ -182,9 +197,15 @@ public class Database extends DatabaseInit {
         // TODO
     }
 
-    public void removeWindowGroupUrl(WindowGroup group, String url) {
-        super.isValid();
-        // TODO
+    public void deleteWindowGroupUrl(WindowURL windowURL) {
+        isValid();
+        String sql = "DELETE FROM WindowGroupUrl WHERE id = ?";
+        try (PreparedStatement statement = createPrepStatement(sql)) {
+            statement.setLong(1, windowURL.getId());
+            statement.executeQuery();
+        } catch (Exception e) {
+            System.out.println("Something went wrong.");
+        }
     }
     // used later when auth is implemented
 
