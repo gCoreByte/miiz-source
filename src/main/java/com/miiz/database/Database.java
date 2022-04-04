@@ -72,6 +72,18 @@ public class Database extends DatabaseInit {
         }
     }
 
+    public ToDoList addTodoList(ToDoList toDoList) {
+        isValid();
+        String sql = "INSERT INTO ToDoList (title, ownerid) VALUES (?, ?)";
+        try (PreparedStatement statement = createPrepStatement(sql)){
+            statement.setString(1, toDoList.getListName());
+            statement.setLong(2, user.getId());
+            statement.executeQuery();
+        } catch (Exception e) {
+            System.out.println("Something went wrong.");
+        }
+    }
+
     public void editToDoListLine(ListLine line) {
         isValid();
         String sql = "UPDATE ToDoList SET content = ? WHERE id = ?";
