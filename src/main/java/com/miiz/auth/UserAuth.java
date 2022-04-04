@@ -1,5 +1,7 @@
 package com.miiz.auth;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
+
 /**
  * General user authentication class
  */
@@ -8,6 +10,7 @@ public class UserAuth {
     // user token and secret - "remember me"
     private String userToken;
     private String userSecret;
+    private final Database database;
 
     public UserAuth(String userToken, String userSecret) {
         this.userToken = userToken;
@@ -23,7 +26,7 @@ public class UserAuth {
      * @return boolean - true if success, false if error
      */
     public boolean userLogin(String username, String password) {
-        return false;
+        String hashedPw;
     }
 
     /**
