@@ -9,6 +9,7 @@ public class ToDoList {
     private String listName;
     private Long id;
 
+
     public ToDoList(List<ListLine> listLines, String listName, Long id) {
         this.listLines = listLines;
         this.listName = listName;

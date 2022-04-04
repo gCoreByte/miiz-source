@@ -6,6 +6,18 @@ public class DatabaseInit {
     private final String connectionString = "jdbc:sqlite:sqlite.db";
     private Connection conn;
 
+    public DatabaseInit() {
+        // first run table generation
+        String USER_SQL = "";
+        String TODOLIST_SQL = """
+                CREATE TABLE ToDoList
+                """;
+        String LISTLINE_SQL = "";
+
+        String WINDOWGROUP_SQL = "";
+        String SONGS_SQL = "";
+    }
+
     private void connect() {
         try {
             conn = DriverManager.getConnection(connectionString);
@@ -35,4 +47,7 @@ public class DatabaseInit {
         isValid();
         return conn.prepareStatement(sql);
     }
+
+    // first run db generation
+
 }
