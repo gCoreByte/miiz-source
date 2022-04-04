@@ -1,6 +1,7 @@
 package com.miiz.database;
 
 import com.miiz.auth.User;
+import com.miiz.group.WindowURL;
 import com.miiz.todolist.ListLine;
 import com.miiz.todolist.ToDoList;
 import com.miiz.group.WindowGroup;
@@ -13,18 +14,25 @@ import java.util.List;
 
 public class Database extends DatabaseInit {
 
+    private User user;
+
     public Database() {
         super();
     }
 
-    public List<ToDoList> getToDoLists(long userid) {
+    // THIS WILL BE CALLED AFTER LOGGING IN
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<ToDoList> getToDoLists() {
         isValid();
         String sql1 = "SELECT * FROM ToDoList WHERE ownerid = ?";
         String sql2 = "SELECT * FROM ListLine WHERE parentid = ?";
         List<ToDoList> toDoLists = new ArrayList<>();
 
         try (PreparedStatement statement = createPrepStatement(sql1)) {
-             statement.setLong(1, userid);
+             statement.setLong(1, user.getId());
              ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 ToDoList toDoList = new ToDoList(rs.getString("title"), rs.getLong("id"), rs.getLong("ownerid"));
@@ -72,6 +80,21 @@ public class Database extends DatabaseInit {
         }
     }
 
+    public ToDoList addTodoList(ToDoList toDoList) {
+        isValid();
+        String sql = "INSERT INTO ToDoList (title, ownerid) VALUES (?, ?)";
+        try (PreparedStatement statement = createPrepStatement(sql)){
+            statement.setString(1, toDoList.getListName());
+            statement.setLong(2, user.getId());
+            statement.executeQuery();
+            toDoList.setId(getLastRowId());
+            return toDoList;
+        } catch (Exception e) {
+            System.out.println("Something went wrong.");
+            return toDoList;
+        }
+    }
+
     public void editToDoListLine(ListLine line) {
         isValid();
         String sql = "UPDATE ToDoList SET content = ? WHERE id = ?";
@@ -97,13 +120,44 @@ public class Database extends DatabaseInit {
 
     public List<WindowGroup> getWindowGroups() {
         isValid();
-        // TODO
-        return new ArrayList<>();
+        String sql1 = "SELECT * FROM WindowGroup WHERE ownerid = ?";
+        String sql2 = "SELECT * FROM WindowGroupUrl WHERE ownerid = ?";
+        List<WindowGroup> groups = new ArrayList<>();
+        try (PreparedStatement statement = createPrepStatement(sql1)) {
+            statement.setLong(1, user.getId());
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                WindowGroup group = new WindowGroup(rs.getLong("id"), rs.getString("name"));
+                try (PreparedStatement statement2 = createPrepStatement(sql2)) {
+                    statement2.setLong(1, rs.getLong("id"));
+                    ResultSet rs2 = statement2.executeQuery();
+                    while (rs2.next()) {
+                        WindowURL url = new WindowURL(rs2.getLong("id"), rs2.getLong("ownerid"), rs2.getString("url"));
+                        group.addUrl(url);
+                    }
+                } catch (Exception e) {
+                    System.out.println("Something went wrong getting group urls.");
+                }
+                groups.add(group);
+            }
+        } catch (Exception e) {
+            System.out.println("Something went wrong.");
+        }
+        return groups;
     }
 
-    public void addWindowGroup(WindowGroup group) {
-        super.isValid();
-        // TODO
+    public WindowGroup addWindowGroup(WindowGroup group) {
+        isValid();
+        String sql = "INSERT INTO WindowGroup (name) VALUES (?)";
+        try (PreparedStatement statement = createPrepStatement(sql)) {
+            statement.setString(1, group.getName());
+            statement.executeQuery();
+            group.setId(getLastRowId());
+            return group;
+        } catch (Exception e) {
+            System.out.println("Something went wrong.");
+            return group;
+        }
     }
 
     public void editWindowGroup(WindowGroup group) {

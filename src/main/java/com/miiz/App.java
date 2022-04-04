@@ -1,9 +1,22 @@
 package com.miiz;
 
+import com.miiz.auth.UserAuth;
+import com.miiz.database.Database;
+import com.miiz.group.WindowGroupHandler;
+import com.miiz.todolist.ToDoList;
+
 import java.util.Scanner;
 
 public class App {
+
     public static void main(String[] args) {
+        Database database = new Database();
+        UserAuth userAuth = new UserAuth(database);
+
+        // TODO: User authentication here
+
+
+        WindowGroupHandler windowGroupHandler = new WindowGroupHandler(database, userAuth.getUser());
 
         System.out.println("Sissejuhatav/ selgitav tekst");
         System.out.println();

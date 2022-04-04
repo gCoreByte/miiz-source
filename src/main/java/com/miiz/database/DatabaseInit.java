@@ -36,7 +36,9 @@ public class DatabaseInit {
                 CREATE TABLE IF NOT EXISTS WindowGroup(
                 id bigint NOT NULL AUTO_INCREMENT,
                 name varchar(255) DEFAULT "Grupp",
-                PRIMARY KEY (id)
+                ownerid bigint NOT NULL,
+                PRIMARY KEY (id),
+                FOREIGN KEY (ownerid) REFERENCES User(id)
                 """;
         String WINDOWGROUPURL_SQL = """
                 CREATE TABLE IF NOT EXISTS WindowGroupUrl(
@@ -110,6 +112,14 @@ public class DatabaseInit {
     protected PreparedStatement createPrepStatement(String sql) throws SQLException {
         isValid();
         return conn.prepareStatement(sql);
+    }
+
+    protected long getLastRowId() throws SQLException {
+        Statement lastRow = createStatement();
+        ResultSet rs = lastRow.executeQuery("SELECT last_insert_rowid()");
+        lastRow.close();
+        rs.next();
+        return rs.getLong(1);
     }
 
 }

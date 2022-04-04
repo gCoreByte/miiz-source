@@ -1,55 +1,36 @@
 package com.miiz.group;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
+import com.miiz.auth.User;
+import com.miiz.database.Database;
+
+
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 // group module handler
 public class WindowGroupHandler {
-    // TEMPORARY FILENAME
-    private static final String filename = "windowgroup.txt";
+    private final Database database;
+    private final User user;
+    private final List<WindowGroup> groupList;
 
-    private void saveGroups(List<WindowGroup> groups) {
-
+    public WindowGroupHandler(Database database, User user) {
+        this.database = database;
+        this.user = user;
+        this.groupList = database.getWindowGroups();
     }
 
-    private static List<WindowGroup> getGroups() throws IOException {
-        // TODO: database integration
-        // we will currently save the groups in a text file as a temporary solution
-
-        // TEMP: read from file
-
-        List<WindowGroup> groups = new ArrayList<>();
-        File file = new File(filename);
-        try (Scanner scanner = new Scanner(file, StandardCharsets.UTF_8)){
-            while (scanner.hasNext()) {
-                String name = scanner.next();
-                WindowGroup group = new WindowGroup(name);
-                while (scanner.hasNext()) {
-                    String line2 = scanner.next();
-                    if (line2.equals(";")) {
-                        break;
-                    }
-                    group.addUrl(line2);
-                }
-                groups.add(group);
-            }
-        }
-        return groups;
-
+    private void newGroup(String name) {
+        WindowGroup group = new WindowGroup(name);
+        group = database.addWindowGroup(group);
+        groupList.add(group);
     }
 
     // main method
-    public static void main() throws IOException {
+    public void main() {
         Scanner inputReader = new Scanner(System.in);
-        List<WindowGroup> groups = getGroups();
+
         // main loop
         while (true) {
-            groups.forEach(System.out::println);
             System.out.println("1 - uus grupp");
             System.out.println("2 - ava grupp");
             System.out.println("3 - kustuta grupp");
@@ -58,8 +39,20 @@ public class WindowGroupHandler {
             System.out.println("6 - tagasi");
             String input = inputReader.nextLine().strip();
             switch (input) {
+                // uus grupp
                 case "1":
-                    // todo
+                    System.out.println("Sisesta uue grupi nimi:");
+                    input = inputReader.nextLine().strip();
+                    if (input.length() != 0) {
+                        newGroup(input);
+                        break;
+                    }
+                    else {
+                        System.out.println("See ei ole sobiv nimi.");
+                        break;
+                    }
+
+                // ava grupp
                 case "2":
                     // todo
                 case "3":

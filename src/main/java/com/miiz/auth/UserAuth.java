@@ -71,6 +71,10 @@ public class UserAuth {
 
     }
 
+    public User getUser() {
+        return user;
+    }
+
     public String getUserToken() {
         return userToken;
     }

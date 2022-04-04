@@ -7,8 +7,9 @@ import java.util.List;
  * WindowGroup data class
  */
 public class WindowGroup {
+    private long id;
     private String name;
-    private final List<String> urls;
+    private final List<WindowURL> urls;
 
     public WindowGroup(String name) {
         this.name = name;
@@ -16,20 +17,21 @@ public class WindowGroup {
     }
 
     // constructor for entries gotten from db
-    public WindowGroup(String name, List<String> urls) {
+    public WindowGroup(long id, String name) {
+        this.id = id;
         this.name = name;
-        this.urls = urls;
+        this.urls = new ArrayList<>();
     }
 
     public void openGroup() {
         // TODO
     }
 
-    public void addUrl(String url) {
+    public void addUrl(WindowURL url) {
         urls.add(url);
     }
 
-    public void removeUrl(String url) {
+    public void removeUrl(WindowURL url) {
         urls.remove(url);
     }
 
@@ -43,8 +45,12 @@ public class WindowGroup {
         this.name = name;
     }
 
-    public List<String> getUrls() {
+    public List<WindowURL> getUrls() {
         return urls;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     @Override
