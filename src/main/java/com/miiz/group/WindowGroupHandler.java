@@ -1,23 +1,28 @@
 package com.miiz.group;
 
+import com.miiz.auth.User;
 import com.miiz.database.Database;
 
 
+import java.util.List;
 import java.util.Scanner;
 
 // group module handler
 public class WindowGroupHandler {
     private final Database database;
     private final User user;
+    private final List<WindowGroup> groupList;
 
     public WindowGroupHandler(Database database, User user) {
         this.database = database;
         this.user = user;
+        this.groupList = database.getWindowGroups();
     }
 
     private void newGroup(String name) {
         WindowGroup group = new WindowGroup(name);
-
+        group = database.addWindowGroup(group);
+        groupList.add(group);
     }
 
     // main method
