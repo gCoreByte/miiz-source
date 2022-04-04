@@ -2,12 +2,20 @@ package com.miiz.todolist;
 
 import com.miiz.database.Database;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 import java.util.Scanner;
 
 public class ToDoListHandler {
 
-    Database database = new Database();
+    private final Database database;
+    private final Scanner scan;
+
+    public ToDoListHandler(Database database, Scanner scan) {
+        this.database = database;
+        this.scan = scan;
+    }
+
 
     public void main() {
 
@@ -71,9 +79,6 @@ public class ToDoListHandler {
     }
 
     public int scanInputInt(String task){
-
-        Scanner scan = new Scanner(System.in);
-
         System.out.println(task);
 
         String input = scan.nextLine();
@@ -92,11 +97,7 @@ public class ToDoListHandler {
     }
 
     public String scanInputString(String task){
-
-        Scanner scan = new Scanner(System.in);
-
         System.out.println(task);
-
         return scan.nextLine();
     }
 

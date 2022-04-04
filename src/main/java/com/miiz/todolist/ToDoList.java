@@ -1,6 +1,5 @@
 package com.miiz.todolist;
 
-import com.miiz.database.Database;
 
 import java.util.ArrayList;
 import java.util.List;
