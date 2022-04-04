@@ -2,6 +2,8 @@ package com.miiz.database;
 
 import com.miiz.auth.User;
 import com.miiz.group.WindowURL;
+import com.miiz.song.Genre;
+import com.miiz.song.Song;
 import com.miiz.todolist.ListLine;
 import com.miiz.todolist.ToDoList;
 import com.miiz.group.WindowGroup;
@@ -238,6 +240,4 @@ public class Database extends DatabaseInit {
         super.isValid();
         // TODO
     }
-
-
 }
