@@ -30,6 +30,19 @@ public class WindowGroupHandler {
         }
     }
 
+    private int choiceChecker(String input) {
+        if (!tryParse(input)) {
+            System.out.println("See ei ole valiidne valik.");
+            return -1;
+        }
+        int choice = Integer.parseInt(input) - 1;
+        if (choice >= groupList.size() || choice < 0) {
+            System.out.println("See ei ole valiidne valik.");
+            return -1;
+        }
+        return choice;
+    }
+
     private void newGroup(Scanner inputReader) {
         System.out.println("Sisesta uue grupi nimi:");
         String input = inputReader.nextLine().strip();
@@ -37,6 +50,7 @@ public class WindowGroupHandler {
             WindowGroup group = new WindowGroup(input);
             group = database.addWindowGroup(group);
             groupList.add(group);
+            System.out.println("Lisatud!");
         } else {
             System.out.println("See ei ole sobiv nimi.\nGruppi ei ole lisatud.");
         }
@@ -49,15 +63,8 @@ public class WindowGroupHandler {
             System.out.println(i + 1 + ". " + groupList.get(i).getName());
         }
         String input = inputReader.nextLine().strip();
-        if (!tryParse(input)) {
-            System.out.println("See ei ole valiidne valik.");
-            return;
-        }
-        int choice = Integer.parseInt(input) - 1;
-        if (choice >= groupList.size() || choice < 0) {
-            System.out.println("See ei ole valiidne valik.");
-            return;
-        }
+        int choice = choiceChecker(input);
+        if (choice == -1) { return; }
         // open the group
         WindowGroup group = groupList.get(choice);
         System.out.println("Grupis on järgnevad lingid:");
@@ -78,15 +85,8 @@ public class WindowGroupHandler {
     private void deleteGroup(Scanner inputReader) {
         System.out.println("Millist gruppi soovite kustutada?");
         String input = inputReader.nextLine().strip();
-        if (!tryParse(input)) {
-            System.out.println("See ei ole valiidne valik.");
-            return;
-        }
-        int choice = Integer.parseInt(input) - 1;
-        if (choice >= groupList.size() || choice < 0) {
-            System.out.println("See ei ole valiidne valik.");
-            return;
-        }
+        int choice = choiceChecker(input);
+        if (choice == -1) { return; }
         WindowGroup group = groupList.get(choice);
         System.out.println("Kustutatav nimekiri: " + group.getName());
         System.out.println("Oled kindel? Y/N");
@@ -97,11 +97,23 @@ public class WindowGroupHandler {
             }
             database.deleteWindowGroup(group);
             groupList.remove(group);
+            System.out.println("Kustutatud!");
         }
     }
 
     private void addGroupUrl(Scanner inputReader) {
-        
+        System.out.println("Millisele grupile soovite URLi lisada?");
+        String input = inputReader.nextLine().strip();
+        int choice = choiceChecker(input);
+        if (choice == -1) { return; }
+        WindowGroup group = groupList.get(choice);
+        System.out.println("Mis on lisatav URL?");
+        input = inputReader.nextLine().strip();
+
+        WindowURL windowURL = new WindowURL(group.getId(), input);
+        windowURL = database.addWindowGroupUrl(windowURL);
+        group.addUrl(windowURL);
+        System.out.println("Lisatud!");
     }
 
     // main method
