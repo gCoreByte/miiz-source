@@ -16,7 +16,7 @@ public class App {
         // TODO: User authentication here
 
 
-        WindowGroupHandler windowGroupHandler = new WindowGroupHandler();
+        WindowGroupHandler windowGroupHandler = new WindowGroupHandler(database, userAuth.getUser());
 
         System.out.println("Sissejuhatav/ selgitav tekst");
         System.out.println();

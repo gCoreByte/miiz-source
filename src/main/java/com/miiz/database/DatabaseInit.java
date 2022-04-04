@@ -114,4 +114,12 @@ public class DatabaseInit {
         return conn.prepareStatement(sql);
     }
 
+    protected long getLastRowId() throws SQLException {
+        Statement lastRow = createStatement();
+        ResultSet rs = lastRow.executeQuery("SELECT last_insert_rowid()");
+        lastRow.close();
+        rs.next();
+        return rs.getLong(1);
+    }
+
 }

@@ -14,7 +14,6 @@ import java.util.List;
 
 public class Database extends DatabaseInit {
 
-    private final String GET_LAST_ID = "SELECT last_insert_rowid()";
     private User user;
 
     public Database() {
@@ -88,8 +87,11 @@ public class Database extends DatabaseInit {
             statement.setString(1, toDoList.getListName());
             statement.setLong(2, user.getId());
             statement.executeQuery();
+            toDoList.setId(getLastRowId());
+            return toDoList;
         } catch (Exception e) {
             System.out.println("Something went wrong.");
+            return toDoList;
         }
     }
 
@@ -150,11 +152,7 @@ public class Database extends DatabaseInit {
         try (PreparedStatement statement = createPrepStatement(sql)) {
             statement.setString(1, group.getName());
             statement.executeQuery();
-            Statement lastRow = createStatement();
-            ResultSet rs = lastRow.executeQuery(GET_LAST_ID);
-            lastRow.close();
-            rs.next();
-            group.setId(rs.getLong("id"));
+            group.setId(getLastRowId());
             return group;
         } catch (Exception e) {
             System.out.println("Something went wrong.");
