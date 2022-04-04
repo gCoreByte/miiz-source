@@ -159,6 +159,7 @@ public class ToDoListHandler {
 
                 }
                 case 4 -> {
+                    return;
                 }
                 default -> {
                     System.out.println("Vigane sisend!");

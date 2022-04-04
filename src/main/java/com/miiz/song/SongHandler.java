@@ -38,7 +38,6 @@ public class SongHandler {
         System.out.println();
         System.out.println("1 - mängi juhuslik lugu");
         System.out.println("2 - vali lugu");
-        System.out.println("3 - vali žanr");
         System.out.println("Sisesta tegevusele vastav number: ");
         System.out.println();
 
@@ -58,10 +57,6 @@ public class SongHandler {
                     printSongs(songs);
                     int pick = Integer.parseInt(inputReader.nextLine().strip());
                     play(songs.get(pick -1));
-                }
-
-                case "3" -> {
-                    System.out.println(java.util.Arrays.asList(Genre.values()));
                 }
             }
         }
