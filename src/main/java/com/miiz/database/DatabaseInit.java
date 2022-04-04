@@ -11,57 +11,56 @@ public class DatabaseInit {
         // first run table generation
         String USER_SQL = """
                 CREATE TABLE IF NOT EXISTS User(
-                id bigint NOT NULL AUTO_INCREMENT,
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 username varchar(255) NOT NULL UNIQUE,
-                hashedPw varchar(255) NOT NULL,
-                PRIMARY KEY (id)
+                hashedPw varchar(255) NOT NULL
+                )
                 """;
         String TODOLIST_SQL = """
                 CREATE TABLE IF NOT EXISTS ToDoList(
-                id bigint NOT NULL AUTO_INCREMENT,
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 title varchar(255) DEFAULT "ToDo List",
-                ownerid bigint NOT NULL,
-                PRIMARY KEY (id)
+                ownerid bigint NOT NULL
                 )
                 """;
         String LISTLINE_SQL = """
                 CREATE TABLE IF NOT EXISTS ListLine(
-                id bigint NOT NULL AUTO_INCREMENT,
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 content varchar(255) DEFAULT "Rida",
-                ownerid bigint NOT NULL AUTO_INCREMENT,
-                PRIMARY KEY (id),
+                ownerid int NOT NULL,
                 FOREIGN KEY (ownerid) REFERENCES ToDoList(id)
+                )
                 """;
         String WINDOWGROUP_SQL = """
                 CREATE TABLE IF NOT EXISTS WindowGroup(
-                id bigint NOT NULL AUTO_INCREMENT,
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name varchar(255) DEFAULT "Grupp",
                 ownerid bigint NOT NULL,
-                PRIMARY KEY (id),
                 FOREIGN KEY (ownerid) REFERENCES User(id)
+                )
                 """;
         String WINDOWGROUPURL_SQL = """
                 CREATE TABLE IF NOT EXISTS WindowGroupUrl(
-                id bigint NOT NULL AUTO_INCREMENT,
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 ownerid bigint NOT NULL,
                 url text NOT NULL,
-                PRIMARY KEY (id),
                 FOREIGN KEY (ownerid) REFERENCES WindowGroup(id)
+                )
                 """;
         String GENRE_SQL = """
                 CREATE TABLE IF NOT EXISTS Genre(
-                id bigint NOT NULL AUTO_INCREMENT,
-                name varchar(255) NOT NULL,
-                PRIMARY KEY (id)
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name varchar(255) NOT NULL
+                )
                 """;
         String SONG_SQL = """
                 CREATE TABLE IF NOT EXISTS Song(
-                id bigint NOT NULL AUTO_INCREMENT,
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name varchar(255) NOT NULL,
                 url text NOT NULL,
                 genre int DEFAULT 0,
-                PRIMARY KEY (id),
                 FOREIGN KEY (genre) REFERENCES Genre(id)
+                )
                 """;
 
         List<String> SQL_STRINGS = List.of(USER_SQL, TODOLIST_SQL, LISTLINE_SQL, WINDOWGROUP_SQL, WINDOWGROUPURL_SQL,
@@ -72,7 +71,7 @@ public class DatabaseInit {
         try (Statement statement = createStatement()) {
             SQL_STRINGS.forEach(s -> {
                 try {
-                    statement.executeQuery(s);
+                    statement.executeUpdate(s);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

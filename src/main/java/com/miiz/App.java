@@ -17,6 +17,8 @@ public class App {
 
         Database database = new Database();
         UserAuth userAuth = new UserAuth(database);
+        // TEMPORARY
+        userAuth.userLogin("a","b");
 
         // TODO: User authentication here
 
