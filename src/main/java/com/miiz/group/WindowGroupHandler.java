@@ -39,8 +39,20 @@ public class WindowGroupHandler {
             System.out.println("6 - tagasi");
             String input = inputReader.nextLine().strip();
             switch (input) {
+                // uus grupp
                 case "1":
-                    // todo
+                    System.out.println("Sisesta uue grupi nimi:");
+                    input = inputReader.nextLine().strip();
+                    if (input.length() != 0) {
+                        newGroup(input);
+                        break;
+                    }
+                    else {
+                        System.out.println("See ei ole sobiv nimi.");
+                        break;
+                    }
+
+                // ava grupp
                 case "2":
                     // todo
                 case "3":
