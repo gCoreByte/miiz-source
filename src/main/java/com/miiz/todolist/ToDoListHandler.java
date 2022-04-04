@@ -50,7 +50,7 @@ public class ToDoListHandler {
                 case 2 -> {
                     System.out.println("Valisid To Do nimekirja muutmise");
                     System.out.println();
-                    int pickedListIndex = pickToDoList(lists, "Vali nimekiri, mida soovid muuta");
+                    int pickedListIndex = pickToDoList(lists, "Vali nimekiri, mida soovid muuta") - 1;
                     if (pickedListIndex == -1) {
                         System.out.println("Vigane sisend");
                     } else {
@@ -61,7 +61,7 @@ public class ToDoListHandler {
                 case 3 -> {
                     System.out.println("Valisid To Do nimekirja kustutamise");
                     System.out.println();
-                    int listIndex = pickToDoList(lists, "Vali nimekiri, mille soovid kustutada");
+                    int listIndex = pickToDoList(lists, "Vali nimekiri, mille soovid kustutada") - 1;
 
                     if (listIndex == -1) {
                         System.out.println("Vigane sisend");
@@ -141,18 +141,18 @@ public class ToDoListHandler {
                     database.editToDoList(list);
                 }
                 case 2 -> {
-                    int lineIndex = scanInputInt("Sisesta kustutava rea number");
+                    int lineIndex = scanInputInt("Sisesta kustutava rea number") - 1;
                     while (lineIndex == -1) {
-                        lineIndex = scanInputInt("Sisesta reanumber uuesti");
+                        lineIndex = scanInputInt("Sisesta reanumber uuesti") - 1;
                     }
 
                     database.deleteToDoListLine(list.getListLines().get(lineIndex));
                     list.deleteLine(lineIndex);
                 }
                 case 3 -> {
-                    int lineIndex = scanInputInt("Sisesta muudetava rea number");
+                    int lineIndex = scanInputInt("Sisesta muudetava rea number") - 1;
                     while (lineIndex == -1) {
-                        lineIndex = scanInputInt("Sisesta reanumber uuesti");
+                        lineIndex = scanInputInt("Sisesta reanumber uuesti") - 1;
                     }
                     String newLine = scanInputString("Sisesta rea uus sisu");
                     list.getListLines().get(lineIndex).setContent(newLine);
