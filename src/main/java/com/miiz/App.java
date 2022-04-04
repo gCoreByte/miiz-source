@@ -10,13 +10,16 @@ import java.util.Scanner;
 public class App {
 
     public static void main(String[] args) {
+        // apparently there can be issues if multiple scanners read system.in
+        // to bypass this we will use the same scanner in all modules
+        Scanner scan = new Scanner(System.in);
+
         Database database = new Database();
         UserAuth userAuth = new UserAuth(database);
 
         // TODO: User authentication here
 
-
-        WindowGroupHandler windowGroupHandler = new WindowGroupHandler(database, userAuth.getUser());
+        WindowGroupHandler windowGroupHandler = new WindowGroupHandler(database, userAuth.getUser(), scan);
 
         System.out.println("Sissejuhatav/ selgitav tekst");
         System.out.println();
@@ -30,7 +33,6 @@ public class App {
             System.out.println("Ava focus-mode:             2");
             System.out.println("Ava notepad:                3");
             System.out.println("Kuva workspaceide valik:    4");
-            Scanner scan = new Scanner(System.in);
             System.out.println("Sisesta tegevusele vastav number: ");
             String str_input = scan.nextLine();
             String[] arr_input = str_input.split(" ");

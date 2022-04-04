@@ -1,5 +1,8 @@
 package com.miiz.group;
 
+import java.awt.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,23 +11,42 @@ import java.util.List;
  */
 public class WindowGroup {
     private long id;
+    private final long ownerid;
     private String name;
     private final List<WindowURL> urls;
 
-    public WindowGroup(String name) {
+    public WindowGroup(String name, long ownerid) {
         this.name = name;
         this.urls = new ArrayList<>();
+        this.ownerid = ownerid;
     }
 
     // constructor for entries gotten from db
-    public WindowGroup(long id, String name) {
+    public WindowGroup(long id, String name, long ownerid) {
         this.id = id;
         this.name = name;
         this.urls = new ArrayList<>();
+        this.ownerid = ownerid;
     }
 
-    public void openGroup() {
-        // TODO
+    public List<WindowURL> openGroup() {
+        // https://stackoverflow.com/questions/5226212/how-to-open-the-default-webbrowser-using-java
+        if (!Desktop.isDesktopSupported() || !Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+            System.out.println("Teie arvuti ei toeta seda funktsionaalsust kahjuks.");
+            return new ArrayList<>();
+        }
+        List<WindowURL> failedUrls = new ArrayList<>();
+        for (WindowURL url : urls) {
+            try {
+                Desktop.getDesktop().browse(new URI(url.getUrl()));
+            } catch (URISyntaxException e) {
+                System.out.println("URL " + url + " ei vasta nõuetele. See eemaldatakse nimekirjast.");
+                failedUrls.add(url);
+            } catch (Exception e) {
+                System.out.println("Something went wrong.");
+            }
+        }
+        return failedUrls;
     }
 
     public void addUrl(WindowURL url) {
@@ -53,9 +75,17 @@ public class WindowGroup {
         this.id = id;
     }
 
+    public long getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
-        return name + "\n" +
-                urls.toString();
+        StringBuilder s = new StringBuilder();
+        s.append(name);
+        for (WindowURL url : urls) {
+            s.append("\n- ").append(url);
+        }
+        return s.toString();
     }
 }
