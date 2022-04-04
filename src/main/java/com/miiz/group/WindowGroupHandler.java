@@ -10,43 +10,11 @@ import java.util.Scanner;
 
 // group module handler
 public class WindowGroupHandler {
-    // TEMPORARY FILENAME
-    private static final String filename = "windowgroup.txt";
-
-    private void saveGroups(List<WindowGroup> groups) {
-
-    }
-
-    private static List<WindowGroup> getGroups() throws IOException {
-        // TODO: database integration
-        // we will currently save the groups in a text file as a temporary solution
-
-        // TEMP: read from file
-
-        List<WindowGroup> groups = new ArrayList<>();
-        File file = new File(filename);
-        try (Scanner scanner = new Scanner(file, StandardCharsets.UTF_8)){
-            while (scanner.hasNext()) {
-                String name = scanner.next();
-                WindowGroup group = new WindowGroup(name);
-                while (scanner.hasNext()) {
-                    String line2 = scanner.next();
-                    if (line2.equals(";")) {
-                        break;
-                    }
-                    group.addUrl(line2);
-                }
-                groups.add(group);
-            }
-        }
-        return groups;
-
-    }
 
     // main method
-    public static void main() throws IOException {
+    public static void main() {
         Scanner inputReader = new Scanner(System.in);
-        List<WindowGroup> groups = getGroups();
+
         // main loop
         while (true) {
             groups.forEach(System.out::println);
