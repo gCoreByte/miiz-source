@@ -1,23 +1,31 @@
 package com.miiz.group;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import com.miiz.database.Database;
+
+
 import java.util.Scanner;
 
 // group module handler
 public class WindowGroupHandler {
+    private final Database database;
+    private final User user;
+
+    public WindowGroupHandler(Database database, User user) {
+        this.database = database;
+        this.user = user;
+    }
+
+    private void newGroup(String name) {
+        WindowGroup group = new WindowGroup(name);
+
+    }
 
     // main method
-    public static void main() {
+    public void main() {
         Scanner inputReader = new Scanner(System.in);
 
         // main loop
         while (true) {
-            groups.forEach(System.out::println);
             System.out.println("1 - uus grupp");
             System.out.println("2 - ava grupp");
             System.out.println("3 - kustuta grupp");
