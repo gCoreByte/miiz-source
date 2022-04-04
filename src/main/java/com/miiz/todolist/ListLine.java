@@ -5,6 +5,10 @@ public class ListLine {
     private String content;
     private long parent_id;
 
+    public ListLine(String content) {
+        this.content = content;
+    }
+
     public ListLine(long id, String content, long parent_id) {
         this.id = id;
         this.content = content;

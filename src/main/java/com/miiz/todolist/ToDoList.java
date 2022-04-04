@@ -1,5 +1,7 @@
 package com.miiz.todolist;
 
+import com.miiz.database.Database;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,9 @@ public class ToDoList {
     private long id;
     private long ownerid;
 
+    public ToDoList(String listName) {
+        this.listName = listName;
+    }
 
     public ToDoList(List<ListLine> listLines, String listName, long id, long ownerid) {
         this.listLines = listLines;
@@ -45,29 +50,30 @@ public class ToDoList {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public void addListLineInit(ListLine line) {
         listLines.add(line);
     }
 
-    public void newList(int listNumber, String listName){
-
+    public void addLine(String lineContent, Long lineId){
+        ListLine newLine = new ListLine(lineId, lineContent, id);
+        listLines.add(newLine);
     }
 
-    public void deleteList(int listNumber){
-
+    public void editLine(int lineNumber, String lineContent){
+        listLines.get(lineNumber).setContent(lineContent);
     }
 
-    public void addLine(int listNumber, int lineNumber, String lineContent){
-
+    public void deleteLine(int lineNumber){
+        listLines.remove(lineNumber-1);
     }
 
-    public void editLine(int listNumber, int lineNumber, String lineContent){
-
+    public void printListLines(){
+        for (int i = 1; i < listLines.size(); i++) {
+            System.out.println("  " + i + ". " + listLines.get(i-1).getContent());
+        }
     }
-
-    public void deleteLine(int listNumber, int lineNumber){
-
-    }
-
-
 }

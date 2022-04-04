@@ -38,17 +38,14 @@ public class App {
 
             switch (user_input) {
                 case "1" -> System.out.println("Valisid To Do nimekirja");
-
                 // To Do list
-                case "2" -> System.out.println("Valisid Focus Modei");
 
-                // Focus
-                case "3" -> System.out.println("Valisid notepadi");
+                case "2" -> System.out.println("Valisid muusika");
+                // Music
 
-                // notepad
-                case "4" -> System.out.println("Valisid workspacei");
-
+                case "3" -> System.out.println("Valisid workspacei");
                 //workspace
+
                 default -> {
                     System.out.println("Vigane sisend!");
                     System.out.println("Sisesta valik uuesti");
