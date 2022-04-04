@@ -30,13 +30,13 @@ public class WindowGroupHandler {
         }
     }
 
-    private int choiceChecker(String input) {
+    private int choiceChecker(String input, List list) {
         if (!tryParse(input)) {
             System.out.println("See ei ole valiidne valik.");
             return -1;
         }
         int choice = Integer.parseInt(input) - 1;
-        if (choice >= groupList.size() || choice < 0) {
+        if (choice >= list.size() || choice < 0) {
             System.out.println("See ei ole valiidne valik.");
             return -1;
         }
@@ -47,7 +47,7 @@ public class WindowGroupHandler {
         System.out.println("Sisesta uue grupi nimi:");
         String input = inputReader.nextLine().strip();
         if (input.length() != 0) {
-            WindowGroup group = new WindowGroup(input);
+            WindowGroup group = new WindowGroup(input, user.getId());
             group = database.addWindowGroup(group);
             groupList.add(group);
             System.out.println("Lisatud!");
@@ -63,7 +63,7 @@ public class WindowGroupHandler {
             System.out.println(i + 1 + ". " + groupList.get(i).getName());
         }
         String input = inputReader.nextLine().strip();
-        int choice = choiceChecker(input);
+        int choice = choiceChecker(input, groupList);
         if (choice == -1) { return; }
         // open the group
         WindowGroup group = groupList.get(choice);
@@ -85,7 +85,7 @@ public class WindowGroupHandler {
     private void deleteGroup(Scanner inputReader) {
         System.out.println("Millist gruppi soovite kustutada?");
         String input = inputReader.nextLine().strip();
-        int choice = choiceChecker(input);
+        int choice = choiceChecker(input, groupList);
         if (choice == -1) { return; }
         WindowGroup group = groupList.get(choice);
         System.out.println("Kustutatav nimekiri: " + group.getName());
@@ -104,7 +104,7 @@ public class WindowGroupHandler {
     private void addGroupUrl(Scanner inputReader) {
         System.out.println("Millisele grupile soovite URLi lisada?");
         String input = inputReader.nextLine().strip();
-        int choice = choiceChecker(input);
+        int choice = choiceChecker(input, groupList);
         if (choice == -1) { return; }
         WindowGroup group = groupList.get(choice);
         System.out.println("Mis on lisatav URL?");
@@ -114,6 +114,30 @@ public class WindowGroupHandler {
         windowURL = database.addWindowGroupUrl(windowURL);
         group.addUrl(windowURL);
         System.out.println("Lisatud!");
+    }
+
+    private void removeGroupUrl(Scanner inputReader) {
+        System.out.println("Millisest grupist soovite URLi eemaldada?");
+        String input = inputReader.nextLine().strip();
+        int choice = choiceChecker(input, groupList);
+        if (choice == -1) { return; }
+        WindowGroup group = groupList.get(choice);
+        for (int i = 0; i < group.getUrls().size(); i++) {
+            System.out.println(i+1 + ". " + group.getUrls().get(i));
+        }
+        System.out.println("Millist URLi soovite kustutada?");
+        input = inputReader.nextLine().strip();
+        choice = choiceChecker(input, group.getUrls());
+        if (choice == -1) { return; }
+        WindowURL url = group.getUrls().get(choice);
+        System.out.println("Kustutatav URL: " + url);
+        System.out.println("Olete kindel? Y/N");
+        input = inputReader.nextLine().strip().toUpperCase();
+        if (input.equals("Y")) {
+            database.deleteWindowGroupUrl(url);
+            group.removeUrl(url);
+            System.out.println("Kustutatud!");
+        }
     }
 
     // main method
@@ -130,31 +154,16 @@ public class WindowGroupHandler {
             System.out.println("6 - tagasi");
             String input = inputReader.nextLine().strip();
             switch (input) {
-                // uus grupp
-                case "1" -> {
-                    newGroup(inputReader);
-                }
-                // ava grupp
-                case "2" -> {
-                    openGroup(inputReader);
-                }
-                case "3" -> {
-                    // kustuta grupp
-                    deleteGroup(inputReader);
-                }
-                case "4" -> {
-                    // lisa url grupis
-                    addGroupUrl(inputReader);
-                }
-                case "5" -> {
-                    // todo
-                }
+
+                case "1" -> newGroup(inputReader);  // uus grupp
+                case "2" -> openGroup(inputReader); // ava grupp
+                case "3" -> deleteGroup(inputReader);   // kustuta grupp
+                case "4" -> addGroupUrl(inputReader);   // lisa url grupis
+                case "5" -> removeGroupUrl(inputReader);    // kustuta url grupis
                 case "6" -> {
                     return;
                 }
-                default -> {
-                    System.out.println("See ei ole valiidne sisend.");
-                }
+                default -> System.out.println("See ei ole valiidne sisend.");
             }
         }
     }

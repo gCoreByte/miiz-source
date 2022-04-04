@@ -40,7 +40,7 @@ public class Database extends DatabaseInit {
                 toDoLists.add(toDoList);
             }
         } catch (Exception e) {
-            System.out.println("Something went wrong.");
+            e.printStackTrace();
             return new ArrayList<>();
         }
         for (ToDoList todolist : toDoLists) {
@@ -52,7 +52,7 @@ public class Database extends DatabaseInit {
                     todolist.addListLineInit(line);
                 }
             } catch (Exception e) {
-                System.out.println("Something went wrong.");
+                e.printStackTrace();
             }
         }
         return toDoLists;
@@ -63,9 +63,9 @@ public class Database extends DatabaseInit {
         String sql = "DELETE FROM ToDoList WHERE id = ?";
         try (PreparedStatement statement = createPrepStatement(sql)) {
             statement.setLong(1, toDoList.getId());
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Something went wrong.");
+            e.printStackTrace();
         }
     }
 
@@ -75,9 +75,9 @@ public class Database extends DatabaseInit {
         try (PreparedStatement statement = createPrepStatement(sql)){
             statement.setString(1, toDoList.getListName());
             statement.setLong(2, toDoList.getId());
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Something went wrong.");
+            e.printStackTrace();
         }
     }
 
@@ -87,11 +87,11 @@ public class Database extends DatabaseInit {
         try (PreparedStatement statement = createPrepStatement(sql)){
             statement.setString(1, toDoList.getListName());
             statement.setLong(2, user.getId());
-            statement.executeQuery();
+            statement.executeUpdate();
             toDoList.setId(getLastRowId());
             return toDoList;
         } catch (Exception e) {
-            System.out.println("Something went wrong.");
+            e.printStackTrace();
             return toDoList;
         }
     }
@@ -102,9 +102,9 @@ public class Database extends DatabaseInit {
         try (PreparedStatement statement = createPrepStatement(sql)) {
             statement.setString(1, line.getContent());
             statement.setLong(2, line.getId());
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Something went wrong.");
+            e.printStackTrace();
         }
     }
 
@@ -113,9 +113,9 @@ public class Database extends DatabaseInit {
         String sql = "DELETE FROM ListLine WHERE id = ?";
         try (PreparedStatement statement = createPrepStatement(sql)) {
             statement.setLong(1, line.getId());
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Something went wrong.");
+            e.printStackTrace();
         }
     }
 
@@ -128,7 +128,7 @@ public class Database extends DatabaseInit {
             statement.setLong(1, user.getId());
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                WindowGroup group = new WindowGroup(rs.getLong("id"), rs.getString("name"));
+                WindowGroup group = new WindowGroup(rs.getLong("id"), rs.getString("name"), rs.getLong("ownerid"));
                 try (PreparedStatement statement2 = createPrepStatement(sql2)) {
                     statement2.setLong(1, rs.getLong("id"));
                     ResultSet rs2 = statement2.executeQuery();
@@ -142,21 +142,22 @@ public class Database extends DatabaseInit {
                 groups.add(group);
             }
         } catch (Exception e) {
-            System.out.println("Something went wrong.");
+            e.printStackTrace();
         }
         return groups;
     }
 
     public WindowGroup addWindowGroup(WindowGroup group) {
         isValid();
-        String sql = "INSERT INTO WindowGroup (name) VALUES (?)";
+        String sql = "INSERT INTO WindowGroup (name, ownerid) VALUES (?, ?)";
         try (PreparedStatement statement = createPrepStatement(sql)) {
             statement.setString(1, group.getName());
-            statement.executeQuery();
+            statement.setLong(2, group.getOwnerid());
+            statement.executeUpdate();
             group.setId(getLastRowId());
             return group;
         } catch (Exception e) {
-            System.out.println("Something went wrong.");
+            e.printStackTrace();
             return group;
         }
     }
@@ -171,9 +172,9 @@ public class Database extends DatabaseInit {
         String sql = "DELETE FROM WindowGroup WHERE id = ?";
         try (PreparedStatement statement = createPrepStatement(sql)) {
             statement.setLong(1, group.getId());
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Something went wrong.");
+            e.printStackTrace();
         }
     }
 
@@ -183,11 +184,11 @@ public class Database extends DatabaseInit {
         try (PreparedStatement statement = createPrepStatement(sql)) {
             statement.setLong(1, windowURL.getOwnerid());
             statement.setString(2, windowURL.getUrl());
-            statement.executeQuery();
+            statement.executeUpdate();
             windowURL.setId(getLastRowId());
             return windowURL;
         } catch (Exception e) {
-            System.out.println("Something went wrong.");
+            e.printStackTrace();
             return windowURL;
         }
     }
@@ -202,9 +203,9 @@ public class Database extends DatabaseInit {
         String sql = "DELETE FROM WindowGroupUrl WHERE id = ?";
         try (PreparedStatement statement = createPrepStatement(sql)) {
             statement.setLong(1, windowURL.getId());
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Something went wrong.");
+            e.printStackTrace();
         }
     }
     // used later when auth is implemented
@@ -218,7 +219,7 @@ public class Database extends DatabaseInit {
             rs.next();
             return new User(rs.getLong("id"), rs.getString("username"), rs.getString("hashedPw"));
         } catch (Exception e) {
-            System.out.println("Something went wrong.");
+            e.printStackTrace();
             return new User();
         }
     }
@@ -229,9 +230,9 @@ public class Database extends DatabaseInit {
         try (PreparedStatement statement = createPrepStatement(sql)) {
             statement.setString(1, user.getUsername());
             statement.setString(2, user.getHashedPw());
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Something went wrong.");
+            e.printStackTrace();
         }
     }
 
