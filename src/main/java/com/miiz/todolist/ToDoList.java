@@ -1,5 +1,7 @@
 package com.miiz.todolist;
 
+import com.miiz.database.Database;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,24 +48,18 @@ public class ToDoList {
         listLines.add(line);
     }
 
-    public void newList(int listNumber, String listName){
-
+    public void addLine(String lineContent, Long lineId, Long listId){
+        // Lisan andmebaasi rea ja sealt saan ta ide
+        ListLine newLine = new ListLine(lineId, lineContent, id);
+        listLines.add(newLine);
     }
 
-    public void deleteList(int listNumber){
-
+    public void editLine(int lineNumber, String lineContent){
+        listLines.get(lineNumber).setContent(lineContent);
     }
 
-    public void addLine(int listNumber, int lineNumber, String lineContent){
-
-    }
-
-    public void editLine(int listNumber, int lineNumber, String lineContent){
-
-    }
-
-    public void deleteLine(int listNumber, int lineNumber){
-
+    public void deleteLine(int lineNumber){
+        listLines.remove(lineNumber-1);
     }
 
 
