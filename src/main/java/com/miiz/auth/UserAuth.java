@@ -18,22 +18,22 @@ public class UserAuth {
     /**
      * Tries to log the user in.
      *
-     * @param email - user email to log in with
+     * @param username - user email to log in with
      * @param password - user password to log in with
      * @return boolean - true if success, false if error
      */
-    public boolean userLogin(String email, String password) {
+    public boolean userLogin(String username, String password) {
         return false;
     }
 
     /**
      * Tries to register an account.
      *
-     * @param email - user email to register with
+     * @param username - user email to register with
      * @param password - user password to log in with
      * @return boolean - true if succes, false if error
      */
-    public boolean userRegister(String email, String password) {
+    public boolean userRegister(String username, String password) {
         return false;
     }
 
