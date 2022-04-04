@@ -7,13 +7,13 @@ public class WindowURL {
 
     public WindowURL(long ownerid, String url) {
         this.ownerid = ownerid;
-        this.url = url;
+        this.url = urlFixer(url);
     }
 
     public WindowURL(long id, long ownerid, String url) {
         this.id = id;
         this.ownerid = ownerid;
-        this.url = url;
+        this.url = urlFixer(url);
     }
 
     public long getId() {
@@ -37,7 +37,14 @@ public class WindowURL {
     }
 
     public void setUrl(String url) {
-        this.url = url;
+        this.url = urlFixer(url);
+    }
+
+    private String urlFixer(String url) {
+        if (!url.startsWith("http://")) {
+            return "http://" + url;
+        }
+        return url;
     }
 
     @Override

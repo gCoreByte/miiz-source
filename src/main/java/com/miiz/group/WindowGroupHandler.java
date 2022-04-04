@@ -88,7 +88,7 @@ public class WindowGroupHandler {
         int choice = choiceChecker(input, groupList);
         if (choice == -1) { return; }
         WindowGroup group = groupList.get(choice);
-        System.out.println("Kustutatav nimekiri: " + group.getName());
+        System.out.println("Kustutatav grupp: " + group.getName());
         System.out.println("Oled kindel? Y/N");
         input = inputReader.nextLine().toUpperCase().strip();
         if (input.equals("Y")) {
@@ -140,12 +140,19 @@ public class WindowGroupHandler {
         }
     }
 
+    private void printAllGroups() {
+        for (int i = 0; i < groupList.size(); i++) {
+            System.out.println(i+1 + ". " + groupList.get(i));
+            System.out.println("------------");
+        }
+    }
+
     // main method
     public void main() {
 
         // main loop
         while (true) {
-            // TODO: print all groups
+            printAllGroups();
             System.out.println("1 - uus grupp");
             System.out.println("2 - ava grupp");
             System.out.println("3 - kustuta grupp");

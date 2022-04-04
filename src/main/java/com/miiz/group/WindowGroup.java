@@ -3,6 +3,7 @@ package com.miiz.group;
 import java.awt.*;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class WindowGroup {
                 System.out.println("URL " + url + " ei vasta nõuetele. See eemaldatakse nimekirjast.");
                 failedUrls.add(url);
             } catch (Exception e) {
-                System.out.println("Something went wrong.");
+               e.printStackTrace();
             }
         }
         return failedUrls;
