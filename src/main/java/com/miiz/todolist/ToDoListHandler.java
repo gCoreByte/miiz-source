@@ -7,7 +7,11 @@ import java.util.Scanner;
 
 public class ToDoListHandler {
 
-    Database database = new Database();
+    private final Database database;
+
+    public ToDoListHandler(Database database) {
+        this.database = database;
+    }
 
     public void main() {
 
