@@ -11,19 +11,22 @@ import java.util.List;
  */
 public class WindowGroup {
     private long id;
+    private final long ownerid;
     private String name;
     private final List<WindowURL> urls;
 
-    public WindowGroup(String name) {
+    public WindowGroup(String name, long ownerid) {
         this.name = name;
         this.urls = new ArrayList<>();
+        this.ownerid = ownerid;
     }
 
     // constructor for entries gotten from db
-    public WindowGroup(long id, String name) {
+    public WindowGroup(long id, String name, long ownerid) {
         this.id = id;
         this.name = name;
         this.urls = new ArrayList<>();
+        this.ownerid = ownerid;
     }
 
     public List<WindowURL> openGroup() {
@@ -78,7 +81,11 @@ public class WindowGroup {
 
     @Override
     public String toString() {
-        return name + "\n" +
-                urls.toString();
+        StringBuilder s = new StringBuilder();
+        s.append(name);
+        for (WindowURL url : urls) {
+            s.append("\n- ").append(url);
+        }
+        return s.toString();
     }
 }

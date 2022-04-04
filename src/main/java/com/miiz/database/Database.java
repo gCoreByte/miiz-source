@@ -126,7 +126,7 @@ public class Database extends DatabaseInit {
             statement.setLong(1, user.getId());
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                WindowGroup group = new WindowGroup(rs.getLong("id"), rs.getString("name"));
+                WindowGroup group = new WindowGroup(rs.getLong("id"), rs.getString("name"), rs.getLong("ownerid"));
                 try (PreparedStatement statement2 = createPrepStatement(sql2)) {
                     statement2.setLong(1, rs.getLong("id"));
                     ResultSet rs2 = statement2.executeQuery();
