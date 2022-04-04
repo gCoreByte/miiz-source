@@ -4,6 +4,7 @@ import com.miiz.auth.UserAuth;
 import com.miiz.database.Database;
 import com.miiz.group.WindowGroupHandler;
 import com.miiz.todolist.ToDoList;
+import com.miiz.todolist.ToDoListHandler;
 
 import java.util.Scanner;
 
@@ -20,6 +21,7 @@ public class App {
         // TODO: User authentication here
 
         WindowGroupHandler windowGroupHandler = new WindowGroupHandler(database, userAuth.getUser(), scan);
+        ToDoListHandler toDoListHandler = new ToDoListHandler(database, userAuth.getUser(), scan);
 
         System.out.println("Sissejuhatav/ selgitav tekst");
         System.out.println();

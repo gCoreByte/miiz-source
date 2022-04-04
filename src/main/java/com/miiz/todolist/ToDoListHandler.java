@@ -13,10 +13,10 @@ public class ToDoListHandler {
     private final Scanner scan;
     private final User user;
 
-    public ToDoListHandler(Database database, Scanner scan, User user) {
+    public ToDoListHandler(Database database, User user, Scanner scan) {
         this.database = database;
-        this.scan = scan;
         this.user = user;
+        this.scan = scan;
     }
 
 
