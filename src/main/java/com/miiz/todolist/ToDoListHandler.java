@@ -13,67 +13,6 @@ public class ToDoListHandler {
         this.database = database;
     }
 
-    public void main() {
-
-        List<ToDoList> lists = database.getToDoLists();
-        boolean invalid_input = true;
-
-        while (invalid_input) {
-            invalid_input = false;
-            System.out.println("Palun vali tegevus:");
-            System.out.println();
-            System.out.println("1 - Loo uus To Do nimekiri");
-            System.out.println("2 - Muuda To Do nimekirja");
-            System.out.println("3 - Kustuta To Do nimekiri");
-            System.out.println("4 - Tagasi algusesse");
-            int user_input = scanInputInt("Sisesta tegevusele vastav number");
-
-            switch (user_input) {
-                case 1 -> {
-                    System.out.println("Valisid To Do nimekirja loomise");
-                    System.out.println();
-                    String name = scanInputString("Sisesta uue nimekirja pealkiri");
-                    while (name.contains("false input")) {
-                        name = scanInputString("Sisesta lühem nimekirja pealkiri");
-                    }
-                    ToDoList newList = new ToDoList(name);
-                    newList = database.addTodoList(newList);
-                    lists.add(newList);
-                }
-                case 2 -> {
-                    System.out.println("Valisid To Do nimekirja muutmise");
-                    System.out.println();
-                    int pickedListIndex = pickToDoList(lists, "Vali nimekiri, mida soovid muuta");
-                    if (pickedListIndex == -1) {
-                        System.out.println("Vigane sisend");
-                    } else {
-                        ToDoList changeL = lists.get(pickedListIndex);
-                        editToDoList(changeL);
-                    }
-                }
-                case 3 -> {
-                    System.out.println("Valisid To Do nimekirja kustutamise");
-                    System.out.println();
-                    int listIndex = pickToDoList(lists, "Vali nimekiri, mille soovid kustutada");
-
-                    if (listIndex == -1) {
-                        System.out.println("Vigane sisend");
-                    } else {
-                        database.deleteToDoList(lists.get(listIndex));
-                    }
-
-                }
-                case 4 -> {
-                }
-                default -> {
-                    System.out.println("Vigane sisend!");
-                    System.out.println("Sisesta valik uuesti");
-                    invalid_input = true;
-                }
-            }
-        }
-    }
-
     public int scanInputInt(String task){
 
         Scanner scan = new Scanner(System.in);
@@ -164,6 +103,67 @@ public class ToDoListHandler {
                 }
                 default -> {
 
+                }
+            }
+        }
+    }
+
+    public void main() {
+
+        List<ToDoList> lists = database.getToDoLists();
+        boolean invalid_input = true;
+
+        while (invalid_input) {
+            invalid_input = false;
+            System.out.println("Palun vali tegevus:");
+            System.out.println();
+            System.out.println("1 - Loo uus To Do nimekiri");
+            System.out.println("2 - Muuda To Do nimekirja");
+            System.out.println("3 - Kustuta To Do nimekiri");
+            System.out.println("4 - Tagasi algusesse");
+            int user_input = scanInputInt("Sisesta tegevusele vastav number");
+
+            switch (user_input) {
+                case 1 -> {
+                    System.out.println("Valisid To Do nimekirja loomise");
+                    System.out.println();
+                    String name = scanInputString("Sisesta uue nimekirja pealkiri");
+                    while (name.contains("false input")) {
+                        name = scanInputString("Sisesta lühem nimekirja pealkiri");
+                    }
+                    ToDoList newList = new ToDoList(name);
+                    newList = database.addTodoList(newList);
+                    lists.add(newList);
+                }
+                case 2 -> {
+                    System.out.println("Valisid To Do nimekirja muutmise");
+                    System.out.println();
+                    int pickedListIndex = pickToDoList(lists, "Vali nimekiri, mida soovid muuta");
+                    if (pickedListIndex == -1) {
+                        System.out.println("Vigane sisend");
+                    } else {
+                        ToDoList changeL = lists.get(pickedListIndex);
+                        editToDoList(changeL);
+                    }
+                }
+                case 3 -> {
+                    System.out.println("Valisid To Do nimekirja kustutamise");
+                    System.out.println();
+                    int listIndex = pickToDoList(lists, "Vali nimekiri, mille soovid kustutada");
+
+                    if (listIndex == -1) {
+                        System.out.println("Vigane sisend");
+                    } else {
+                        database.deleteToDoList(lists.get(listIndex));
+                    }
+
+                }
+                case 4 -> {
+                }
+                default -> {
+                    System.out.println("Vigane sisend!");
+                    System.out.println("Sisesta valik uuesti");
+                    invalid_input = true;
                 }
             }
         }
