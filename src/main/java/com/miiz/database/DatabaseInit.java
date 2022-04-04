@@ -7,7 +7,7 @@ public class DatabaseInit {
     private final String connectionString = "jdbc:sqlite:sqlite.db";
     private Connection conn;
 
-    public DatabaseInit() {
+    protected DatabaseInit() {
         // first run table generation
         String USER_SQL = """
                 CREATE TABLE IF NOT EXISTS User(

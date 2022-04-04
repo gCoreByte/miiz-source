@@ -1,5 +1,8 @@
 package com.miiz.group;
 
+import java.awt.*;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +26,24 @@ public class WindowGroup {
         this.urls = new ArrayList<>();
     }
 
-    public void openGroup() {
-        // TODO
+    public List<WindowURL> openGroup() {
+        // TODO https://stackoverflow.com/questions/5226212/how-to-open-the-default-webbrowser-using-java
+        if (!Desktop.isDesktopSupported() || !Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+            System.out.println("Teie arvuti ei toeta seda funktsionaalsust kahjuks.");
+            return new ArrayList<>();
+        }
+        List<WindowURL> failedUrls = new ArrayList<>();
+        for (WindowURL url : urls) {
+            try {
+                Desktop.getDesktop().browse(new URI(url.getUrl()));
+            } catch (URISyntaxException e) {
+                System.out.println("URL " + url + " ei vasta nõuetele. See eemaldatakse nimekirjast.");
+                failedUrls.add(url);
+            } catch (Exception e) {
+                System.out.println("Something went wrong.");
+            }
+        }
+        return failedUrls;
     }
 
     public void addUrl(WindowURL url) {

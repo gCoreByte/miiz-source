@@ -8,7 +8,6 @@ import com.miiz.group.WindowGroup;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -180,9 +179,15 @@ public class Database extends DatabaseInit {
         // TODO
     }
 
-    public void removeWindowGroupUrl(WindowGroup group, String url) {
-        super.isValid();
-        // TODO
+    public void deleteWindowGroupUrl(WindowURL windowURL) {
+        isValid();
+        String sql = "DELETE FROM WindowGroupUrl WHERE id = ?";
+        try (PreparedStatement statement = createPrepStatement(sql)) {
+            statement.setLong(1, windowURL.getId());
+            statement.executeQuery();
+        } catch (Exception e) {
+            System.out.println("Something went wrong.");
+        }
     }
     // used later when auth is implemented
 
