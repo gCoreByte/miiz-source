@@ -7,6 +7,8 @@ import javax.xml.crypto.Data;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.miiz.utils.Utils.tryParse;
+
 public class ToDoListHandler {
 
     private final Database database;
@@ -32,18 +34,8 @@ public class ToDoListHandler {
             String user_input = scan.nextLine().strip();
 
             switch (user_input) {
-                case "1" -> newTodoList();
-                case "2" -> {
-                    System.out.println("Valisid To Do nimekirja muutmise");
-                    System.out.println();
-                    int pickedListIndex = pickToDoList(lists, "Vali nimekiri, mida soovid muuta") - 1;
-                    if (pickedListIndex == -1) {
-                        System.out.println("Vigane sisend");
-                    } else {
-                        ToDoList changeL = lists.get(pickedListIndex);
-                        editToDoList(changeL);
-                    }
-                }
+                case "1" -> newToDoList();
+                case "2" -> editToDoListCall();
                 case "3" -> {
                     System.out.println("Valisid To Do nimekirja kustutamise");
                     System.out.println();
@@ -66,17 +58,33 @@ public class ToDoListHandler {
         }
     }
 
-    private void newTodoList() {
+    private void newToDoList() {
         System.out.println("Sisesta uue nimekirja pealkiri:");
         String user_input = scan.nextLine().strip();
-        while (user_input.length() > 255) {
-            System.out.println("Maksimaalne pikkus on 255 karakterit. Palun sisesta lühem pealkiri:");
-            user_input = scan.nextLine().strip();
+        if (user_input.length() > 255) {
+            System.out.println("Maksimaalne pikkus on 255 karakterit.");
+            return;
         }
         ToDoList newList = new ToDoList(user_input, user.getId());
         newList = database.addTodoList(newList);
         lists.add(newList);
         System.out.println("Lisatud!");
+    }
+
+    private void editToDoListCall() {
+        System.out.println("Millist nimekirja soovite muuta?");
+        String user_input = scan.nextLine().strip();
+        if (!tryParse(user_input)) {
+            System.out.println("Vigane sisend.");
+            return;
+        }
+        int input = Integer.parseInt(user_input) - 1;
+        if (input < 0 || input >= lists.size()) {
+            System.out.println("Vigane sisend.");
+            return;
+        }
+        ToDoList change = lists.get(input);
+        editToDoList(change);
     }
 
     public int scanInputInt(String task){
@@ -107,9 +115,8 @@ public class ToDoListHandler {
     }
 
     public int pickToDoList(List<ToDoList> lists, String task){
-
         for (int i = 0; i < lists.size(); i++) {
-            System.out.println(i + ". " + lists.get(i).getListName());
+            System.out.println(i + 1 + ". " + lists.get(i).getListName());
             lists.get(i).printListLines();
             System.out.println();
         }

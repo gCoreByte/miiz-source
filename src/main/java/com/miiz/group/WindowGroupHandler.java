@@ -7,6 +7,8 @@ import com.miiz.database.Database;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.miiz.utils.Utils.tryParse;
+
 // group module handler
 public class WindowGroupHandler {
     private final Database database;
@@ -21,14 +23,6 @@ public class WindowGroupHandler {
         this.inputReader = inputReader;
     }
 
-    private boolean tryParse(String input) {
-        try {
-            Integer.parseInt(input);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
 
     private int choiceChecker(String input, List list) {
         if (!tryParse(input)) {
