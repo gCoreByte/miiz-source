@@ -43,7 +43,7 @@ public class WindowGroupHandler {
         return choice;
     }
 
-    private void newGroup(Scanner inputReader) {
+    private void newGroup() {
         System.out.println("Sisesta uue grupi nimi:");
         String input = inputReader.nextLine().strip();
         if (input.length() != 0) {
@@ -57,7 +57,7 @@ public class WindowGroupHandler {
 
     }
 
-    private void openGroup(Scanner inputReader) {
+    private void openGroup() {
         System.out.println("Vali millist gruppi avada:");
         for (int i = 0; i < groupList.size(); i++) {
             System.out.println(i + 1 + ". " + groupList.get(i).getName());
@@ -82,7 +82,7 @@ public class WindowGroupHandler {
         }
     }
 
-    private void deleteGroup(Scanner inputReader) {
+    private void deleteGroup() {
         System.out.println("Millist gruppi soovite kustutada?");
         String input = inputReader.nextLine().strip();
         int choice = choiceChecker(input, groupList);
@@ -101,7 +101,7 @@ public class WindowGroupHandler {
         }
     }
 
-    private void addGroupUrl(Scanner inputReader) {
+    private void addGroupUrl() {
         System.out.println("Millisele grupile soovite URLi lisada?");
         String input = inputReader.nextLine().strip();
         int choice = choiceChecker(input, groupList);
@@ -116,7 +116,7 @@ public class WindowGroupHandler {
         System.out.println("Lisatud!");
     }
 
-    private void removeGroupUrl(Scanner inputReader) {
+    private void removeGroupUrl() {
         System.out.println("Millisest grupist soovite URLi eemaldada?");
         String input = inputReader.nextLine().strip();
         int choice = choiceChecker(input, groupList);
@@ -162,11 +162,11 @@ public class WindowGroupHandler {
             String input = inputReader.nextLine().strip();
             switch (input) {
 
-                case "1" -> newGroup(inputReader);  // uus grupp
-                case "2" -> openGroup(inputReader); // ava grupp
-                case "3" -> deleteGroup(inputReader);   // kustuta grupp
-                case "4" -> addGroupUrl(inputReader);   // lisa url grupis
-                case "5" -> removeGroupUrl(inputReader);    // kustuta url grupis
+                case "1" -> newGroup();  // uus grupp
+                case "2" -> openGroup(); // ava grupp
+                case "3" -> deleteGroup();   // kustuta grupp
+                case "4" -> addGroupUrl();   // lisa url grupis
+                case "5" -> removeGroupUrl();    // kustuta url grupis
                 case "6" -> {
                     return;
                 }
