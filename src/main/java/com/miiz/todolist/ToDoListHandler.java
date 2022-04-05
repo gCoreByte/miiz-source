@@ -24,16 +24,15 @@ public class ToDoListHandler {
     public void main() {
 
         while (true) {
-            System.out.println("Palun vali tegevus:");
-            System.out.println();
+            // TODO: show all todolist names
             System.out.println("1 - Loo uus To Do nimekiri");
             System.out.println("2 - Muuda To Do nimekirja");
             System.out.println("3 - Kustuta To Do nimekiri");
             System.out.println("4 - Tagasi algusesse");
-            int user_input = scanInputInt("Sisesta tegevusele vastav number");
+            String user_input = scan.nextLine().strip();
 
             switch (user_input) {
-                case 1 -> {
+                case "1" -> {
                     System.out.println("Valisid To Do nimekirja loomise");
                     System.out.println();
                     String name = scanInputString("Sisesta uue nimekirja pealkiri");
@@ -44,7 +43,7 @@ public class ToDoListHandler {
                     newList = database.addTodoList(newList);
                     lists.add(newList);
                 }
-                case 2 -> {
+                case "2" -> {
                     System.out.println("Valisid To Do nimekirja muutmise");
                     System.out.println();
                     int pickedListIndex = pickToDoList(lists, "Vali nimekiri, mida soovid muuta") - 1;
@@ -55,7 +54,7 @@ public class ToDoListHandler {
                         editToDoList(changeL);
                     }
                 }
-                case 3 -> {
+                case "3" -> {
                     System.out.println("Valisid To Do nimekirja kustutamise");
                     System.out.println();
                     int listIndex = pickToDoList(lists, "Vali nimekiri, mille soovid kustutada") - 1;
@@ -66,7 +65,7 @@ public class ToDoListHandler {
                         database.deleteToDoList(lists.get(listIndex));
                     }
                 }
-                case 4 -> {
+                case "4" -> {
                     return;
                 }
                 default -> {
