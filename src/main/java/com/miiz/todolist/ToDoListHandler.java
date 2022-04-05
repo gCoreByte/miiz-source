@@ -32,17 +32,7 @@ public class ToDoListHandler {
             String user_input = scan.nextLine().strip();
 
             switch (user_input) {
-                case "1" -> {
-                    System.out.println("Valisid To Do nimekirja loomise");
-                    System.out.println();
-                    String name = scanInputString("Sisesta uue nimekirja pealkiri");
-                    while (name.equals("false input")) {
-                        name = scanInputString("Sisesta lühem nimekirja pealkiri");
-                    }
-                    ToDoList newList = new ToDoList(name, user.getId());
-                    newList = database.addTodoList(newList);
-                    lists.add(newList);
-                }
+                case "1" -> newTodoList();
                 case "2" -> {
                     System.out.println("Valisid To Do nimekirja muutmise");
                     System.out.println();
@@ -74,6 +64,19 @@ public class ToDoListHandler {
                 }
             }
         }
+    }
+
+    private void newTodoList() {
+        System.out.println("Sisesta uue nimekirja pealkiri:");
+        String user_input = scan.nextLine().strip();
+        while (user_input.length() > 255) {
+            System.out.println("Maksimaalne pikkus on 255 karakterit. Palun sisesta lühem pealkiri:");
+            user_input = scan.nextLine().strip();
+        }
+        ToDoList newList = new ToDoList(user_input, user.getId());
+        newList = database.addTodoList(newList);
+        lists.add(newList);
+        System.out.println("Lisatud!");
     }
 
     public int scanInputInt(String task){
