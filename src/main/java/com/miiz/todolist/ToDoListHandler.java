@@ -12,16 +12,16 @@ public class ToDoListHandler {
     private final Database database;
     private final Scanner scan;
     private final User user;
+    private final List<ToDoList> lists;
 
     public ToDoListHandler(Database database, User user, Scanner scan) {
         this.database = database;
         this.user = user;
         this.scan = scan;
+        this.lists = database.getToDoLists();
     }
 
     public void main() {
-
-        List<ToDoList> lists = database.getToDoLists();
 
         while (true) {
             System.out.println("Palun vali tegevus:");
