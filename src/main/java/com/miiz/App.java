@@ -3,6 +3,7 @@ package com.miiz;
 import com.miiz.auth.UserAuth;
 import com.miiz.database.Database;
 import com.miiz.group.WindowGroupHandler;
+import com.miiz.song.SongHandler;
 import com.miiz.todolist.ToDoList;
 import com.miiz.todolist.ToDoListHandler;
 
@@ -24,6 +25,7 @@ public class App {
 
         WindowGroupHandler windowGroupHandler = new WindowGroupHandler(database, userAuth.getUser(), scan);
         ToDoListHandler toDoListHandler = new ToDoListHandler(database, userAuth.getUser(), scan);
+        SongHandler songHandler = new SongHandler(database, scan);
 
         System.out.println("Sissejuhatav/ selgitav tekst");
         System.out.println();
@@ -31,7 +33,7 @@ public class App {
             System.out.println("Palun vali tegevus!");
             System.out.println();
             System.out.println("Kuva To Do nimekiri:        1");
-            System.out.println("Ava focus-mode:             2");
+            System.out.println("Ava muusika valik:          2");
             System.out.println("Ava notepad:                3");
             System.out.println("Kuva workspaceide valik:    4");
             System.out.println("Sulge programm:             5");
@@ -44,10 +46,8 @@ public class App {
                 case "1" -> toDoListHandler.main();
                 // To Do list
 
-                case "2" -> System.out.println("Valisid muusika");
+                case "2" -> songHandler.main();
                 // Music
-
-                case "3" -> System.out.println("Not implemented.");
 
                 case "4" -> windowGroupHandler.main();
                 //workspace
