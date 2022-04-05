@@ -217,8 +217,10 @@ public class Database extends DatabaseInit {
         try (PreparedStatement statement = createPrepStatement(sql)) {
             statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
-            rs.next();
-            return new User(rs.getLong("id"), rs.getString("username"), rs.getString("hashedPw"));
+            if (rs.next()) {
+                return new User(rs.getLong("id"), rs.getString("username"), rs.getString("hashedPw"));
+            }
+            return new User();
         } catch (Exception e) {
             e.printStackTrace();
             return new User();
