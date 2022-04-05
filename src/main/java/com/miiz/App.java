@@ -34,9 +34,8 @@ public class App {
             System.out.println();
             System.out.println("Kuva To Do nimekiri:        1");
             System.out.println("Ava muusika valik:          2");
-            System.out.println("Ava notepad:                3");
-            System.out.println("Kuva workspaceide valik:    4");
-            System.out.println("Sulge programm:             5");
+            System.out.println("Kuva workspaceide valik:    3");
+            System.out.println("Sulge programm:             4");
             System.out.println("Sisesta tegevusele vastav number: ");
             String str_input = scan.nextLine();
             String[] arr_input = str_input.split(" ");
@@ -49,10 +48,10 @@ public class App {
                 case "2" -> songHandler.main();
                 // Music
 
-                case "4" -> windowGroupHandler.main();
+                case "3" -> windowGroupHandler.main();
                 //workspace
 
-                case "5" -> System.exit(0);
+                case "4" -> System.exit(0);
 
                 default -> {
                     System.out.println("Vigane sisend!");
