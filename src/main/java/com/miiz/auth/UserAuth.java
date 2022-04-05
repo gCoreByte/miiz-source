@@ -34,7 +34,7 @@ public class UserAuth {
      */
     // TODO: move user authentication to server
     public boolean userLogin(String username, String password) {
-        /*
+        username = username.toLowerCase();
         User user = database.getUserByUsername(username);
         // id -1 means no user found
         if (user.getId() == -1) {
@@ -47,11 +47,12 @@ public class UserAuth {
             setUserSecret("temp");
             setUserToken("temp");
             this.user = user;
+            database.setUser(user);
             return true;
         }
         return false;
-        */
-        // TODO: remove temporary solution and implement auth
+        /*
+        // old temporary solution before auth implementation
         User user = database.getUserByUsername(username);
         if (user.getId() == -1) {
             user = new User(username, password);
@@ -64,6 +65,7 @@ public class UserAuth {
         database.setUser(user);
         this.user = user;
         return true;
+        */
     }
 
     /**
@@ -74,6 +76,7 @@ public class UserAuth {
      * @return boolean - true if success, false if error
      */
     public boolean userRegister(String username, String password) {
+        username = username.toLowerCase();
         User user = database.getUserByUsername(username);
         // id -1 means no user found
         if (user.getId() != -1) {

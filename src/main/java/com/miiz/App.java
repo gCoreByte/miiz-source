@@ -3,6 +3,7 @@ package com.miiz;
 import com.miiz.auth.UserAuth;
 import com.miiz.database.Database;
 import com.miiz.group.WindowGroupHandler;
+import com.miiz.song.Song;
 import com.miiz.song.SongHandler;
 import com.miiz.todolist.ToDoList;
 import com.miiz.todolist.ToDoListHandler;
@@ -10,6 +11,53 @@ import com.miiz.todolist.ToDoListHandler;
 import java.util.Scanner;
 
 public class App {
+
+
+    public static void authentication(Scanner scanner, UserAuth userAuth) {
+        while (true) {
+            System.out.println("Programmi kasutamiseks on vajalik sisselogimine.");
+            System.out.println("1 - Logi sisse");
+            System.out.println("2 - Tee konto");
+            String input = scanner.nextLine().strip();
+            switch (input) {
+                case "1" -> {
+                    boolean result = login(scanner, userAuth);
+                    if (result) {
+                        System.out.println("Edukalt sisse logitud!");
+                        System.out.println("-------------");
+                        return;
+                    }
+                    System.out.println("Sisselogimine ebaõnnestus.");
+                }
+                case "2" -> {
+                    boolean result = register(scanner, userAuth);
+                    if (result) {
+                        System.out.println("Kasutaja loodud! Logige palun sisse.");
+                    }
+                    else {
+                        System.out.println("Kasutajanimi on juba olemas.");
+                    }
+                }
+            }
+            System.out.println("-------------");
+        }
+    }
+
+    public static boolean login(Scanner scanner, UserAuth userAuth) {
+        System.out.println("Sisestage kasutajanimi:");
+        String username = scanner.nextLine().strip();
+        System.out.println("Sisestage parool:");
+        String password = scanner.nextLine();
+        return userAuth.userLogin(username, password);
+    }
+
+    public static boolean register(Scanner scanner, UserAuth userAuth) {
+        System.out.println("Sisestage kasutajanimi:");
+        String username = scanner.nextLine().strip();
+        System.out.println("Sisestage parool:");
+        String password = scanner.nextLine();
+        return userAuth.userRegister(username, password);
+    }
 
     public static void main(String[] args) {
         // apparently there can be issues if multiple scanners read system.in
@@ -19,9 +67,11 @@ public class App {
         Database database = new Database();
         UserAuth userAuth = new UserAuth(database);
         // TEMPORARY
-        userAuth.userLogin("a","b");
+        //userAuth.userLogin("a","b");
 
-        // TODO: User authentication here
+        // TODO: Move user authentication interface to UserAuthHandler?
+        authentication(scan, userAuth);
+
 
         WindowGroupHandler windowGroupHandler = new WindowGroupHandler(database, userAuth.getUser(), scan);
         ToDoListHandler toDoListHandler = new ToDoListHandler(database, userAuth.getUser(), scan);
