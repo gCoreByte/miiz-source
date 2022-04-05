@@ -6,16 +6,18 @@ public class Song {
     private String title;
     private String author;
     private String url;
-    private Genre genre;
+    private int genre;
     private long id;
 
-    public Song(String title, String author, String url, Genre genre, long id) {
+    public Song(String title, String author, String url, int genre, long id) {
         this.title = title;
         this.author = author;
         this.url = url;
         this.genre = genre;
         this.id = id;
     }
+
+
 
     public String getTitle() {
         return title;
@@ -41,11 +43,11 @@ public class Song {
         this.url = url;
     }
 
-    public Genre getGenre() {
+    public int getGenre() {
         return genre;
     }
 
-    public void setGenre(Genre genre) {
+    public void setGenre(int genre) {
         this.genre = genre;
     }
 

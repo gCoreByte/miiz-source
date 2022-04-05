@@ -10,6 +10,7 @@ import com.miiz.group.WindowGroup;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -239,5 +240,47 @@ public class Database extends DatabaseInit {
     public void removeUser() {
         super.isValid();
         // TODO
+    }
+
+    public List<Song> getSongs(){
+        isValid();
+        String sql = "SELECT * FROM song";
+
+        List<Song> songs = new ArrayList<>();
+
+        try (Statement statement = createStatement()) {
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+
+                Song song = new Song(rs.getString("name"), rs.getString("author"), rs.getString("url"), rs.getInt("genre"), rs.getLong("id"));
+                songs.add(song);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+
+        return songs;
+    }
+
+    public List<Song> getSongsByGenre(int genre){
+        isValid();
+        String sql = "SELECT * FROM song WHERE genre = ?";
+
+        List<Song> songsByGenre = new ArrayList<>();
+
+        try (PreparedStatement statement = createPrepStatement(sql)) {
+            statement.setInt(1, genre);
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+            Song song = new Song(rs.getString("name"), rs.getString("author"), rs.getString("url"), rs.getInt("genre"), rs.getLong("id"));
+            songsByGenre.add(song);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+
+        return songsByGenre;
     }
 }
