@@ -14,6 +14,7 @@ public class ToDoList {
     public ToDoList(String listName, long ownerid) {
         this.listName = listName;
         this.ownerid = ownerid;
+        this.listLines = new ArrayList<>();
     }
 
     public ToDoList(List<ListLine> listLines, String listName, long id, long ownerid) {
