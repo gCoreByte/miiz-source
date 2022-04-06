@@ -15,4 +15,13 @@ public class Utils {
             return false;
         }
     }
+
+    public static void separator(){
+        System.out.println("----------------------------------");
+        System.out.println();
+    }
+
+    public static void separatorWOS(){
+        System.out.println("----------------------------------");
+    }
 }
