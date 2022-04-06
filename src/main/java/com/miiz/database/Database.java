@@ -102,7 +102,7 @@ public class Database extends DatabaseInit {
 
     public ListLine addListLine(ListLine line) {
         isValid();
-        String sql = "INSERT INTO ListLine VALUES (?, ?)";
+        String sql = "INSERT INTO ListLine (content, ownerid) VALUES (?, ?)";
         try (PreparedStatement statement = createPrepStatement(sql)) {
             statement.setString(1, line.getContent());
             statement.setLong(2, line.getParentid());
