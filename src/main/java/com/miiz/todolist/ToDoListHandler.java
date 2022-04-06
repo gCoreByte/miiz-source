@@ -103,7 +103,7 @@ public class ToDoListHandler {
 
             separatorWOS();
 
-            System.out.println("Mida sooviksd teha?");
+            System.out.println("Mida sooviksid teha?");
             System.out.println("1 - lisada rida");
             System.out.println("2 - kustutada rida");
             System.out.println("3 - muuda rida");
