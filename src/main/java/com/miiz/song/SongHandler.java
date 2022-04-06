@@ -8,6 +8,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.miiz.utils.Utils.tryParse;
+
 public class SongHandler {
 
     private final Database database;
@@ -40,6 +42,22 @@ public class SongHandler {
         }
     }
 
+    private void pickSong() {
+        printSongs(songs);
+        System.out.println("Valige lugu, mida soovite kuulata:");
+        String input = inputReader.nextLine().strip();
+        if (!tryParse(input)) {
+            System.out.println("Vigane sisend.");
+            return;
+        }
+        int choice = Integer.parseInt(input) - 1;
+        if (choice < 0 || choice >= songs.size() - 1) {
+            System.out.println("Vigane sisend.");
+            return;
+        }
+        play(songs.get(choice));
+    }
+
     public void main(){
 
         while (true) {
@@ -61,12 +79,7 @@ public class SongHandler {
                 play(songs.get(rand));
             }
 
-            case "2" -> {
-                System.out.println("Vali lugu, mille soovid esitada:");
-                printSongs(songs);
-                int pick = Integer.parseInt(inputReader.nextLine().strip());
-                play(songs.get(pick -1));
-            }
+            case "2" -> pickSong();
 
             case "3" -> {
                 System.out.println("Vali žanr:");
