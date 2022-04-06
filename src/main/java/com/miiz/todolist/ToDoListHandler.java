@@ -23,7 +23,7 @@ public class ToDoListHandler {
     }
 
     public void main() {
-        separatorWOS();
+        separator();
         while (true) {
 
             if (lists.size() == 0)
@@ -36,7 +36,7 @@ public class ToDoListHandler {
                 }
             }
 
-            separatorWOS();
+            separator();
 
             System.out.println("1 - Loo To Do List.");
             System.out.println("2 - Muuda To Do Listi");
@@ -62,11 +62,12 @@ public class ToDoListHandler {
                     if (noLists())
                         return;
 
-                    int listIndex = pickToDoList("Vali To Do List, mille soovid kustutada.") - 1;
+                    int listIndex = pickToDoList("Vali To Do List, mille soovid kustutada.");
 
                     if (invalidReqIndex(listIndex))
                         return;
 
+                    listIndex--;
                     deleteList(listIndex);
                 }
                 case "4" ->{
@@ -88,7 +89,7 @@ public class ToDoListHandler {
 
     private void editToDoList(ToDoList list) {
         while (true) {
-            separatorWOS();
+            separator();
 
             System.out.println(list.getListName());
             if (list.getListLines().size() == 0){
@@ -101,7 +102,7 @@ public class ToDoListHandler {
                 }
             }
 
-            separatorWOS();
+            separator();
 
             System.out.println("Mida sooviksid teha?");
             System.out.println("1 - lisada rida");
@@ -130,6 +131,8 @@ public class ToDoListHandler {
                     if (listIsEmpty(list))
                         return;
 
+                    printNotEmptyList(list);
+
                     int lineIndex = scanInputInt("Sisesta kustutava rea number") - 1;
 
                     if (invalidReqIndexList(lineIndex, list))
@@ -141,6 +144,8 @@ public class ToDoListHandler {
                 case 3 -> {
                     if (listIsEmpty(list))
                         return;
+
+                    printNotEmptyList(list);
 
                     int lineIndex = scanInputInt("Sisesta muudetava rea number") - 1;
 
@@ -212,9 +217,12 @@ public class ToDoListHandler {
     }
 
     private void printList(){
-        int listIndex = pickToDoList("Vali To Do List, mida soovid kuvada.") - 1;
+        int listIndex = pickToDoList("Vali To Do List, mida soovid kuvada.") ;
+
         if (invalidReqIndex(listIndex))
             return;
+
+        listIndex --;
         System.out.println(lists.get(listIndex).getListName());
 
         if (!listIsEmpty(lists.get(listIndex))){
@@ -251,6 +259,13 @@ public class ToDoListHandler {
         System.out.println("Rida muudetud.");
         separator();
 
+    }
+
+    private void printNotEmptyList( ToDoList list){
+        System.out.println(list.getListName());
+        for (int i = 0; i < list.getListLines().size(); i++) {
+            System.out.println("  " + (i+1) + ". " + list.getListLines().get(i).getContent());
+        }
     }
 
     /*******************************************************************************************************************
@@ -292,7 +307,6 @@ public class ToDoListHandler {
     private boolean invalidReqIndex(int index){
         if (index == -1) {
             System.out.println("Vigane sisend.");
-            separator();
             return true;
         }
         return false;
@@ -300,8 +314,8 @@ public class ToDoListHandler {
 
     private boolean invalidReqIndexList(int index, ToDoList list){
         if (index == -1 || index > list.getListLines().size()-1) {
+            System.out.println(list.getListLines().size()-1);
             System.out.println("Vigane sisend.");
-            separator();
             return true;
         }
         return false;
@@ -319,7 +333,7 @@ public class ToDoListHandler {
     private int pickToDoList(String task){
         for (int i = 0; i < lists.size(); i++) {
             System.out.println(i + 1 + ". " + lists.get(i).getListName());
-            separatorWOS();
+            separator();
         }
 
         System.out.println(task);
