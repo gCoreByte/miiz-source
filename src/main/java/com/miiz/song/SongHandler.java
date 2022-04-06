@@ -6,6 +6,7 @@ import java.awt.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 import static com.miiz.utils.Utils.tryParse;
@@ -82,6 +83,11 @@ public class SongHandler {
     }
 
     public void main(){
+        if (songs.size() == 0) {
+            System.out.println("Andmebaasis ei ole ühtegi laulu.");
+            System.out.println("Laulude moodul ei tööta.");
+            return;
+        }
 
         while (true) {
         System.out.println("1 - mängi juhuslik lugu");
@@ -95,8 +101,9 @@ public class SongHandler {
         switch (input) {
             case "1" -> {
                 System.out.println("Esitan juhusliku loo");
-                int rand = (int) (Math.random() * songs.size());
-                System.out.println("Valisin " + songs.get(rand-1).getTitle());
+                Random r = new Random();
+                int rand = r.nextInt(songs.size());
+                System.out.println("Valisin " + songs.get(rand).getTitle());
                 play(songs.get(rand));
             }
 
