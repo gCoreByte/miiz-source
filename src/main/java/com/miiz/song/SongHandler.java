@@ -42,6 +42,7 @@ public class SongHandler {
 
         List<Song> songs = database.getSongs();
 
+        while (true) {
         System.out.println("Vali tegevus:");
         System.out.println();
         System.out.println("1 - mängi juhuslik lugu");
@@ -52,40 +53,38 @@ public class SongHandler {
         System.out.println();
 
         String input = inputReader.nextLine().strip();
-
-        while (true){
-            switch (input) {
-                case "1" -> {
-                    System.out.println("Esitan juhusliku loo");
-                    int rand = (int) (Math.random() * songs.size());
-                    System.out.println("Valisin " + songs.get(rand-1).getTitle());
-                    play(songs.get(rand));
-                }
-
-                case "2" -> {
-                    System.out.println("Vali lugu, mille soovid esitada:");
-                    printSongs(songs);
-                    int pick = Integer.parseInt(inputReader.nextLine().strip());
-                    play(songs.get(pick -1));
-                }
-
-                case "3" -> {
-                    System.out.println("Vali žanr:");
-                    for (int i = 1; i < Genre.genres.size() + 1; i++) {
-                        System.out.println(i + ". " + Genre.genres.get(i-1));
-                    }
-                    int pick = Integer.parseInt(inputReader.nextLine().strip());
-                    List<Song> songsByGenre = database.getSongsByGenre(pick -1 );
-                    int rand = (int) (Math.random() * songsByGenre.size());
-                    play(songsByGenre.get(rand));
-                }
-                case "4" -> {
-                    return;
-                }
-
-                default -> System.out.println("Pole valiidne sisend");
-
+        switch (input) {
+            case "1" -> {
+                System.out.println("Esitan juhusliku loo");
+                int rand = (int) (Math.random() * songs.size());
+                System.out.println("Valisin " + songs.get(rand-1).getTitle());
+                play(songs.get(rand));
             }
+
+            case "2" -> {
+                System.out.println("Vali lugu, mille soovid esitada:");
+                printSongs(songs);
+                int pick = Integer.parseInt(inputReader.nextLine().strip());
+                play(songs.get(pick -1));
+            }
+
+            case "3" -> {
+                System.out.println("Vali žanr:");
+                for (int i = 1; i < Genre.genres.size() + 1; i++) {
+                    System.out.println(i + ". " + Genre.genres.get(i-1));
+                }
+                int pick = Integer.parseInt(inputReader.nextLine().strip());
+                List<Song> songsByGenre = database.getSongsByGenre(pick -1 );
+                int rand = (int) (Math.random() * songsByGenre.size());
+                play(songsByGenre.get(rand));
+            }
+            case "4" -> {
+                return;
+            }
+
+            default -> System.out.println("Pole valiidne sisend");
+
+        }
         }
     }
 
