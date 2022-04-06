@@ -12,10 +12,12 @@ public class SongHandler {
 
     private final Database database;
     private final Scanner inputReader;
+    private final List<Song> songs;
 
     public SongHandler(Database database, Scanner inputReader) {
         this.database = database;
         this.inputReader = inputReader;
+        this.songs = database.getSongs();
     }
 
     public void printSongs(List<Song> songsList){
@@ -39,8 +41,6 @@ public class SongHandler {
     }
 
     public void main(){
-
-        List<Song> songs = database.getSongs();
 
         while (true) {
         System.out.println("Vali tegevus:");
