@@ -12,8 +12,12 @@ import java.util.Scanner;
 
 public class App {
 
-
-    public static void authentication(Scanner scanner, UserAuth userAuth) {
+    /**
+     * User authentication -> get user input and handle choices
+     * @param scanner - the shared scanner from main
+     * @param userAuth - userAuth class to handle checking against the db
+     */
+    private static void authentication(Scanner scanner, UserAuth userAuth) {
         while (true) {
             System.out.println("Programmi kasutamiseks on vajalik sisselogimine.");
             System.out.println("1 - Logi sisse");
@@ -21,15 +25,17 @@ public class App {
             String input = scanner.nextLine().strip();
             switch (input) {
                 case "1" -> {
+                    // if login succeeds, we return out of auth, breaking the loop
                     boolean result = login(scanner, userAuth);
                     if (result) {
                         System.out.println("Edukalt sisse logitud!");
-                        System.out.println("-------------");
+                        System.out.println("----------------------------------");
                         return;
                     }
                     System.out.println("Sisselogimine ebaõnnestus.");
                 }
                 case "2" -> {
+                    // checking if registration was successful
                     boolean result = register(scanner, userAuth);
                     if (result) {
                         System.out.println("Kasutaja loodud! Logige palun sisse.");
@@ -39,11 +45,17 @@ public class App {
                     }
                 }
             }
-            System.out.println("-------------");
+            System.out.println("----------------------------------");
         }
     }
 
-    public static boolean login(Scanner scanner, UserAuth userAuth) {
+    /**
+     * Connects user input to userAuth.login()
+     * @param scanner - shared scanner from main
+     * @param userAuth - userAuth class to handle checking against the db
+     * @return true if login was successful, otherwise false
+     */
+    private static boolean login(Scanner scanner, UserAuth userAuth) {
         System.out.println("Sisestage kasutajanimi:");
         String username = scanner.nextLine().strip();
         System.out.println("Sisestage parool:");
@@ -51,7 +63,13 @@ public class App {
         return userAuth.userLogin(username, password);
     }
 
-    public static boolean register(Scanner scanner, UserAuth userAuth) {
+    /**
+     * Connects user input to userAuth.register()
+     * @param scanner - shared scanner from main
+     * @param userAuth - userAuth class to handle checking against the db
+     * @return true if registration was successful, otherwise false
+     */
+    private static boolean register(Scanner scanner, UserAuth userAuth) {
         System.out.println("Sisestage kasutajanimi:");
         String username = scanner.nextLine().strip();
         System.out.println("Sisestage parool:");
@@ -59,6 +77,10 @@ public class App {
         return userAuth.userRegister(username, password);
     }
 
+    /**
+     * Main method
+     * @param args - cmdline args
+     */
     public static void main(String[] args) {
         // apparently there can be issues if multiple scanners read system.in
         // to bypass this we will use the same scanner in all modules
@@ -66,19 +88,18 @@ public class App {
 
         Database database = new Database();
         UserAuth userAuth = new UserAuth(database);
-        // TEMPORARY
-        //userAuth.userLogin("a","b");
 
         // TODO: Move user authentication interface to UserAuthHandler?
         authentication(scan, userAuth);
 
-
+        // initialise our handlers
         WindowGroupHandler windowGroupHandler = new WindowGroupHandler(database, userAuth.getUser(), scan);
         ToDoListHandler toDoListHandler = new ToDoListHandler(database, userAuth.getUser(), scan);
         SongHandler songHandler = new SongHandler(database, scan);
 
+        // TODO: change sissejuhatav/selgitav tekst
         System.out.println("Sissejuhatav/ selgitav tekst");
-        System.out.println();
+        System.out.println("----------------------------------");
         while (true){
             System.out.println("Palun vali tegevus!");
             System.out.println();

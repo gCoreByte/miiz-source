@@ -3,7 +3,12 @@ package com.miiz.database;
 import java.sql.*;
 import java.util.List;
 
+/**
+ * Initialisation for database
+ * This class contains methods for the database itself and SQL to create new tables if needed
+ */
 public class DatabaseInit {
+    // connection string for easy modification
     private final String connectionString = "jdbc:sqlite:sqlite.db";
     private Connection conn;
 
@@ -77,6 +82,7 @@ public class DatabaseInit {
                 }
             });
         } catch (Exception e) {
+            // if something goes wrong we cannot continue running the program
             System.out.println("Something went wrong with DB init.");
             e.printStackTrace();
             System.exit(-1);
@@ -88,18 +94,23 @@ public class DatabaseInit {
             conn = DriverManager.getConnection(connectionString);
         }
         catch (SQLException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
+    // check if our connection is still alive
+    // with sqlite it is better practice to simply reuse one connection
+    // with bigger databases it is best practice to use a connection pool and open a new connection
+    // for each query
     protected void isValid() {
         try {
             if (!conn.isValid(1)) {
                 connect();
             }
         } catch (SQLException e) {
-            System.out.println(e);
-            connect();
+            // this is a fatal error - database connection has died and we must exit
+            e.printStackTrace();
+            System.exit(-1);
         }
     }
 

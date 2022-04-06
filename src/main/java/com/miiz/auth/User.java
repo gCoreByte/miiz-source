@@ -1,5 +1,10 @@
 package com.miiz.auth;
 
+
+/**
+ * User data class
+ * This store all of the users account data
+ */
 public class User {
 
     private long id;
