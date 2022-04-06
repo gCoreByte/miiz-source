@@ -321,15 +321,15 @@ public class Database extends DatabaseInit {
         try (PreparedStatement statement = createPrepStatement(sql)) {
             statement.setInt(1, genre);
             ResultSet rs = statement.executeQuery();
-            rs.next();
-            Song song = new Song(rs.getString("name"), rs.getString("author"), rs.getString("url"), rs.getInt("genre"), rs.getLong("id"));
-            songsByGenre.add(song);
+            while (rs.next()) {
+                Song song = new Song(rs.getString("name"), rs.getString("author"), rs.getString("url"), rs.getInt("genre"), rs.getLong("id"));
+                songsByGenre.add(song);
+            }
+            return songsByGenre;
 
         } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();
         }
-
-        return songsByGenre;
     }
 }

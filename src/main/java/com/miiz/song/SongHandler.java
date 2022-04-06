@@ -91,7 +91,8 @@ public class SongHandler {
         // TODO: genre class refactoring
         // TODO: make getSongsByGenre not require +1 - not intuitive
         List<Song> songsByGenre = database.getSongsByGenre(choice + 1);
-        int rand = (int) (Math.random() * songsByGenre.size());
+        Random r = new Random();
+        int rand = r.nextInt(songsByGenre.size());
         play(songsByGenre.get(rand));
     }
 
