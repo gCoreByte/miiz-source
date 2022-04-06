@@ -120,7 +120,7 @@ public class ToDoListHandler {
                     if (newLineC.equals("false input")) {
                         System.out.println("Vigane sisend.");
                         separator();
-                        return;
+                        continue;
                     }
 
                     addLine(list, newLineC);
@@ -133,7 +133,7 @@ public class ToDoListHandler {
                     int lineIndex = scanInputInt("Sisesta kustutava rea number") - 1;
 
                     if (invalidReqIndexList(lineIndex, list))
-                        return;
+                        continue;
 
                     deleteLine(list, lineIndex);
                 }
@@ -145,11 +145,11 @@ public class ToDoListHandler {
                     int lineIndex = scanInputInt("Sisesta muudetava rea number") - 1;
 
                     if (invalidReqIndexList(lineIndex, list))
-                        return;
+                        continue;
 
                     String newLine = scanInputString("Sisesta rea uus sisu:");
                     if (newLine.equals("false input"))
-                        return;
+                        continue;
 
                     editLine(list, newLine, lineIndex);
                 }
@@ -229,7 +229,7 @@ public class ToDoListHandler {
 
     private void addLine(ToDoList list, String newLineC){
 
-        ListLine newLine = new ListLine(newLineC);
+        ListLine newLine = new ListLine(newLineC, list.getId());
         newLine = database.addListLine(newLine);
         list.addLine(newLine);
         System.out.println("Rida lisatud!");

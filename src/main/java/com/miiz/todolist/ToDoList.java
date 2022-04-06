@@ -77,8 +77,8 @@ public class ToDoList {
     }
 
     public void printListLines(){
-        for (int i = 1; i < listLines.size() + 1; i++) {
-            System.out.println("  " + i + ". " + listLines.get(i-1).getContent());
+        for (int i = 0; i < listLines.size(); i++) {
+            System.out.println("  " + i + 1 + ". " + listLines.get(i).getContent());
         }
     }
 }
