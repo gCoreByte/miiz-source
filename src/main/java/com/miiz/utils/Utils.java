@@ -16,7 +16,10 @@ public class Utils {
         }
     }
 
-    public static void divider(){
+    /**
+     * Keep the separators the same length everywhere in the code easily.
+     */
+    public static void separator(){
         System.out.println("----------------------------------");
     }
 }

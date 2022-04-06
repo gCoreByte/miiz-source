@@ -23,6 +23,19 @@ public class Database extends DatabaseInit {
 
     public Database() {
         super();
+        isValid();
+        // check for songs in the database to see if we need to add them
+        String sql = "SELECT * FROM Song";
+        try (Statement statement = createStatement()) {
+            ResultSet rs = statement.executeQuery(sql);
+            if (!rs.next()) {
+                DatabaseSongInit.initSongs(this);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // something went wrong already, we should stop the program
+            System.exit(-1);
+        }
     }
 
     // THIS WILL BE CALLED AFTER LOGGING IN
@@ -261,6 +274,23 @@ public class Database extends DatabaseInit {
         // TODO
     }
 
+    public Song addSong(Song song) {
+        isValid();
+        String sql = "INSERT INTO Song (name, author, url, genre) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement statement = createPrepStatement(sql)) {
+            statement.setString(1, song.getTitle());
+            statement.setString(2, song.getAuthor());
+            statement.setString(3, song.getUrl());
+            statement.setInt(4, song.getGenre());
+            statement.executeUpdate();
+            song.setId(getLastRowId());
+            return song;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return song;
+        }
+    }
+
     public List<Song> getSongs(){
         isValid();
         String sql = "SELECT * FROM song";
@@ -291,15 +321,15 @@ public class Database extends DatabaseInit {
         try (PreparedStatement statement = createPrepStatement(sql)) {
             statement.setInt(1, genre);
             ResultSet rs = statement.executeQuery();
-            rs.next();
-            Song song = new Song(rs.getString("name"), rs.getString("author"), rs.getString("url"), rs.getInt("genre"), rs.getLong("id"));
-            songsByGenre.add(song);
+            while (rs.next()) {
+                Song song = new Song(rs.getString("name"), rs.getString("author"), rs.getString("url"), rs.getInt("genre"), rs.getLong("id"));
+                songsByGenre.add(song);
+            }
+            return songsByGenre;
 
         } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();
         }
-
-        return songsByGenre;
     }
 }
