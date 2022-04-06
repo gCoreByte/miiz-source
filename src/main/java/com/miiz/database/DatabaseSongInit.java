@@ -9,6 +9,13 @@ import java.util.List;
  * Helper class to feed a selection of starter songs to the database if none are found.
  */
 public class DatabaseSongInit {
+
+    /**
+     * This method should only be called on the very first run in order to seed the database with songs.
+     * TODO: add the ability to add custom songs - the helper functions already exist in WindowURL.java, its just a matter of writing the interface
+     * Most likely will be added during the graphical UI additions to make it easier for users to interact with it
+     * @param database - database class
+     */
     public static void initSongs(Database database) {
         List<Song> songs = new ArrayList<>();
         // CLASSICAL
