@@ -190,7 +190,7 @@ public class WindowGroupHandler {
     private void printAllGroups() {
         for (int i = 0; i < groupList.size(); i++) {
             System.out.println(i+1 + ". " + groupList.get(i));
-            System.out.println("------------");
+            System.out.println("----------------------------------");
         }
     }
 
