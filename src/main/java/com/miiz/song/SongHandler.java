@@ -90,32 +90,32 @@ public class SongHandler {
         }
 
         while (true) {
-        System.out.println("1 - mängi juhuslik lugu");
-        System.out.println("2 - vali lugu");
-        System.out.println("3 - vali žanr");
-        System.out.println("4 - tagasi");
-        System.out.println("Sisesta tegevusele vastav number: ");
-        System.out.println();
-
-        String input = inputReader.nextLine().strip();
-        switch (input) {
-            case "1" -> {
-                System.out.println("Esitan juhusliku loo");
-                Random r = new Random();
-                int rand = r.nextInt(songs.size());
-                System.out.println("Valisin " + songs.get(rand).getTitle());
-                play(songs.get(rand));
+            for (int i = 0; i < songs.size(); i++) {
+                System.out.println(i + 1 + ". " + songs.get(i));
             }
+            System.out.println("1 - mängi juhuslik lugu");
+            System.out.println("2 - vali lugu");
+            System.out.println("3 - vali žanr");
+            System.out.println("4 - tagasi");
+            System.out.println("Sisesta tegevusele vastav number: ");
+            System.out.println();
 
-            case "2" -> pickSong();
-            case "3" -> pickSongByGenre();
-            case "4" -> {
-                return;
+            String input = inputReader.nextLine().strip();
+            switch (input) {
+                case "1" -> {
+                    System.out.println("Esitan juhusliku loo");
+                    Random r = new Random();
+                    int rand = r.nextInt(songs.size());
+                    System.out.println("Valisin " + songs.get(rand).getTitle());
+                    play(songs.get(rand));
+                }
+                case "2" -> pickSong();
+                case "3" -> pickSongByGenre();
+                case "4" -> {
+                    return;
+                }
+                default -> System.out.println("Pole valiidne sisend");
             }
-
-            default -> System.out.println("Pole valiidne sisend");
-
-        }
         }
     }
 
