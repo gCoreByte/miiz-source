@@ -20,6 +20,13 @@ public class Song {
         this.id = id;
     }
 
+    public Song(String title, String author, String url, int genre) {
+        this.title = title;
+        this.author = author;
+        this.url = url;
+        this.genre = genre;
+    }
+
 
 
     public String getTitle() {
