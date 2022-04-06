@@ -14,6 +14,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Main class for database calls
+ * JDBC Wrapper for Sqlite
+ */
 public class Database extends DatabaseInit {
 
     private User user;
@@ -209,7 +213,6 @@ public class Database extends DatabaseInit {
             e.printStackTrace();
         }
     }
-    // used later when auth is implemented
 
     public User getUserByUsername(String username) {
         isValid();

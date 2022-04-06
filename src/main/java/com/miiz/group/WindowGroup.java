@@ -9,6 +9,8 @@ import java.util.List;
 
 /**
  * WindowGroup data class
+ * It contains methods related to a single WindowGroup and provides ease-of-access from
+ * database calls.
  */
 public class WindowGroup {
     private long id;
@@ -30,6 +32,10 @@ public class WindowGroup {
         this.ownerid = ownerid;
     }
 
+    /**
+     * Opens a group of windows
+     * @return list of malformed URLs to be removed
+     */
     public List<WindowURL> openGroup() {
         // https://stackoverflow.com/questions/5226212/how-to-open-the-default-webbrowser-using-java
         if (!Desktop.isDesktopSupported() || !Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
@@ -50,6 +56,7 @@ public class WindowGroup {
         return failedUrls;
     }
 
+    // getters, setters
     public void addUrl(WindowURL url) {
         urls.add(url);
     }
@@ -57,8 +64,6 @@ public class WindowGroup {
     public void removeUrl(WindowURL url) {
         urls.remove(url);
     }
-
-    // getters/setters
 
     public String getName() {
         return name;
