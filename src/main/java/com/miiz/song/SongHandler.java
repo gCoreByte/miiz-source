@@ -76,6 +76,14 @@ public class SongHandler {
         play(songsByGenre.get(rand));
     }
 
+    private void pickRandomSong() {
+        System.out.println("Esitan juhusliku loo");
+        Random r = new Random();
+        int rand = r.nextInt(songs.size());
+        System.out.println("Valisin " + songs.get(rand).getTitle());
+        play(songs.get(rand));
+    }
+
     public void main(){
         if (songs.size() == 0) {
             System.out.println("Andmebaasis ei ole ühtegi laulu.");
@@ -96,13 +104,7 @@ public class SongHandler {
 
             String input = inputReader.nextLine().strip();
             switch (input) {
-                case "1" -> {
-                    System.out.println("Esitan juhusliku loo");
-                    Random r = new Random();
-                    int rand = r.nextInt(songs.size());
-                    System.out.println("Valisin " + songs.get(rand).getTitle());
-                    play(songs.get(rand));
-                }
+                case "1" -> pickRandomSong();
                 case "2" -> pickSong();
                 case "3" -> pickSongByGenre();
                 case "4" -> {
