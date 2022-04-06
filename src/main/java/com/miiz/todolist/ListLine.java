@@ -31,6 +31,8 @@ public class ListLine {
         return id;
     }
 
+    public void setId(long id) { this.id = id; }
+
     public long getParentid() {
         return parentid;
     }

@@ -2,7 +2,6 @@ package com.miiz.database;
 
 import com.miiz.auth.User;
 import com.miiz.group.WindowURL;
-import com.miiz.song.Genre;
 import com.miiz.song.Song;
 import com.miiz.todolist.ListLine;
 import com.miiz.todolist.ToDoList;
@@ -54,7 +53,7 @@ public class Database extends DatabaseInit {
                 ResultSet rs = statement.executeQuery();
                 while (rs.next()) {
                     ListLine line = new ListLine(rs.getLong("id"), rs.getString("content"), todolist.getId());
-                    todolist.addListLineInit(line);
+                    todolist.addLine(line);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -98,6 +97,21 @@ public class Database extends DatabaseInit {
         } catch (Exception e) {
             e.printStackTrace();
             return toDoList;
+        }
+    }
+
+    public ListLine addListLine(ListLine line) {
+        isValid();
+        String sql = "INSERT INTO ListLine VALUES (?, ?)";
+        try (PreparedStatement statement = createPrepStatement(sql)) {
+            statement.setString(1, line.getContent());
+            statement.setLong(2, line.getParentid());
+            statement.executeUpdate();
+            line.setId(getLastRowId());
+            return line;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return line;
         }
     }
 

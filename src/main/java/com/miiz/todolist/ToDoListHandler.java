@@ -230,8 +230,8 @@ public class ToDoListHandler {
     private void addLine(ToDoList list, String newLineC){
 
         ListLine newLine = new ListLine(newLineC);
-        list.addListLineInit(newLine);
-        database.editToDoList(list);
+        newLine = database.addListLine(newLine);
+        list.addLine(newLine);
         System.out.println("Rida lisatud!");
         separator();
     }

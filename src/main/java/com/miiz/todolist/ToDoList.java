@@ -63,14 +63,10 @@ public class ToDoList {
         this.ownerid = ownerid;
     }
 
-    public void addListLineInit(ListLine line) {
+    public void addLine(ListLine line) {
         listLines.add(line);
     }
 
-    public void addLine(String lineContent, Long lineId){
-        ListLine newLine = new ListLine(lineId, lineContent, id);
-        listLines.add(newLine);
-    }
 
     public void editLine(int lineNumber, String lineContent){
         listLines.get(lineNumber).setContent(lineContent);
