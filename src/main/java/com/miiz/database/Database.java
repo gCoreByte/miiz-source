@@ -99,7 +99,7 @@ public class Database extends DatabaseInit {
 
     public void editToDoListLine(ListLine line) {
         isValid();
-        String sql = "UPDATE ToDoList SET content = ? WHERE id = ?";
+        String sql = "UPDATE ListLine SET content = ? WHERE id = ?";
         try (PreparedStatement statement = createPrepStatement(sql)) {
             statement.setString(1, line.getContent());
             statement.setLong(2, line.getId());
