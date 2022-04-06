@@ -77,7 +77,7 @@ public class ToDoList {
     }
 
     public void deleteLine(int lineNumber){
-        listLines.remove(lineNumber-1);
+        listLines.remove(lineNumber);
     }
 
     public void printListLines(){
