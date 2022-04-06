@@ -58,11 +58,32 @@ public class SongHandler {
         play(songs.get(choice));
     }
 
+    private void pickSongByGenre() {
+        for (int i = 0; i < Genre.genres.size(); i++) {
+            System.out.println(i + 1 + ". " + Genre.genres.get(i));
+        }
+        System.out.println("Vali žanr:");
+        String input = inputReader.nextLine().strip();
+        if (!tryParse(input)) {
+            System.out.println("Vigane sisend.");
+            return;
+        }
+        int choice = Integer.parseInt(input) - 1;
+        if (choice < 0 || choice >= Genre.genres.size() - 1) {
+            System.out.println("Vigane sisend.");
+            return;
+        }
+        // TODO: change getsongsbygenre to also have string input as genre name
+        // TODO: genre class refactoring
+        // TODO: make getSongsByGenre not require +1 - not intuitive
+        List<Song> songsByGenre = database.getSongsByGenre(choice + 1);
+        int rand = (int) (Math.random() * songsByGenre.size());
+        play(songsByGenre.get(rand));
+    }
+
     public void main(){
 
         while (true) {
-        System.out.println("Vali tegevus:");
-        System.out.println();
         System.out.println("1 - mängi juhuslik lugu");
         System.out.println("2 - vali lugu");
         System.out.println("3 - vali žanr");
@@ -80,17 +101,7 @@ public class SongHandler {
             }
 
             case "2" -> pickSong();
-
-            case "3" -> {
-                System.out.println("Vali žanr:");
-                for (int i = 1; i < Genre.genres.size() + 1; i++) {
-                    System.out.println(i + ". " + Genre.genres.get(i-1));
-                }
-                int pick = Integer.parseInt(inputReader.nextLine().strip());
-                List<Song> songsByGenre = database.getSongsByGenre(pick -1 );
-                int rand = (int) (Math.random() * songsByGenre.size());
-                play(songsByGenre.get(rand));
-            }
+            case "3" -> pickSongByGenre();
             case "4" -> {
                 return;
             }
