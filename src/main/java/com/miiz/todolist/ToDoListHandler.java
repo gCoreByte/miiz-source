@@ -91,16 +91,9 @@ public class ToDoListHandler {
         System.out.println(task);
 
         String input = scan.nextLine();
-        String[] parts = input.split(" ");
-        String firstNr = parts[0];
 
-        try {
-            if (Integer.parseInt(firstNr) > 0)
-                return Integer.parseInt(firstNr);
-            else return -1;
-        }
-        catch(Exception e) {
-            return -1;
+        if (!tryParse(input)) {
+            // vigane sisend
         }
 
     }
