@@ -98,7 +98,10 @@ public class App {
         SongHandler songHandler = new SongHandler(database, scan);
 
         // TODO: change sissejuhatav/selgitav tekst
-        System.out.println("Sissejuhatav/ selgitav tekst");
+        System.out.println("Programm ajaplaneerimiseks ja keskendumiseks");
+        System.out.println("Liikudes mööda programmi ringi on võimalik avastada erinevaid");
+        System.out.println("keskendumist soodustavaid ja muidu abistavaid funktsioone. Programmi ");
+        System.out.println("kasutamiseks vali vastavalt soovitud tegevusele number ning sisesta see.");
         divider();
 
         while (true){

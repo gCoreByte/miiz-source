@@ -19,7 +19,7 @@ public class Utils {
     /**
      * Keep the separators the same length everywhere in the code easily.
      */
-    public static void separator(){
+    public static void divider(){
         System.out.println("----------------------------------");
     }
 }
