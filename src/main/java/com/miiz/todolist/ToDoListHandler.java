@@ -27,6 +27,10 @@ public class ToDoListHandler {
 
         while (true) {
             // TODO: show all todolist names
+            for (int i = 0; i < lists.size(); i++) {
+                System.out.println(i + 1 + ". " + lists.get(i).getListName());
+            }
+
             System.out.println("1 - Loo uus To Do nimekiri");
             System.out.println("2 - Muuda To Do nimekirja");
             System.out.println("3 - Kustuta To Do nimekiri");
@@ -35,7 +39,9 @@ public class ToDoListHandler {
 
             switch (user_input) {
                 case "1" -> newToDoList();
+                // TODO: kontrolli kas on nimekirju
                 case "2" -> editToDoListCall();
+                // TODO: kontrolli kas on nimekirju
                 case "3" -> {
                     System.out.println("Valisid To Do nimekirja kustutamise");
                     System.out.println();
@@ -45,8 +51,10 @@ public class ToDoListHandler {
                         System.out.println("Vigane sisend");
                     } else {
                         database.deleteToDoList(lists.get(listIndex));
+                        lists.remove(lists.get(listIndex));
                     }
                 }
+                // TODO: vaata nimekirja
                 case "4" -> {
                     return;
                 }
@@ -95,7 +103,7 @@ public class ToDoListHandler {
         if (!tryParse(input)) {
             // vigane sisend
         }
-
+        return Integer.parseInt(input);
     }
 
     public String scanInputString(String task){
@@ -119,19 +127,19 @@ public class ToDoListHandler {
     }
 
     public void editToDoList(ToDoList list){
-        System.out.println(list.getListName());
-        list.printListLines();
-
-        System.out.println("Mida sooviksd teha?");
-        System.out.println("1 - lisada rida");
-        System.out.println("2 - kustutada rida");
-        System.out.println("3 - muuda rida");
-        System.out.println("4 - mine tagasi");
-        System.out.println();
-
-        int pick = scanInputInt("Vali tegevusele vastav number");
-
         while (true){
+            System.out.println(list.getListName());
+            list.printListLines();
+
+            System.out.println("Mida sooviksd teha?");
+            System.out.println("1 - lisada rida");
+            System.out.println("2 - kustutada rida");
+            System.out.println("3 - muuda rida");
+            System.out.println("4 - mine tagasi");
+            System.out.println();
+
+            int pick = scanInputInt("Vali tegevusele vastav number");
+
             switch (pick) {
                 case 1 -> {
                     String newLineC = scanInputString("Sisesta lisatav rida");
@@ -143,6 +151,7 @@ public class ToDoListHandler {
                     database.editToDoList(list);
                 }
                 case 2 -> {
+                    // TODO: kontrolli kas on ridu
                     int lineIndex = scanInputInt("Sisesta kustutava rea number") - 1;
                     while (lineIndex == -1) {
                         lineIndex = scanInputInt("Sisesta reanumber uuesti") - 1;
@@ -152,6 +161,7 @@ public class ToDoListHandler {
                     list.deleteLine(lineIndex);
                 }
                 case 3 -> {
+                    // TODO: kontrolli kas on ridu
                     int lineIndex = scanInputInt("Sisesta muudetava rea number") - 1;
                     while (lineIndex == -1) {
                         lineIndex = scanInputInt("Sisesta reanumber uuesti") - 1;
