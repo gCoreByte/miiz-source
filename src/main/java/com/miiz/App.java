@@ -12,8 +12,7 @@ import java.util.Scanner;
 
 public class App {
 
-
-    public static void authentication(Scanner scanner, UserAuth userAuth) {
+    private static void authentication(Scanner scanner, UserAuth userAuth) {
         while (true) {
             System.out.println("Programmi kasutamiseks on vajalik sisselogimine.");
             System.out.println("1 - Logi sisse");
@@ -43,7 +42,7 @@ public class App {
         }
     }
 
-    public static boolean login(Scanner scanner, UserAuth userAuth) {
+    private static boolean login(Scanner scanner, UserAuth userAuth) {
         System.out.println("Sisestage kasutajanimi:");
         String username = scanner.nextLine().strip();
         System.out.println("Sisestage parool:");
@@ -51,7 +50,7 @@ public class App {
         return userAuth.userLogin(username, password);
     }
 
-    public static boolean register(Scanner scanner, UserAuth userAuth) {
+    private static boolean register(Scanner scanner, UserAuth userAuth) {
         System.out.println("Sisestage kasutajanimi:");
         String username = scanner.nextLine().strip();
         System.out.println("Sisestage parool:");
