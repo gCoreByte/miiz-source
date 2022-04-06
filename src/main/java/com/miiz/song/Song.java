@@ -1,5 +1,8 @@
 package com.miiz.song;
 
+/**
+ * Song data class
+ */
 public class Song {
 
 
