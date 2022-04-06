@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+import static com.miiz.utils.Utils.divider;
 import static com.miiz.utils.Utils.tryParse;
 
 /**
@@ -40,12 +41,14 @@ public class SongHandler {
     public void play(Song song){
         // https://stackoverflow.com/questions/5226212/how-to-open-the-default-webbrowser-using-java
         if (!Desktop.isDesktopSupported() || !Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-            System.out.println("Teie arvuti ei toeta seda funktsionaalsust kahjuks.");
+            System.out.println("Teie arvuti kahjuks ei toeta seda funktsionaalsust.");
+            divider();
         }
         try {
             Desktop.getDesktop().browse(new URI(song.getUrl()));
         } catch (URISyntaxException e) {
             System.out.println("Lugu " + song.getTitle() + " pole võimalik esitada");
+            divider();
         } catch (Exception e) {
             System.out.println("Something went wrong.");
         }
@@ -59,11 +62,13 @@ public class SongHandler {
         String input = inputReader.nextLine().strip();
         if (!tryParse(input)) {
             System.out.println("Vigane sisend.");
+            divider();
             return;
         }
         int choice = Integer.parseInt(input) - 1;
         if (choice < 0 || choice >= songs.size() - 1) {
             System.out.println("Vigane sisend.");
+            divider();
             return;
         }
         play(songs.get(choice));
@@ -80,11 +85,13 @@ public class SongHandler {
         String input = inputReader.nextLine().strip();
         if (!tryParse(input)) {
             System.out.println("Vigane sisend.");
+            divider();
             return;
         }
         int choice = Integer.parseInt(input) - 1;
         if (choice < 0 || choice >= Genre.genres.size() - 1) {
             System.out.println("Vigane sisend.");
+            divider();
             return;
         }
         // TODO: change getsongsbygenre to also have string input as genre name
@@ -103,6 +110,7 @@ public class SongHandler {
         Random r = new Random();
         int rand = r.nextInt(songs.size());
         System.out.println("Valisin " + songs.get(rand).getTitle());
+        divider();
         play(songs.get(rand));
     }
 
@@ -121,10 +129,10 @@ public class SongHandler {
             for (int i = 0; i < songs.size(); i++) {
                 System.out.println(i + 1 + ". " + songs.get(i));
             }
-            System.out.println("1 - mängi juhuslik lugu");
-            System.out.println("2 - vali lugu");
-            System.out.println("3 - vali žanr");
-            System.out.println("4 - tagasi");
+            System.out.println("0 - Tagasi");
+            System.out.println("1 - Mängi juhuslik lugu");
+            System.out.println("2 - Vali lugu");
+            System.out.println("3 - Vali žanr");
             System.out.println("Sisesta tegevusele vastav number: ");
             System.out.println();
 
@@ -133,12 +141,15 @@ public class SongHandler {
                 case "1" -> pickRandomSong();
                 case "2" -> pickSong();
                 case "3" -> pickSongByGenre();
-                case "4" -> {
+                case "0" -> {
                     // exit out of module
                     return;
                 }
                 // user input is invalid
-                default -> System.out.println("Pole valiidne sisend");
+                default -> {
+                    System.out.println("Vigane sisend.");
+                    divider();
+                }
             }
         }
     }

@@ -16,7 +16,7 @@ public class Utils {
         }
     }
 
-    public static void separator(){
+    public static void divider(){
         System.out.println("----------------------------------");
     }
 }

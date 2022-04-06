@@ -7,6 +7,7 @@ import com.miiz.database.Database;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.miiz.utils.Utils.divider;
 import static com.miiz.utils.Utils.tryParse;
 
 /**
@@ -41,12 +42,12 @@ public class WindowGroupHandler {
      */
     private int choiceChecker(String input, List<?> list) {
         if (!tryParse(input)) {
-            System.out.println("See ei ole valiidne valik.");
+            System.out.println("Vigane sisend.");
             return -1;
         }
         int choice = Integer.parseInt(input) - 1;
         if (choice >= list.size() || choice < 0) {
-            System.out.println("See ei ole valiidne valik.");
+            System.out.println("Vigane sisend.");
             return -1;
         }
         return choice;
@@ -67,9 +68,10 @@ public class WindowGroupHandler {
             group = database.addWindowGroup(group);
             groupList.add(group);
             System.out.println("Lisatud!");
+            divider();
         } else {
             System.out.println("See ei ole sobiv nimi.\nGruppi ei ole lisatud.");
-
+            divider();
         }
 
     }
@@ -129,6 +131,7 @@ public class WindowGroupHandler {
             database.deleteWindowGroup(group);
             groupList.remove(group);
             System.out.println("Kustutatud!");
+            divider();
         }
     }
 
@@ -143,6 +146,7 @@ public class WindowGroupHandler {
         if (choice == -1) { return; }
         // getting URL to add
         WindowGroup group = groupList.get(choice);
+        divider();
         System.out.println("Mis on lisatav URL?");
         input = inputReader.nextLine().strip();
         // adding URL
@@ -167,6 +171,7 @@ public class WindowGroupHandler {
         for (int i = 0; i < group.getUrls().size(); i++) {
             System.out.println(i+1 + ". " + group.getUrls().get(i));
         }
+        divider();
         System.out.println("Millist URLi soovite kustutada?");
         input = inputReader.nextLine().strip();
         choice = choiceChecker(input, group.getUrls());
@@ -181,6 +186,7 @@ public class WindowGroupHandler {
             database.deleteWindowGroupUrl(url);
             group.removeUrl(url);
             System.out.println("Kustutatud!");
+            divider();
         }
     }
 
@@ -190,7 +196,7 @@ public class WindowGroupHandler {
     private void printAllGroups() {
         for (int i = 0; i < groupList.size(); i++) {
             System.out.println(i+1 + ". " + groupList.get(i));
-            System.out.println("----------------------------------");
+            divider();
         }
     }
 
@@ -202,13 +208,14 @@ public class WindowGroupHandler {
         // main input loop
         while (true) {
             printAllGroups();
-            System.out.println("1 - uus grupp");
-            System.out.println("2 - ava grupp");
-            System.out.println("3 - kustuta grupp");
-            System.out.println("4 - lisa url grupis");
-            System.out.println("5 - kustuta url grupis");
-            System.out.println("6 - tagasi");
+            System.out.println("0 - tagasi");
+            System.out.println("1 - Uus grupp");
+            System.out.println("2 - Ava grupp");
+            System.out.println("3 - Kustuta grupp");
+            System.out.println("4 - Lisa URL grupis");
+            System.out.println("5 - Kustuta URL grupis");
             String input = inputReader.nextLine().strip();
+            divider();
             switch (input) {
 
                 case "1" -> newGroup();
@@ -216,12 +223,15 @@ public class WindowGroupHandler {
                 case "3" -> deleteGroup();
                 case "4" -> addGroupUrl();
                 case "5" -> removeGroupUrl();
-                case "6" -> {
+                case "0" -> {
                     // exit out of module
                     return;
                 }
                 // user input is invalid
-                default -> System.out.println("See ei ole valiidne sisend.");
+                default -> {
+                    System.out.println("Vigane sisend.");
+                    divider();
+                }
             }
         }
     }

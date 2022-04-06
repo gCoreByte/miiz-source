@@ -7,8 +7,8 @@ import com.miiz.song.Song;
 import com.miiz.song.SongHandler;
 import com.miiz.todolist.ToDoList;
 import com.miiz.todolist.ToDoListHandler;
-
 import java.util.Scanner;
+import static com.miiz.utils.Utils.divider;
 
 public class App {
 
@@ -99,14 +99,15 @@ public class App {
 
         // TODO: change sissejuhatav/selgitav tekst
         System.out.println("Sissejuhatav/ selgitav tekst");
-        System.out.println("----------------------------------");
+        divider();
+
         while (true){
-            System.out.println("Palun vali tegevus!");
+            System.out.println("Palun vali tegevus:");
             System.out.println();
-            System.out.println("Kuva To Do nimekiri:        1");
-            System.out.println("Ava muusika valik:          2");
-            System.out.println("Kuva workspaceide valik:    3");
-            System.out.println("Sulge programm:             4");
+            System.out.println("0 - Sulge programm");
+            System.out.println("1 - To Do List");
+            System.out.println("2 - Muusika");
+            System.out.println("3 - Töölaud");
             System.out.println("Sisesta tegevusele vastav number: ");
             String str_input = scan.nextLine();
             String[] arr_input = str_input.split(" ");
@@ -114,20 +115,14 @@ public class App {
 
             switch (user_input) {
                 case "1" -> toDoListHandler.main();
-                // To Do list
 
                 case "2" -> songHandler.main();
-                // Music
 
                 case "3" -> windowGroupHandler.main();
-                //workspace
 
-                case "4" -> System.exit(0);
+                case "0" -> System.exit(0);
 
-                default -> {
-                    System.out.println("Vigane sisend!");
-                    System.out.println("Sisesta valik uuesti");
-                }
+                default -> System.out.println("Vigane sisend.");
             }
         }
     }

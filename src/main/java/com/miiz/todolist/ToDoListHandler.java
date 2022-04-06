@@ -22,74 +22,257 @@ public class ToDoListHandler {
         this.lists = database.getToDoLists();
     }
 
-    public void main() {
-        separator();
-        while (true) {
+    // Methods to manage To Do Lists
+    /**
+     * Create a new To Do List and add it to the database
+     */
+    private void newToDoList() {
+        System.out.println("Sisesta uue To Do Listi pealkiri:");
+        String user_input = scan.nextLine().strip();
+        if (user_input.length() > 255) {
+            System.out.println("Vigane sisend. Maksimaalne rea pikkus on 255 karakterit.");
+            divider();
+            return;
+        }
+        ToDoList newList = new ToDoList(user_input, user.getId());
+        newList = database.addTodoList(newList);
+        lists.add(newList);
+        System.out.println("To Do List loodud.");
+        divider();
+    }
 
-            if (lists.size() == 0)
-                System.out.println("Sul pole ühtegi To Do Listi");
+    /**
+     * Select a To Do List to edit
+     */
+    private void editToDoListCall() {
+        System.out.println("Millist To Do Listi soovite muuta?");
+        for (int i = 0; i < lists.size(); i++) {
+            System.out.println((i + 1) + ". " + lists.get(i).getListName());
+        }
+        String user_input = scan.nextLine().strip();
+        if (!tryParse(user_input)) {
+            System.out.println("Vigane sisend.");
+            divider();
+            return;
+        }
+        int input = Integer.parseInt(user_input) - 1;
+        if (input < 0 || input >= lists.size()) {
+            System.out.println("Vigane sisend.");
+            divider();
+            return;
+        }
+        ToDoList change = lists.get(input);
+        editToDoList(change);
+    }
 
-            else {
-                System.out.println("Sinu To Do Listid: ");
-                for (int i = 0; i < lists.size(); i++) {
-                    System.out.println((i + 1) + ". " + lists.get(i).getListName());
-                }
-            }
+    /**
+     * Deletes the selected To Do List form the database and the list of To Do Lists
+     * @param listIndex index of the selected To Do List
+     */
+    private void deleteList(int listIndex){
+        database.deleteToDoList(lists.get(listIndex));
+        lists.remove(lists.get(listIndex));
+        System.out.println("To Do List on kustutatud.");
+        divider();
+    }
 
-            separator();
+    /**
+     * Prints the name of the selected To Do List and its contents
+     */
+    private void printList(){
+        int listIndex = pickToDoList("Vali To Do List, mida soovid kuvada.") ;
 
-            System.out.println("1 - Loo To Do List.");
-            System.out.println("2 - Muuda To Do Listi");
-            System.out.println("3 - Kustuta To Do List");
-            System.out.println("4 - Kuva To Do List");
-            System.out.println("5 - Tagasi");
+        if (invalidReqIndex(listIndex))
+            return;
 
-            String user_input = scan.nextLine().strip();
+        listIndex --;
+        System.out.println(lists.get(listIndex).getListName());
 
-            separator();
-
-            switch (user_input) {
-                case "1" -> newToDoList();
-
-                case "2" -> {
-                    if (noLists())
-                        return;
-
-                    editToDoListCall();
-
-                }
-                case "3" -> {
-                    if (noLists())
-                        return;
-
-                    int listIndex = pickToDoList("Vali To Do List, mille soovid kustutada.");
-
-                    if (invalidReqIndex(listIndex))
-                        return;
-
-                    listIndex--;
-                    deleteList(listIndex);
-                }
-                case "4" ->{
-                    if (noLists())
-                        return;
-
-                    printList();
-                }
-                case "5" -> {
-                    return;
-                }
-                default -> {
-                    System.out.println("Vigane sisend!");
-                    System.out.println("Sisesta valik uuesti");
-                }
-            }
+        if (!listIsEmpty(lists.get(listIndex))){
+            lists.get(listIndex).printListLines();
+            divider();
         }
     }
 
+    // Methods to manage a To Do List
+
+    /**
+     * Adds a new task to the end of the selected To Do List
+     * @param list Selected To Do List
+     * @param newLineC Inserted line
+     */
+    private void addLine(ToDoList list, String newLineC){
+
+        ListLine newLine = new ListLine(newLineC, list.getId());
+        newLine = database.addListLine(newLine);
+        list.addLine(newLine);
+        System.out.println("Rida lisatud!");
+        divider();
+    }
+
+    /**
+     * Deletes the selected line
+     * @param list previously selected To Do List
+     * @param lineIndex index of the selected line
+     */
+    private void deleteLine(ToDoList list, int lineIndex){
+
+        database.deleteToDoListLine(list.getListLines().get(lineIndex));
+        list.deleteLine(lineIndex);
+        System.out.println("Rida kustutatud.");
+        divider();
+    }
+
+    /**
+     * Overwrites the selected line
+     * @param list previosly selected To Do List
+     * @param newLine inserted line
+     * @param lineIndex index of the selected line
+     */
+    private void editLine(ToDoList list, String newLine, int lineIndex){
+
+        list.getListLines().get(lineIndex).setContent(newLine);
+        database.editToDoListLine(list.getListLines().get(lineIndex));
+        System.out.println("Rida muudetud.");
+        divider();
+
+    }
+
+    /**
+     * Prints a To Do List which has atleast one element (must be checked before)
+     * @param list Selected list
+     */
+    private void printNotEmptyList( ToDoList list){
+        System.out.println(list.getListName());
+        for (int i = 0; i < list.getListLines().size(); i++) {
+            System.out.println("  " + (i+1) + ". " + list.getListLines().get(i).getContent());
+        }
+    }
+
+    // Methods for getting and validating user input and other actions
+
+    /**
+     * Scans user input and returns it as an integer if possible
+     * Mostly used to select lines or lists
+     * @param task printed for users
+     * @return valid user input or an indicator of invalid input
+     */
+    private int scanInputInt(String task){
+        System.out.println(task);
+
+        String input = scan.nextLine();
+
+        if (!tryParse(input)) {
+            System.out.println("Vigane sisend.");
+            divider();
+            return -1;
+        }
+
+        return Integer.parseInt(input);
+    }
+
+    /**
+     * Scans user input and returns it if it is less than 255 characters (max for database)
+     * @param task printed for users
+     * @return valid user input or an indicator of invalid input
+     */
+    private String scanInputString(String task){
+        System.out.println(task);
+        String line = scan.nextLine();
+        if (line.length() > 255)
+            return "false input";
+        else
+            return line;
+    }
+
+    /**
+     * Checks if the list is empty or not
+     * @param list selected list
+     * @return true if the list is empty, false if the list is not empty
+     */
+    private boolean listIsEmpty(ToDoList list){
+        if (list.getListLines().size() == 0){
+            System.out.println("To Do List on tühi.");
+            divider();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Some methods return -1 as and indicator of an invalid input. This method checks it.
+     * @param index index for user input
+     * @return true, if the input is invalid, false, if valid
+     */
+    private boolean invalidReqIndex(int index){
+        if (index == -1) {
+            System.out.println("Vigane sisend.");
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Some methods return -1 as and indicator of an invalid input.
+     * input is invalid If -1 was previously returned or the index is out of bounds.
+     * @param index previosly returned index from user input
+     * @param list previously selected To Do List
+     * @return true if the index is invalid, false if not
+     */
+    private boolean invalidReqIndexList(int index, ToDoList list){
+        if (index == -1 || index > list.getListLines().size()-1) {
+            System.out.println(list.getListLines().size()-1);
+            System.out.println("Vigane sisend.");
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Checks if the user has any To Do Lists or not
+     * @return true, if there are no To Do Lists, false if there are
+     */
+    private boolean noLists(){
+        if(lists.size() == 0){
+            System.out.println("Sul pole ühtegi To Do Listi.");
+            divider();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Prints all the titles of the users To Do Lists
+     * @param task for the user
+     * @return the number of the picked List
+     */
+    private int pickToDoList(String task){
+        for (int i = 0; i < lists.size(); i++) {
+            System.out.println(i + 1 + ". " + lists.get(i).getListName());
+            divider();
+        }
+
+        System.out.println(task);
+
+        String input = scan.nextLine();
+
+        if (!tryParse(input) || Integer.parseInt(input) > lists.size()) {
+            System.out.println("Vigane sisend.");
+            divider();
+            return -1;
+        }
+
+        return Integer.parseInt(input);
+
+    }
+
+    /**
+     * Section for managing individual To Do Lists
+     * @param list selected list
+     */
     private void editToDoList(ToDoList list) {
         while (true) {
-            separator();
+            divider();
 
             System.out.println(list.getListName());
             if (list.getListLines().size() == 0){
@@ -102,17 +285,17 @@ public class ToDoListHandler {
                 }
             }
 
-            separator();
+            divider();
 
             System.out.println("Mida sooviksid teha?");
-            System.out.println("1 - lisada rida");
-            System.out.println("2 - kustutada rida");
-            System.out.println("3 - muuda rida");
-            System.out.println("4 - mine tagasi");
+            System.out.println("0 - Tagasi");
+            System.out.println("1 - Lisada rida");
+            System.out.println("2 - Kustutada rida");
+            System.out.println("3 - Muuda rida");
 
             int pick = scanInputInt("Vali tegevusele vastav number");
 
-            separator();
+            divider();
 
             switch (pick) {
                 case 1 -> {
@@ -120,7 +303,7 @@ public class ToDoListHandler {
 
                     if (newLineC.equals("false input")) {
                         System.out.println("Vigane sisend.");
-                        separator();
+                        divider();
                         continue;
                     }
 
@@ -159,7 +342,7 @@ public class ToDoListHandler {
                     editLine(list, newLine, lineIndex);
                 }
 
-                case 4 -> {
+                case 0 -> {
                     return;
                 }
 
@@ -169,184 +352,68 @@ public class ToDoListHandler {
             }
         }
     }
-    /*******************************************************************************************************************
-    TO DO LISTS
-     */
 
-    private void newToDoList() {
-        System.out.println("Sisesta uue To Do Listi pealkiri:");
-        String user_input = scan.nextLine().strip();
-        if (user_input.length() > 255) {
-            System.out.println("Vigane sisend. Maksimaalne rea pikkus on 255 karakterit.");
-            separator();
-            return;
+    public void main() {
+
+        while (true) {
+
+            if (lists.size() == 0)
+                System.out.println("Sul pole ühtegi To Do Listi");
+
+            else {
+                System.out.println("Sinu To Do Listid: ");
+                for (int i = 0; i < lists.size(); i++) {
+                    System.out.println((i + 1) + ". " + lists.get(i).getListName());
+                }
+            }
+
+            divider();
+            System.out.println("0 - Tagasi");
+            System.out.println("1 - Loo To Do List.");
+            System.out.println("2 - Muuda To Do Listi");
+            System.out.println("3 - Kustuta To Do List");
+            System.out.println("4 - Kuva To Do List");
+
+            String user_input = scan.nextLine().strip();
+
+            divider();
+
+            switch (user_input) {
+                case "1" -> newToDoList();
+
+                case "2" -> {
+                    if (noLists())
+                        return;
+
+                    editToDoListCall();
+
+                }
+                case "3" -> {
+                    if (noLists())
+                        return;
+
+                    int listIndex = pickToDoList("Vali To Do List, mille soovid kustutada.");
+
+                    if (invalidReqIndex(listIndex))
+                        return;
+
+                    listIndex--;
+                    deleteList(listIndex);
+                }
+                case "4" ->{
+                    if (noLists())
+                        return;
+
+                    printList();
+                }
+                case "0" -> {
+                    return;
+                }
+                default -> {
+                    System.out.println("Vigane sisend!");
+                    System.out.println("Sisesta valik uuesti");
+                }
+            }
         }
-        ToDoList newList = new ToDoList(user_input, user.getId());
-        newList = database.addTodoList(newList);
-        lists.add(newList);
-        System.out.println("To Do List loodud.");
-        separator();
-    }
-
-    private void editToDoListCall() {
-        System.out.println("Millist To Do Listi soovite muuta?");
-        for (int i = 0; i < lists.size(); i++) {
-            System.out.println((i + 1) + ". " + lists.get(i).getListName());
-        }
-        String user_input = scan.nextLine().strip();
-        if (!tryParse(user_input)) {
-            System.out.println("Vigane sisend.");
-            separator();
-            return;
-        }
-        int input = Integer.parseInt(user_input) - 1;
-        if (input < 0 || input >= lists.size()) {
-            System.out.println("Vigane sisend.");
-            separator();
-            return;
-        }
-        ToDoList change = lists.get(input);
-        editToDoList(change);
-    }
-
-    private void deleteList(int listIndex){
-        database.deleteToDoList(lists.get(listIndex));
-        lists.remove(lists.get(listIndex));
-        System.out.println("To Do List on kustutatud.");
-        separator();
-    }
-
-    private void printList(){
-        int listIndex = pickToDoList("Vali To Do List, mida soovid kuvada.") ;
-
-        if (invalidReqIndex(listIndex))
-            return;
-
-        listIndex --;
-        System.out.println(lists.get(listIndex).getListName());
-
-        if (!listIsEmpty(lists.get(listIndex))){
-            lists.get(listIndex).printListLines();
-            separator();
-        }
-    }
-
-    /*******************************************************************************************************************
-     TO DO LIST
-     */
-
-    private void addLine(ToDoList list, String newLineC){
-
-        ListLine newLine = new ListLine(newLineC, list.getId());
-        newLine = database.addListLine(newLine);
-        list.addLine(newLine);
-        System.out.println("Rida lisatud!");
-        separator();
-    }
-
-    private void deleteLine(ToDoList list, int lineIndex){
-
-        database.deleteToDoListLine(list.getListLines().get(lineIndex));
-        list.deleteLine(lineIndex);
-        System.out.println("Rida kustutatud.");
-        separator();
-    }
-
-    private void editLine(ToDoList list, String newLine, int lineIndex){
-
-        list.getListLines().get(lineIndex).setContent(newLine);
-        database.editToDoListLine(list.getListLines().get(lineIndex));
-        System.out.println("Rida muudetud.");
-        separator();
-
-    }
-
-    private void printNotEmptyList( ToDoList list){
-        System.out.println(list.getListName());
-        for (int i = 0; i < list.getListLines().size(); i++) {
-            System.out.println("  " + (i+1) + ". " + list.getListLines().get(i).getContent());
-        }
-    }
-
-    /*******************************************************************************************************************
-    INPUT
-     */
-
-    private int scanInputInt(String task){
-        System.out.println(task);
-
-        String input = scan.nextLine();
-
-        if (!tryParse(input)) {
-            System.out.println("Vigane sisend.");
-            separator();
-            return -1;
-        }
-
-        return Integer.parseInt(input);
-    }
-
-    private String scanInputString(String task){
-        System.out.println(task);
-        String line = scan.nextLine();
-        if (line.length() > 255)
-            return "false input";
-        else
-            return line;
-    }
-
-    private boolean listIsEmpty(ToDoList list){
-        if (list.getListLines().size() == 0){
-            System.out.println("To Do List on tühi.");
-            separator();
-            return true;
-        }
-        return false;
-    }
-
-    private boolean invalidReqIndex(int index){
-        if (index == -1) {
-            System.out.println("Vigane sisend.");
-            return true;
-        }
-        return false;
-    }
-
-    private boolean invalidReqIndexList(int index, ToDoList list){
-        if (index == -1 || index > list.getListLines().size()-1) {
-            System.out.println(list.getListLines().size()-1);
-            System.out.println("Vigane sisend.");
-            return true;
-        }
-        return false;
-    }
-
-    private boolean noLists(){
-        if(lists.size() == 0){
-            System.out.println("Sul pole ühtegi To Do Listi.");
-            separator();
-            return true;
-        }
-        return false;
-    }
-
-    private int pickToDoList(String task){
-        for (int i = 0; i < lists.size(); i++) {
-            System.out.println(i + 1 + ". " + lists.get(i).getListName());
-            separator();
-        }
-
-        System.out.println(task);
-
-        String input = scan.nextLine();
-
-        if (!tryParse(input) || Integer.parseInt(input) > lists.size()) {
-            System.out.println("Vigane sisend.");
-            separator();
-            return -1;
-        }
-
-        return Integer.parseInt(input);
-
     }
 }

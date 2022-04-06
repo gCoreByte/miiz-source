@@ -39,7 +39,7 @@ public class WindowGroup {
     public List<WindowURL> openGroup() {
         // https://stackoverflow.com/questions/5226212/how-to-open-the-default-webbrowser-using-java
         if (!Desktop.isDesktopSupported() || !Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-            System.out.println("Teie arvuti ei toeta seda funktsionaalsust kahjuks.");
+            System.out.println("Teie arvuti  kahjuks ei toeta seda funktsionaalsust.");
             return new ArrayList<>();
         }
         List<WindowURL> failedUrls = new ArrayList<>();
