@@ -233,7 +233,7 @@ public class WindowGroupHandler {
         while (true) {
             divider();
             printAllGroupsName();
-            System.out.println("0 - tagasi");
+            System.out.println("0 - Tagasi");
             System.out.println("1 - Uus töölaud");
             System.out.println("2 - Ava töölaud");
             System.out.println("3 - Kustuta töölaud");
