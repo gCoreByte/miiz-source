@@ -21,7 +21,7 @@ public class App {
         while (true) {
             System.out.println("Programmi kasutamiseks on vajalik sisselogimine.");
             System.out.println("1 - Logi sisse");
-            System.out.println("2 - Tee konto");
+            System.out.println("2 - Loo konto");
             String input = scanner.nextLine().strip();
             switch (input) {
                 case "1" -> {
@@ -38,14 +38,14 @@ public class App {
                     // checking if registration was successful
                     boolean result = register(scanner, userAuth);
                     if (result) {
-                        System.out.println("Kasutaja loodud! Logige palun sisse.");
+                        System.out.println("Kasutaja loodud! Palun logige sisse.");
                     }
                     else {
-                        System.out.println("Kasutajanimi on juba olemas.");
+                        System.out.println("Kasutajanimi on juba võetud.");
                     }
                 }
             }
-            System.out.println("----------------------------------");
+            divider();
         }
     }
 
@@ -113,16 +113,14 @@ public class App {
         divider();
 
         while (true){
-            System.out.println("Palun vali tegevus:");
+            System.out.println("Palun valige tegevus:");
             System.out.println();
             System.out.println("0 - Sulge programm");
             System.out.println("1 - To Do List");
             System.out.println("2 - Muusika");
             System.out.println("3 - Töölaud");
-            System.out.println("Sisesta tegevusele vastav number: ");
-            String str_input = scan.nextLine();
-            String[] arr_input = str_input.split(" ");
-            String user_input = arr_input[0];
+            System.out.println("Sisestage tegevusele vastav number: ");
+            String user_input = scan.nextLine().strip();
 
             switch (user_input) {
                 case "1" -> toDoListHandler.main();
