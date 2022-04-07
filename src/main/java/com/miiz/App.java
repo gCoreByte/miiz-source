@@ -88,7 +88,20 @@ public class App {
 
         Database database = new Database();
         UserAuth userAuth = new UserAuth(database);
-
+        divider();
+        System.out.println("TERE TULEMAST PROGRAMMI MIIZ");
+        divider();
+        System.out.println("MIIZ on programm ajaplaneerimiseks ja keskendumiseks:");
+        System.out.println("Programmi kasutamiseks pead sisestma soovitud tegevuselevastava");
+        System.out.println("arvu. Esmalt  tuleb Sul  luua kasutaja.  Palun kasuta kindlasti");
+        System.out.println("parooli, mida sa  mujal ei  kasuta! Hoia  aga  kasutajanimi  ja");
+        System.out.println("parool meeles, sest vaid nendega  sisse logides pääsed ligi oma");
+        System.out.println("varem loodud  asjadele. Kui kasutaja on  loodud ja oled sisse -");
+        System.out.println("logitud, saad alustada  programmi kasutamisega.  Programmi abil");
+        System.out.println("on sul  võimalik luua  To Do Liste, mängida  tausta muusikat ja");
+        System.out.println("luua  tegevustega seotud veebilehtede gruppe, mida saad korraga");
+        System.out.println("avada, et hoida kokku aega ja vältida segavate lehtede avamist.");
+        divider();
         // TODO: Move user authentication interface to UserAuthHandler?
         authentication(scan, userAuth);
 
@@ -97,10 +110,6 @@ public class App {
         ToDoListHandler toDoListHandler = new ToDoListHandler(database, userAuth.getUser(), scan);
         SongHandler songHandler = new SongHandler(database, scan);
 
-        System.out.println("Programm ajaplaneerimiseks ja keskendumiseks");
-        System.out.println("Liikudes mööda programmi ringi on võimalik avastada erinevaid");
-        System.out.println("keskendumist soodustavaid ja muidu abistavaid funktsioone. Programmi ");
-        System.out.println("kasutamiseks valige vastavalt soovitud tegevusele number ning sisestage see.");
         divider();
 
         while (true){
