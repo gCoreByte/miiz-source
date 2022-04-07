@@ -57,10 +57,10 @@ public class WindowGroupHandler {
      * Creates a new WindowGroup if the user input is valid
      */
     private void newGroup() {
-        System.out.println("Sisesta uue grupi nimi:");
+        System.out.println("Sisesta uue töölaua nimi:");
         String input = inputReader.nextLine().strip();
         if (input.length() > 255) {
-            System.out.println("Grupi nime maksimaalne pikkus on 255 karakterit.\nGruppi ei ole lisatud.");
+            System.out.println("Töölaua nime maksimaalne pikkus on 255 karakterit.\nTöölauda ei ole lisatud.");
         }
         if (input.length() > 0)  {
             WindowGroup group = new WindowGroup(input, user.getId());
@@ -70,7 +70,7 @@ public class WindowGroupHandler {
             System.out.println("Lisatud!");
             divider();
         } else {
-            System.out.println("See ei ole sobiv nimi.\nGruppi ei ole lisatud.");
+            System.out.println("See ei ole sobiv nimi.\nTöölauda ei ole lisatud.");
             divider();
         }
 
@@ -80,17 +80,19 @@ public class WindowGroupHandler {
      * Opens a WindowGroups windows if the user selects a valid one
      */
     private void openGroup() {
-        System.out.println("Vali millist gruppi avada:");
-        for (int i = 0; i < groupList.size(); i++) {
-            System.out.println(i + 1 + ". " + groupList.get(i).getName());
-        }
+        printAllGroupsName();
+        System.out.println("Vali millist töölauda avada:");
         // get user input
         String input = inputReader.nextLine().strip();
         int choice = choiceChecker(input, groupList);
         if (choice == -1) { return; }
         // get the group and show the user the contained links
         WindowGroup group = groupList.get(choice);
-        System.out.println("Grupis on järgnevad lingid:");
+        if (group.getUrls().size() == 0) {
+            System.out.println("Töölauas ei ole ühtegi linki, mida avada.");
+            return;
+        }
+        System.out.println("Töölauas on järgnevad lingid:");
         for (WindowURL url : group.getUrls()) {
             System.out.println(url.getUrl());
         }
@@ -111,14 +113,15 @@ public class WindowGroupHandler {
      * Deletes a WindowGroup if the user selects a valid one
      */
     private void deleteGroup() {
-        System.out.println("Millist gruppi soovite kustutada?");
+        printAllGroupsName();
+        System.out.println("Millist tööauda soovite kustutada?");
         // get user input
         String input = inputReader.nextLine().strip();
         int choice = choiceChecker(input, groupList);
         if (choice == -1) { return; }
         // get the group and ask for confirmation
         WindowGroup group = groupList.get(choice);
-        System.out.println("Kustutatav grupp: " + group.getName());
+        System.out.println("Kustutatav töölaud: " + group.getName());
         System.out.println("Oled kindel? Y/N");
         input = inputReader.nextLine().toUpperCase().strip();
         if (input.equals("Y")) {
@@ -139,7 +142,12 @@ public class WindowGroupHandler {
      * Adds a new WindowURL to a WindowGroup
      */
     private void addGroupUrl() {
-        System.out.println("Millisele grupile soovite URLi lisada?");
+        if (groupList.size() == 0) {
+            System.out.println("Ühtegi töölauda ei ole.");
+            return;
+        }
+        printAllGroupsName();
+        System.out.println("Millisele töölauale soovite URLi lisada?");
         // user input
         String input = inputReader.nextLine().strip();
         int choice = choiceChecker(input, groupList);
@@ -161,7 +169,12 @@ public class WindowGroupHandler {
      * Deletes a WindowURL from a WindowGroup
      */
     private void removeGroupUrl() {
-        System.out.println("Millisest grupist soovite URLi eemaldada?");
+        if (groupList.size() == 0) {
+            System.out.println("Ühtegi töölauda ei ole.");
+            return;
+        }
+        printAllGroupsName();
+        System.out.println("Millisest töölauast soovite URLi eemaldada?");
         // user input
         String input = inputReader.nextLine().strip();
         int choice = choiceChecker(input, groupList);
@@ -193,11 +206,22 @@ public class WindowGroupHandler {
     /**
      * Helper method to print out all groups
      */
+    // WILL LIKELY FIND USAGE IN GUI VERSION
     private void printAllGroups() {
         for (int i = 0; i < groupList.size(); i++) {
             System.out.println(i+1 + ". " + groupList.get(i));
             divider();
         }
+    }
+
+    /**
+     * Helper method to print out only group names
+     */
+    private void printAllGroupsName() {
+        for (int i = 0; i < groupList.size(); i++) {
+            System.out.println(i + 1 + ". " + groupList.get(i).getName());
+        }
+        divider();
     }
 
     /**
@@ -207,13 +231,14 @@ public class WindowGroupHandler {
 
         // main input loop
         while (true) {
-            printAllGroups();
+            divider();
+            printAllGroupsName();
             System.out.println("0 - tagasi");
-            System.out.println("1 - Uus grupp");
-            System.out.println("2 - Ava grupp");
-            System.out.println("3 - Kustuta grupp");
-            System.out.println("4 - Lisa URL grupis");
-            System.out.println("5 - Kustuta URL grupis");
+            System.out.println("1 - Uus töölaud");
+            System.out.println("2 - Ava töölaud");
+            System.out.println("3 - Kustuta töölaud");
+            System.out.println("4 - Lisa URL töölauas");
+            System.out.println("5 - Kustuta URL töölauas");
             String input = inputReader.nextLine().strip();
             divider();
             switch (input) {
