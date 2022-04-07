@@ -297,7 +297,6 @@ public class ToDoListHandler {
 
                     if (newLineC.equals("false input")) {
                         System.out.println("Vigane sisend.");
-                        divider();
                         continue;
                     }
 
@@ -350,7 +349,6 @@ public class ToDoListHandler {
     public void main() {
 
         while (true) {
-            divider();
             if (lists.size() == 0)
                 System.out.println("Teil ei ole ühtegi To Do Listi");
 
