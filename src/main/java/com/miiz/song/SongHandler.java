@@ -81,7 +81,7 @@ public class SongHandler {
         for (int i = 0; i < Genre.genres.size(); i++) {
             System.out.println(i + 1 + ". " + Genre.genres.get(i));
         }
-        System.out.println("Vali žanr:");
+        System.out.println("Valige žanr:");
         String input = inputReader.nextLine().strip();
         if (!tryParse(input)) {
             System.out.println("Vigane sisend.");
@@ -136,7 +136,7 @@ public class SongHandler {
             System.out.println("1 - Mängi juhuslik lugu");
             System.out.println("2 - Vali lugu");
             System.out.println("3 - Vali žanr");
-            System.out.println("Sisesta tegevusele vastav number: ");
+            System.out.println("Sisestage tegevusele vastav number: ");
             System.out.println();
 
             String input = inputReader.nextLine().strip();

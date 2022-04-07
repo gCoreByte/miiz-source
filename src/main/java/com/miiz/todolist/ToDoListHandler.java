@@ -27,7 +27,7 @@ public class ToDoListHandler {
      * Create a new To Do List and add it to the database
      */
     private void newToDoList() {
-        System.out.println("Sisesta uue To Do Listi pealkiri:");
+        System.out.println("Sisestage uue To Do Listi pealkiri:");
         String user_input = scan.nextLine().strip();
         if (user_input.length() > 255) {
             System.out.println("Vigane sisend. Maksimaalne rea pikkus on 255 karakterit.");
@@ -80,7 +80,7 @@ public class ToDoListHandler {
      * Prints the name of the selected To Do List and its contents
      */
     private void printList(){
-        int listIndex = pickToDoList("Vali To Do List, mida soovid kuvada.") ;
+        int listIndex = pickToDoList("Vali To Do List, mida soovite kuvada.") ;
 
         if (invalidReqIndex(listIndex))
             return;
@@ -106,7 +106,7 @@ public class ToDoListHandler {
         ListLine newLine = new ListLine(newLineC, list.getId());
         newLine = database.addListLine(newLine);
         list.addLine(newLine);
-        System.out.println("Rida lisatud!");
+        System.out.println("Rida lisatud.");
         divider();
     }
 
@@ -281,19 +281,19 @@ public class ToDoListHandler {
 
             divider();
 
-            System.out.println("Mida sooviksid teha?");
+            System.out.println("Palun valige tegevus:");
             System.out.println("0 - Tagasi");
             System.out.println("1 - Lisada rida");
             System.out.println("2 - Kustutada rida");
             System.out.println("3 - Muuda rida");
 
-            int pick = scanInputInt("Vali tegevusele vastav number");
+            int pick = scanInputInt("Valige tegevusele vastav number");
 
             divider();
 
             switch (pick) {
                 case 1 -> {
-                    String newLineC = scanInputString("Sisesta lisatav rida:");
+                    String newLineC = scanInputString("Sisestage lisatav rida:");
 
                     if (newLineC.equals("false input")) {
                         System.out.println("Vigane sisend.");
@@ -310,7 +310,7 @@ public class ToDoListHandler {
 
                     printNotEmptyList(list);
 
-                    int lineIndex = scanInputInt("Sisesta kustutava rea number") - 1;
+                    int lineIndex = scanInputInt("Sisestage kustutava rea number") - 1;
 
                     if (invalidReqIndexList(lineIndex, list))
                         continue;
@@ -324,12 +324,12 @@ public class ToDoListHandler {
 
                     printNotEmptyList(list);
 
-                    int lineIndex = scanInputInt("Sisesta muudetava rea number") - 1;
+                    int lineIndex = scanInputInt("Sisestage muudetava rea number") - 1;
 
                     if (invalidReqIndexList(lineIndex, list))
                         continue;
 
-                    String newLine = scanInputString("Sisesta rea uus sisu:");
+                    String newLine = scanInputString("Sisestage rea uus sisu:");
                     if (newLine.equals("false input"))
                         continue;
 
@@ -350,9 +350,9 @@ public class ToDoListHandler {
     public void main() {
 
         while (true) {
-
+            divider();
             if (lists.size() == 0)
-                System.out.println("Sul pole ühtegi To Do Listi");
+                System.out.println("Teil ei ole ühtegi To Do Listi");
 
             else {
                 System.out.println("Sinu To Do Listid: ");
@@ -386,7 +386,7 @@ public class ToDoListHandler {
                     if (noLists())
                         continue;
 
-                    int listIndex = pickToDoList("Vali To Do List, mille soovid kustutada.");
+                    int listIndex = pickToDoList("Valige To Do List, mida soovite kustutada.");
 
                     if (invalidReqIndex(listIndex))
                         continue;
@@ -404,8 +404,9 @@ public class ToDoListHandler {
                     return;
                 }
                 default -> {
-                    System.out.println("Vigane sisend!");
-                    System.out.println("Sisesta valik uuesti");
+                    System.out.println("Vigane sisend.");
+                    System.out.println("Sisestage valik uuesti.");
+                    divider();
                 }
             }
         }
