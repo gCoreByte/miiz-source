@@ -89,7 +89,7 @@ public class App {
         Database database = new Database();
         UserAuth userAuth = new UserAuth(database);
         divider();
-        System.out.println("TERE TULEMAST PROGRAMMI MIIZ");
+        System.out.println("TERE TULEMAST MIIZi");
         divider();
         System.out.println("MIIZ on programm ajaplaneerimiseks ja keskendumiseks:");
         System.out.println("Programmi kasutamiseks pead sisestma soovitud tegevuselevastava");
