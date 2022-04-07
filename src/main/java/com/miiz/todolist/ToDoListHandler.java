@@ -221,7 +221,6 @@ public class ToDoListHandler {
      */
     private boolean invalidReqIndexList(int index, ToDoList list){
         if (index == -1 || index > list.getListLines().size()-1) {
-            System.out.println(list.getListLines().size()-1);
             System.out.println("Vigane sisend.");
             return true;
         }
@@ -233,12 +232,7 @@ public class ToDoListHandler {
      * @return true, if there are no To Do Lists, false if there are
      */
     private boolean noLists(){
-        if(lists.size() == 0){
-            System.out.println("Sul pole ühtegi To Do Listi.");
-            divider();
-            return true;
-        }
-        return false;
+        return lists.size() == 0;
     }
 
     /**
@@ -383,26 +377,26 @@ public class ToDoListHandler {
 
                 case "2" -> {
                     if (noLists())
-                        return;
+                        continue;
 
                     editToDoListCall();
 
                 }
                 case "3" -> {
                     if (noLists())
-                        return;
+                        continue;
 
                     int listIndex = pickToDoList("Vali To Do List, mille soovid kustutada.");
 
                     if (invalidReqIndex(listIndex))
-                        return;
+                        continue;
 
                     listIndex--;
                     deleteList(listIndex);
                 }
                 case "4" ->{
                     if (noLists())
-                        return;
+                        continue;
 
                     printList();
                 }

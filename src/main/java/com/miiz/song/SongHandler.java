@@ -35,7 +35,7 @@ public class SongHandler {
     }
 
     /**
-     * Plays a song if the users platform supports opening a browser
+     * Plays a song if the user's platform supports opening a browser
      * @param song - the song to play
      */
     public void play(Song song){
@@ -127,9 +127,11 @@ public class SongHandler {
         }
 
         while (true) {
+            divider();
             for (int i = 0; i < songs.size(); i++) {
                 System.out.println(i + 1 + ". " + songs.get(i));
             }
+            divider();
             System.out.println("0 - Tagasi");
             System.out.println("1 - Mängi juhuslik lugu");
             System.out.println("2 - Vali lugu");
