@@ -1,5 +1,8 @@
 package com.miiz.group;
 
+/**
+ * WindowURL data class
+ */
 public class WindowURL {
     private long id;
     private long ownerid;
@@ -40,6 +43,11 @@ public class WindowURL {
         this.url = urlFixer(url);
     }
 
+    /**
+     * Fixes URLs that are in the format of google.com etc.
+     * @param url - input url
+     * @return fixed url
+     */
     private String urlFixer(String url) {
         if (!url.startsWith("http://")) {
             return "http://" + url;

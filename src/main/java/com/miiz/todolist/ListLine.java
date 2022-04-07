@@ -5,8 +5,9 @@ public class ListLine {
     private String content;
     private long parentid;
 
-    public ListLine(String content) {
+    public ListLine(String content, long parentid) {
         this.content = content;
+        this.parentid = parentid;
     }
 
     public ListLine(long id, String content, long parentid) {
@@ -30,6 +31,8 @@ public class ListLine {
     public long getId() {
         return id;
     }
+
+    public void setId(long id) { this.id = id; }
 
     public long getParentid() {
         return parentid;
