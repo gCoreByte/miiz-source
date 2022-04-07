@@ -29,7 +29,6 @@ public class App {
                     boolean result = login(scanner, userAuth);
                     if (result) {
                         System.out.println("Edukalt sisse logitud!");
-                        System.out.println("----------------------------------");
                         return;
                     }
                     System.out.println("Sisselogimine ebaõnnestus.");
