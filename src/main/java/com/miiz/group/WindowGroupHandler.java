@@ -43,7 +43,7 @@ public class WindowGroupHandler {
         return choice;
     }
 
-    private void newGroup(Scanner inputReader) {
+    protected void newGroup(Scanner inputReader) {
         System.out.println("Sisesta uue grupi nimi:");
         String input = inputReader.nextLine().strip();
         if (input.length() != 0) {
@@ -57,7 +57,7 @@ public class WindowGroupHandler {
 
     }
 
-    private void openGroup(Scanner inputReader) {
+    protected void openGroup(Scanner inputReader) {
         System.out.println("Vali millist gruppi avada:");
         for (int i = 0; i < groupList.size(); i++) {
             System.out.println(i + 1 + ". " + groupList.get(i).getName());
@@ -82,7 +82,7 @@ public class WindowGroupHandler {
         }
     }
 
-    private void deleteGroup(Scanner inputReader) {
+    protected void deleteGroup(Scanner inputReader) {
         System.out.println("Millist gruppi soovite kustutada?");
         String input = inputReader.nextLine().strip();
         int choice = choiceChecker(input, groupList);
@@ -101,7 +101,7 @@ public class WindowGroupHandler {
         }
     }
 
-    private void addGroupUrl(Scanner inputReader) {
+    protected void addGroupUrl(Scanner inputReader) {
         System.out.println("Millisele grupile soovite URLi lisada?");
         String input = inputReader.nextLine().strip();
         int choice = choiceChecker(input, groupList);
@@ -116,7 +116,7 @@ public class WindowGroupHandler {
         System.out.println("Lisatud!");
     }
 
-    private void removeGroupUrl(Scanner inputReader) {
+    protected void removeGroupUrl(Scanner inputReader) {
         System.out.println("Millisest grupist soovite URLi eemaldada?");
         String input = inputReader.nextLine().strip();
         int choice = choiceChecker(input, groupList);

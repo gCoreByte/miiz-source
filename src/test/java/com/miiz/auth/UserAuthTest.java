@@ -18,7 +18,7 @@ public class UserAuthTest {
     private AutoCloseable closeable;
 
     @Mock
-    private static Database mockDb;
+    private Database mockDb;
     private UserAuth userAuth;
 
 
