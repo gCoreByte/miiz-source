@@ -37,6 +37,7 @@ public class UserAuth {
         username = username.toLowerCase();
         User user = database.getUserByUsername(username);
         // id -1 means no user found
+        // TODO: replace with exception
         if (user.getId() == -1) {
             return false;
         }
