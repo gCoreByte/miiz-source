@@ -63,26 +63,22 @@ public class ToDoList {
         this.ownerid = ownerid;
     }
 
-    public void addListLineInit(ListLine line) {
+    public void addLine(ListLine line) {
         listLines.add(line);
     }
 
-    public void addLine(String lineContent, Long lineId){
-        ListLine newLine = new ListLine(lineId, lineContent, id);
-        listLines.add(newLine);
-    }
 
     public void editLine(int lineNumber, String lineContent){
         listLines.get(lineNumber).setContent(lineContent);
     }
 
     public void deleteLine(int lineNumber){
-        listLines.remove(lineNumber-1);
+        listLines.remove(lineNumber);
     }
 
     public void printListLines(){
-        for (int i = 1; i < listLines.size() + 1; i++) {
-            System.out.println("  " + i + ". " + listLines.get(i-1).getContent());
+        for (int i = 0; i < listLines.size(); i++) {
+            System.out.println("  " + i + 1 + ". " + listLines.get(i).getContent());
         }
     }
 }

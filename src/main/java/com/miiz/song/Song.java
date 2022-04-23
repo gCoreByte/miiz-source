@@ -1,5 +1,8 @@
 package com.miiz.song;
 
+/**
+ * Song data class
+ */
 public class Song {
 
 
@@ -15,6 +18,13 @@ public class Song {
         this.url = url;
         this.genre = genre;
         this.id = id;
+    }
+
+    public Song(String title, String author, String url, int genre) {
+        this.title = title;
+        this.author = author;
+        this.url = url;
+        this.genre = genre;
     }
 
 
@@ -61,12 +71,6 @@ public class Song {
 
     @Override
     public String toString() {
-        return "Song{" +
-                "title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", url='" + url + '\'' +
-                ", genre=" + genre +
-                ", id=" + id +
-                '}';
+        return author + " - " + title;
     }
 }

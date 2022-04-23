@@ -4,7 +4,9 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.miiz.database.Database;
 
 /**
- * General user authentication class (server-side)
+ * General user authentication class
+ * This class holds the secret and token for web-based authentication later
+ * It also contains authentication methods
  */
 public class UserAuth {
 
@@ -14,16 +16,11 @@ public class UserAuth {
     private User user; // temporary logged in user while we do not have web auth
     private final Database database;
 
+
     public UserAuth(Database database) {
         this.database = database;
     }
 
-    public UserAuth(String userToken, String userSecret, Database database) {
-        this.userToken = userToken;
-        this.userSecret = userSecret;
-        this.database = database;
-    }
-    //TODO
 
     /**
      * Tries to log the user in.
@@ -42,6 +39,7 @@ public class UserAuth {
             return false;
         }
         String hashedPw = user.getHashedPw();
+        // BCrypt - check if password == input
         BCrypt.Result result = BCrypt.verifyer().verify(password.toCharArray(), hashedPw);
         if (result.verified) {
             // TODO: user secret+token doesn't matter right now - this is important for serverside auth
@@ -52,21 +50,6 @@ public class UserAuth {
             return true;
         }
         return false;
-        /*
-        // old temporary solution before auth implementation
-        User user = database.getUserByUsername(username);
-        if (user.getId() == -1) {
-            user = new User(username, password);
-            database.addUser(user);
-            user = database.getUserByUsername(username);
-            this.user = user;
-            database.setUser(user);
-            return true;
-        }
-        database.setUser(user);
-        this.user = user;
-        return true;
-        */
     }
 
     /**
@@ -84,12 +67,14 @@ public class UserAuth {
             // cant register duplicate username
             return false;
         }
+        // BCrypt password hashing
         user = new User(username, BCrypt.withDefaults().hashToString(12, password.toCharArray()));
         database.addUser(user);
         return true;
 
     }
 
+    // getters, setters
     public User getUser() {
         return this.user;
     }
