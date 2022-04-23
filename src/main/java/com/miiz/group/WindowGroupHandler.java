@@ -30,7 +30,7 @@ public class WindowGroupHandler {
         }
     }
 
-    private int choiceChecker(String input, List list) {
+    private <T> int choiceChecker(String input, List<T> list) {
         if (!tryParse(input)) {
             System.out.println("See ei ole valiidne valik.");
             return -1;
