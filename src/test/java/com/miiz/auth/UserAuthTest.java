@@ -45,7 +45,7 @@ public class UserAuthTest {
     @Test
     public void testUserLogin_WrongPassword() {
         // returned fake user
-        User user = new User(-1L, "test", "a");
+        User user = new User(1L, "test", "a");
         Mockito.when(mockDb.getUserByUsername(Mockito.anyString())).thenReturn(user);
 
         assertFalse(userAuth.userLogin("a","test"));
