@@ -104,8 +104,9 @@ public class WindowGroupHandler {
      * Opens a WindowGroups windows if the user selects a valid one
      * @throws InvalidChoiceException if user makes an invalid choice
      * @throws InvalidInputException if user input is invalid
+     * @throws UnsupportedOperationException if users PC does not support opening windows
      */
-    protected void openGroup() throws InvalidInputException, InvalidChoiceException {
+    protected void openGroup() throws InvalidInputException, InvalidChoiceException, UnsupportedOperationException {
         printAllGroupsName();
         System.out.println("Vali millist töölauda avada:");
         // get user input
@@ -134,8 +135,6 @@ public class WindowGroupHandler {
             }
         }
     }
-
-
 
     /**
      * Deletes a WindowGroup if the user selects a valid one
