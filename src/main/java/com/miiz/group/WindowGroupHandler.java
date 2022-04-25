@@ -2,6 +2,8 @@ package com.miiz.group;
 
 import com.miiz.auth.User;
 import com.miiz.database.Database;
+import com.miiz.utils.exceptions.InvalidChoiceException;
+import com.miiz.utils.exceptions.InvalidInputException;
 
 
 import java.util.List;
@@ -38,30 +40,49 @@ public class WindowGroupHandler {
      * Checks if the choice is a valid nr and not too big/small
      * @param input - the users input
      * @param list - the list we are checking the size against
-     * @return the integer if it was a valid choice, -1 otherwise.
+     * @return the integer if it was a valid choice, throws InvalidChoiceException otherwise.
+     * @throws InvalidChoiceException if choice is not valid
      */
-    private int choiceChecker(String input, List<?> list) {
+    private int choiceChecker(String input, List<?> list) throws InvalidChoiceException {
         if (!tryParse(input)) {
-            System.out.println("Vigane sisend.");
-            return -1;
+            throw new InvalidChoiceException("Input is not a number.");
         }
         int choice = Integer.parseInt(input) - 1;
         if (choice >= list.size() || choice < 0) {
+            throw new InvalidChoiceException("Input is out of bounds.");
+        }
+        return choice;
+    }
+
+
+    /**
+     * Checks if choice is valid in groupList
+     * @return - int if choice is valid
+     * @throws InvalidChoiceException if choice is not valid
+     */
+    private int getChoiceFromGroupList() throws InvalidChoiceException {
+        int choice;
+        String input = inputReader.nextLine().strip();
+        try {
+            choice = choiceChecker(input, groupList);
+        } catch (InvalidChoiceException e) {
             System.out.println("Vigane sisend.");
-            return -1;
+            throw e;
         }
         return choice;
     }
 
     /**
      * Creates a new WindowGroup if the user input is valid
+     * @throws InvalidInputException if user input is invalid at any point
      */
-    protected boolean newGroup() {
+    protected void newGroup() throws InvalidInputException {
         System.out.println("Sisesta uue töölaua nimi:");
         String input = inputReader.nextLine().strip();
         if (input.length() > 255) {
             System.out.println("Töölaua nime maksimaalne pikkus on 255 karakterit.\nTöölauda ei ole lisatud.");
-            return false;
+            divider();
+            throw new InvalidInputException("Input too long.");
         }
         if (input.length() > 0)  {
             WindowGroup group = new WindowGroup(input, user.getId());
@@ -69,29 +90,33 @@ public class WindowGroupHandler {
             group = database.addWindowGroup(group);
             groupList.add(group);
             System.out.println("Lisatud!");
+            divider();
         } else {
             System.out.println("See ei ole sobiv nimi.\nTöölauda ei ole lisatud.");
+            divider();
+            throw new InvalidInputException("Input cannot be empty.");
         }
-        divider();
-        return true;
+
 
     }
 
     /**
      * Opens a WindowGroups windows if the user selects a valid one
+     * @throws InvalidChoiceException if user makes an invalid choice
+     * @throws InvalidInputException if user input is invalid
      */
-    protected void openGroup() {
+    protected void openGroup() throws InvalidInputException, InvalidChoiceException {
         printAllGroupsName();
         System.out.println("Vali millist töölauda avada:");
         // get user input
-        String input = inputReader.nextLine().strip();
-        int choice = choiceChecker(input, groupList);
-        if (choice == -1) { return; }
+        int choice = getChoiceFromGroupList();
+        String input;
         // get the group and show the user the contained links
         WindowGroup group = groupList.get(choice);
         if (group.getUrls().size() == 0) {
             System.out.println("Töölauas ei ole ühtegi linki, mida avada.");
-            return;
+            divider();
+            throw new InvalidInputException("Workspace cannot be empty.");
         }
         System.out.println("Töölauas on järgnevad lingid:");
         for (WindowURL url : group.getUrls()) {
@@ -110,17 +135,18 @@ public class WindowGroupHandler {
         }
     }
 
+
+
     /**
      * Deletes a WindowGroup if the user selects a valid one
+     * @throws InvalidChoiceException if user makes an invalid choice
      */
-    protected void deleteGroup() {
+    protected void deleteGroup() throws InvalidChoiceException {
         printAllGroupsName();
         System.out.println("Millist tööauda soovite kustutada?");
         // get user input
-        String input = inputReader.nextLine().strip();
-        int choice = choiceChecker(input, groupList);
-        if (choice == -1) { return; }
-        // get the group and ask for confirmation
+        int choice = getChoiceFromGroupList();
+        String input;
         WindowGroup group = groupList.get(choice);
         System.out.println("Kustutatav töölaud: " + group.getName());
         System.out.println("Oled kindel? Y/N");
@@ -141,18 +167,19 @@ public class WindowGroupHandler {
 
     /**
      * Adds a new WindowURL to a WindowGroup
+     * @throws InvalidChoiceException if user makes an invalid choice
+     * @throws InvalidInputException if user give invalid input
      */
-    protected void addGroupUrl() {
+    protected void addGroupUrl() throws InvalidChoiceException, InvalidInputException {
         if (groupList.size() == 0) {
             System.out.println("Ühtegi töölauda ei ole.");
-            return;
+            throw new InvalidInputException("Workspace list is empty.");
         }
         printAllGroupsName();
         System.out.println("Millisele töölauale soovite URLi lisada?");
         // user input
-        String input = inputReader.nextLine().strip();
-        int choice = choiceChecker(input, groupList);
-        if (choice == -1) { return; }
+        int choice = getChoiceFromGroupList();
+        String input;
         // getting URL to add
         WindowGroup group = groupList.get(choice);
         divider();
@@ -166,20 +193,22 @@ public class WindowGroupHandler {
         System.out.println("Lisatud!");
     }
 
+
+
     /**
      * Deletes a WindowURL from a WindowGroup
+     * @throws InvalidChoiceException if user makes an invalid choice
+     * @throws InvalidInputException if user gives invalid input
      */
-    protected void removeGroupUrl() {
+    protected void removeGroupUrl() throws InvalidChoiceException, InvalidInputException {
         if (groupList.size() == 0) {
             System.out.println("Ühtegi töölauda ei ole.");
-            return;
+            throw new InvalidInputException("Workspace list is empty.");
         }
         printAllGroupsName();
         System.out.println("Millisest töölauast soovite URLi eemaldada?");
         // user input
-        String input = inputReader.nextLine().strip();
-        int choice = choiceChecker(input, groupList);
-        if (choice == -1) { return; }
+        int choice = getChoiceFromGroupList();
         // show windowgroup urls, get users choice
         WindowGroup group = groupList.get(choice);
         for (int i = 0; i < group.getUrls().size(); i++) {
@@ -187,9 +216,13 @@ public class WindowGroupHandler {
         }
         divider();
         System.out.println("Millist URLi soovite kustutada?");
-        input = inputReader.nextLine().strip();
-        choice = choiceChecker(input, group.getUrls());
-        if (choice == -1) { return; }
+        String input = inputReader.nextLine().strip();
+        try {
+            choice = choiceChecker(input, group.getUrls());
+        } catch (InvalidChoiceException e) {
+            System.out.println("Vigane sisend.");
+            throw e;
+        }
         // confirmation
         WindowURL url = group.getUrls().get(choice);
         System.out.println("Kustutatav URL: " + url);
@@ -242,23 +275,25 @@ public class WindowGroupHandler {
             System.out.println("5 - Kustuta URL töölauas");
             String input = inputReader.nextLine().strip();
             divider();
-            switch (input) {
+            try {
+                switch (input) {
 
-                case "1" -> newGroup();
-                case "2" -> openGroup();
-                case "3" -> deleteGroup();
-                case "4" -> addGroupUrl();
-                case "5" -> removeGroupUrl();
-                case "0" -> {
-                    // exit out of module
-                    return;
+                    case "1" -> newGroup();
+                    case "2" -> openGroup();
+                    case "3" -> deleteGroup();
+                    case "4" -> addGroupUrl();
+                    case "5" -> removeGroupUrl();
+                    case "0" -> {
+                        // exit out of module
+                        return;
+                    }
+                    // user input is invalid
+                    default -> {
+                        System.out.println("Vigane sisend.");
+                        divider();
+                    }
                 }
-                // user input is invalid
-                default -> {
-                    System.out.println("Vigane sisend.");
-                    divider();
-                }
-            }
+            } catch (Exception ignored) {}
         }
     }
 }
