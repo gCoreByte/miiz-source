@@ -35,12 +35,13 @@ public class WindowGroup {
     /**
      * Opens a group of windows
      * @return list of malformed URLs to be removed
+     * @throws UnsupportedOperationException when PC does not support functionality.
      */
-    public List<WindowURL> openGroup() {
+    public List<WindowURL> openGroup() throws UnsupportedOperationException {
         // https://stackoverflow.com/questions/5226212/how-to-open-the-default-webbrowser-using-java
         if (!Desktop.isDesktopSupported() || !Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
             System.out.println("Teie arvuti  kahjuks ei toeta seda funktsionaalsust.");
-            return new ArrayList<>();
+            throw new UnsupportedOperationException("PC does not support functionality.");
         }
         List<WindowURL> failedUrls = new ArrayList<>();
         for (WindowURL url : urls) {
