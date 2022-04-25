@@ -25,10 +25,9 @@ public class WindowGroupHandlerTest {
 
     @Mock
     private Database mockDb;
-    private WindowGroupHandler windowGroupHandler;
-    private Scanner scanner;
     private final PrintStream originalOut = System.out;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private WindowGroupHandler windowGroupHandler;
 
     private ByteArrayInputStream setInput(String str) {
         return new ByteArrayInputStream(str.getBytes());
@@ -39,7 +38,7 @@ public class WindowGroupHandlerTest {
         System.setOut(new PrintStream(outContent));
         closeable = MockitoAnnotations.openMocks(this);
         User user = Mockito.mock(User.class, Mockito.withSettings().useConstructor(1L, "test", "testHashPw"));
-        scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         windowGroupHandler = new WindowGroupHandler(mockDb, user, scanner);
     }
 
@@ -49,7 +48,27 @@ public class WindowGroupHandlerTest {
         System.setOut(originalOut);
     }
 
+    @Test
+    public void testNewGroup_TooLongName() {
+        System.setIn(setInput("aaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
+        assertFalse(windowGroupHandler.newGroup());
+    }
+
+    @Test
+    public void testNewGroup_NoName() {
+        System.setIn(setInput(""));
+        assertFalse(windowGroupHandler.newGroup());
+    }
+
     // TODO: massive rewrites to make it unit testable
     // eg all functions return a true/false depending on if they succeed
+    // throw exceptions if fail
 
 }

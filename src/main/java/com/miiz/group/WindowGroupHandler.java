@@ -56,11 +56,12 @@ public class WindowGroupHandler {
     /**
      * Creates a new WindowGroup if the user input is valid
      */
-    private void newGroup() {
+    protected boolean newGroup() {
         System.out.println("Sisesta uue töölaua nimi:");
         String input = inputReader.nextLine().strip();
         if (input.length() > 255) {
             System.out.println("Töölaua nime maksimaalne pikkus on 255 karakterit.\nTöölauda ei ole lisatud.");
+            return false;
         }
         if (input.length() > 0)  {
             WindowGroup group = new WindowGroup(input, user.getId());
@@ -68,18 +69,18 @@ public class WindowGroupHandler {
             group = database.addWindowGroup(group);
             groupList.add(group);
             System.out.println("Lisatud!");
-            divider();
         } else {
             System.out.println("See ei ole sobiv nimi.\nTöölauda ei ole lisatud.");
-            divider();
         }
+        divider();
+        return true;
 
     }
 
     /**
      * Opens a WindowGroups windows if the user selects a valid one
      */
-    private void openGroup() {
+    protected void openGroup() {
         printAllGroupsName();
         System.out.println("Vali millist töölauda avada:");
         // get user input
@@ -112,7 +113,7 @@ public class WindowGroupHandler {
     /**
      * Deletes a WindowGroup if the user selects a valid one
      */
-    private void deleteGroup() {
+    protected void deleteGroup() {
         printAllGroupsName();
         System.out.println("Millist tööauda soovite kustutada?");
         // get user input
@@ -141,7 +142,7 @@ public class WindowGroupHandler {
     /**
      * Adds a new WindowURL to a WindowGroup
      */
-    private void addGroupUrl() {
+    protected void addGroupUrl() {
         if (groupList.size() == 0) {
             System.out.println("Ühtegi töölauda ei ole.");
             return;
@@ -168,7 +169,7 @@ public class WindowGroupHandler {
     /**
      * Deletes a WindowURL from a WindowGroup
      */
-    private void removeGroupUrl() {
+    protected void removeGroupUrl() {
         if (groupList.size() == 0) {
             System.out.println("Ühtegi töölauda ei ole.");
             return;
