@@ -21,7 +21,7 @@ public class NotepadHandler {
     }
 
     public void saveFileText(String text, String filename) throws IOException {
-        FileWriter fileWriter = new FileWriter(filename);
+        FileWriter fileWriter = new FileWriter(filename, StandardCharsets.UTF_8);
         fileWriter.write(text);
         fileWriter.close();
     }
