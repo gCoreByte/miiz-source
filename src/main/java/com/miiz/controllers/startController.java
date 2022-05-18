@@ -27,8 +27,6 @@ public class startController {
 
     public void loginStart(ActionEvent event) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/login.fxml")));
-        loginController loginController = new loginController(database);
-        fxmlLoader.setController(loginController);
         app.changeScene(fxmlLoader);
     }
 

@@ -1,14 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.miiz.controllers.appController"
-            prefHeight="400.0" prefWidth="600.0">
 
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="Menüü">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Logi välja" />
+                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab fx:id="toDoListTab" closable="false" text="To Do List">
+               <content>
+                  <HBox fx:id="toDoListHB" prefHeight="100.0" prefWidth="200.0" />
+               </content>
+          </Tab>
+          <Tab fx:id="musicTab" closable="false" text="Muusika">
+               <content>
+                  <HBox fx:id="musicHB" prefHeight="100.0" prefWidth="200.0" />
+               </content>
+          </Tab>
+            <Tab fx:id="workSpaceTab" closable="false" text="Töölaud">
+               <content>
+                  <HBox fx:id="workSpaceHB" prefHeight="100.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+            <Tab fx:id="notePadTab" closable="false" text="Märkmed">
+               <content>
+                  <HBox fx:id="notePadHB" prefHeight="100.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+</BorderPane>
