@@ -43,6 +43,11 @@ public class Database extends DatabaseInit {
         this.user = user;
     }
 
+    // get currently logged in user
+    public User getUser() {
+        return this.user;
+    }
+
     public List<ToDoList> getToDoLists() {
         isValid();
         String sql1 = "SELECT * FROM ToDoList WHERE ownerid = ?";
