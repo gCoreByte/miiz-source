@@ -13,6 +13,12 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 
 public class registerController {
+
+    private AppNew app;
+    public registerController(AppNew app) {
+        this.app = app;
+    }
+
     @FXML
     private Button registertB;
     @FXML
@@ -29,8 +35,7 @@ public class registerController {
     }
 
     public void exit(ActionEvent event) throws IOException {
-        AppNew m = new AppNew();
-        m.changeScene("/mainApp.fxml");
+        app.changeScene("/startScreen");
     }
 
     private void registerUser(UserAuth userAuth) throws IOException {
