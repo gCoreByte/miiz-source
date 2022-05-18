@@ -5,6 +5,12 @@ plugins {
     id 'org.beryx.jlink' version '2.24.1'
 }
 
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 sourceCompatibility = 17
 targetCompatibility = 17
 
