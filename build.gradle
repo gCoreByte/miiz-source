@@ -35,7 +35,7 @@ dependencies {
 
 
 application {
-    mainClass = 'com.miiz.App'
+    mainClass = 'com.miiz.AppNew'
 }
 
 test {

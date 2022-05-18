@@ -15,12 +15,12 @@ public class startController {
 
     public void loginStart(ActionEvent event) throws Exception {
         AppNew app = new AppNew();
-        app.changeScene("login.fxml");
+        app.changeScene("/login.fxml");
     }
 
     public void registerStart(ActionEvent event) throws Exception {
         AppNew app = new AppNew();
-        app.changeScene("register.fxml");
+        app.changeScene("/register.fxml");
     }
 
 }

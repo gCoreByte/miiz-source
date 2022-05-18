@@ -31,7 +31,7 @@ public class loginController {
     private void userLogin(UserAuth userAuth) throws IOException {
         AppNew m = new AppNew();
         if (userAuth.userLogin(usernameIN.getText(), passwordIN.getText())){
-            m.changeScene("mainApp.fxml");
+            m.changeScene("/mainApp.fxml");
         }
         else{
             loginFail.setText("Sisselogimine ebaõnnestus");

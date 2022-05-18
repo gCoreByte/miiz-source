@@ -29,7 +29,7 @@ public class registerController {
     private void registerUser(UserAuth userAuth) throws IOException {
         AppNew m = new AppNew();
         if (userAuth.userRegister(usernameIN.getText(), passwordIN.getText())){
-            m.changeScene("start.fxml");
+            m.changeScene("/start.fxml");
         }
         else{
             registerFail.setText("Kasutajanimi on juba võetud");
