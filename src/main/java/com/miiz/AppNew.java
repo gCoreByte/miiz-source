@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
 
 public class AppNew extends Application {
@@ -17,7 +18,8 @@ public class AppNew extends Application {
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
         primaryStage.setResizable(false); // See võiks olla kõigel peale main appi
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("startScreen.fxml")));
+        URL url = getClass().getResource("/startScreen.fxml");
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/startScreen.fxml")));
         primaryStage.setTitle("Miiz");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
