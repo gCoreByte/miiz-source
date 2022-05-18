@@ -20,7 +20,7 @@ import java.util.Objects;
 public class LoginController {
 
     public UserAuth userAuth;
-    private AppNew app;
+    private final AppNew app;
 
     public LoginController(AppNew app, UserAuth userAuth) {
         this.userAuth = userAuth;
@@ -30,12 +30,12 @@ public class LoginController {
     @FXML
     private Label loginFail;
     @FXML
-    private TextField usernameIN;
+    private TextField username;
     @FXML
-    private PasswordField passwordIN;
+    private PasswordField password;
 
-    public void login(ActionEvent event) throws IOException { // when button pressed
-        if (userAuth.userLogin(usernameIN.getText(), passwordIN.getText())) {
+    public void login() throws IOException { // when button pressed
+        if (userAuth.userLogin(username.getText(), password.getText())) {
             FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/mainApp.fxml")));
             MainController mainController = new MainController(app);
             fxmlLoader.setController(mainController);
@@ -46,7 +46,7 @@ public class LoginController {
 
     }
 
-    public void exit(ActionEvent event) throws IOException {
+    public void exit() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/startScreen.fxml")));
         StartController startController = new StartController(app, userAuth);
         fxmlLoader.setController(startController);

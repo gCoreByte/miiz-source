@@ -42,14 +42,14 @@
                         <Insets />
                      </opaqueInsets>
                      <children>
-                        <TreeView prefHeight="277.0" prefWidth="374.0" />
+                        <TreeView fx:id="todoTree" prefHeight="277.0" prefWidth="374.0" />
                         <VBox prefHeight="277.0" prefWidth="194.0" spacing="50.0">
                            <HBox.margin>
                               <Insets left="20.0" top="50.0" />
                            </HBox.margin>
                            <children>
-                              <TextField alignment="CENTER" text="todolisti pealkiri" VBox.vgrow="ALWAYS" />
-                              <Button alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="185.0" text="Lisa uus todolist" textAlignment="CENTER" VBox.vgrow="ALWAYS" />
+                              <TextField fx:id="todoTitle" alignment="CENTER" promptText="todolisti pealkiri" VBox.vgrow="ALWAYS" />
+                              <Button fx:id="addList" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="185.0" text="Lisa uus todolist" textAlignment="CENTER" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
                      </children>
@@ -68,18 +68,18 @@
                   <HBox fx:id="workSpaceHB" prefHeight="100.0" prefWidth="200.0" />
                </content>
             </Tab>
-            <Tab fx:id="notePadTab" closable="false" text="Märkmed">
+            <Tab fx:id="notePadTab" closable="false" onSelectionChanged="#notesChanged" text="Märkmed">
                <content>
                   <HBox prefHeight="264.0" prefWidth="600.0">
                      <padding>
                         <Insets left="20.0" right="20.0" top="20.0" />
                      </padding>
                      <children>
-                        <TextArea prefHeight="277.0" prefWidth="409.0" />
-                        <VBox prefHeight="277.0" prefWidth="152.0" spacing="20.0">
+                        <TextArea fx:id="fileContent" prefHeight="277.0" prefWidth="409.0" wrapText="true" HBox.hgrow="ALWAYS" />
+                        <VBox fillWidth="false" prefHeight="277.0" prefWidth="152.0" spacing="20.0">
                            <children>
-                              <TextField text="Faili nimi" />
-                              <ChoiceBox prefWidth="150.0" />
+                              <TextField fx:id="fileName" promptText="Faili nimi" VBox.vgrow="ALWAYS" />
+                              <ChoiceBox fx:id="filePicker" prefWidth="150.0" />
                               <GridPane prefHeight="131.0" prefWidth="147.0">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -91,8 +91,8 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button mnemonicParsing="false" text="Salvesta" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                    <Button mnemonicParsing="false" text="Kustuta" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                    <Button mnemonicParsing="false" onAction="#saveFile" text="Salvesta" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                    <Button mnemonicParsing="false" onAction="#deleteFile" text="Kustuta" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                                  </children>
                               </GridPane>
                            </children>

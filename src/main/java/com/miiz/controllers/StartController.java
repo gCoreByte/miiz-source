@@ -16,6 +16,7 @@ public class StartController {
     public StartController(AppNew app) {
         this.app = app;
         this.userAuth = new UserAuth(app.database);
+        app.stage.setResizable(false);
     }
 
     public StartController(AppNew app, UserAuth userAuth) {
