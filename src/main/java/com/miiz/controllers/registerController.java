@@ -1,5 +1,8 @@
 package com.miiz.controllers;
 
+import com.miiz.AppNew;
+import com.miiz.auth.UserAuth;
+import com.miiz.database.Database;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -20,14 +23,16 @@ public class registerController {
     private PasswordField passwordIN;
 
     public void register(ActionEvent event) throws IOException { // when button pressed
-        registerUser();
+        registerUser(new UserAuth(new Database())); //TODO properly
     }
 
-    private void registerUser() throws IOException {
-        //AppNew m = new AppNew();
-        //m.changeScene("startScreen.fxml"); // tagasi algusesse
-        //register meetod appist
-        // if register successful järgmine stseen m.changeScene("startScreen.fxml")
-        // else registerFail.setText("Selle nimega kasutaja on juba vms");
+    private void registerUser(UserAuth userAuth) throws IOException {
+        AppNew m = new AppNew();
+        if (userAuth.userRegister(usernameIN.getText(), passwordIN.getText())){
+            m.changeScene("start.fxml");
+        }
+        else{
+            registerFail.setText("Kasutajanimi on juba võetud");
+        }
     }
 }

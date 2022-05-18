@@ -17,7 +17,7 @@ public class AppNew extends Application {
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
         primaryStage.setResizable(false); // See võiks olla kõigel peale main appi
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("startScreen.fxml")));
         primaryStage.setTitle("Miiz");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
