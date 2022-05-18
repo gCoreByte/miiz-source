@@ -8,21 +8,25 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.miiz.controllers.startController">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true">
+      <ImageView fitHeight="400.0" fitWidth="600.0" layoutX="1.0" pickOnBounds="true">
          <image>
             <Image url="@mount.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="200.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="logIn" layoutX="125.0" layoutY="193.0" mnemonicParsing="false" onAction="#loginStart" prefHeight="48.0" prefWidth="351.0" style="-fx-background-color: transparent; -fx-border-color: #FFFFFF;" text="LOGI SISSE">
+      <Button fx:id="logIn" layoutX="125.0" layoutY="212.0" mnemonicParsing="false" onAction="#loginStart" prefHeight="48.0" prefWidth="351.0" style="-fx-background-color: transparent; -fx-border-color: #FFFFFF;" text="LOGI SISSE">
          <font>
             <Font name="Times New Roman Bold" size="48.0" />
          </font>
       </Button>
-      <Button fx:id="register" layoutX="214.0" layoutY="344.0" mnemonicParsing="false" onAction="#registerStart" prefHeight="5.0" prefWidth="173.0" style="-fx-background-color: transparent; -fx-label-padding: #000000; -fx-border-color: #FFFFFF;" text="LOO KASUTAJA" textFill="WHITE">
+      <Button fx:id="register" layoutX="214.0" layoutY="323.0" mnemonicParsing="false" onAction="#registerStart" prefHeight="5.0" prefWidth="173.0" style="-fx-background-color: transparent; -fx-label-padding: #000000; -fx-border-color: #FFFFFF;" text="LOO KASUTAJA" textFill="WHITE">
          <font>
             <Font name="Times New Roman Bold" size="14.0" />
          </font>
       </Button>
+      <ImageView fitHeight="140.0" fitWidth="149.0" layoutX="230.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Asset_transparent.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
