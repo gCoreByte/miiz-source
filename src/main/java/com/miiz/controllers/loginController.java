@@ -22,10 +22,17 @@ public class loginController {
     private TextField usernameIN;
     @FXML
     private PasswordField passwordIN;
+    @FXML
+    private Button exitB;
 
     public void login(ActionEvent event) throws IOException { // when button pressed
         userLogin(new UserAuth(new Database())); //TODO properly
 
+    }
+
+    public void exit(ActionEvent event) throws IOException {
+        AppNew m = new AppNew();
+        m.changeScene("/mainApp.fxml");
     }
 
     private void userLogin(UserAuth userAuth) throws IOException {

@@ -21,9 +21,16 @@ public class registerController {
     private TextField usernameIN;
     @FXML
     private PasswordField passwordIN;
+    @FXML
+    private Button exitB;
 
     public void register(ActionEvent event) throws IOException { // when button pressed
         registerUser(new UserAuth(new Database())); //TODO properly
+    }
+
+    public void exit(ActionEvent event) throws IOException {
+        AppNew m = new AppNew();
+        m.changeScene("/mainApp.fxml");
     }
 
     private void registerUser(UserAuth userAuth) throws IOException {
