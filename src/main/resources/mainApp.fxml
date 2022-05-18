@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F8F4E3;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
+      <MenuBar style="-fx-background-color: #CF5C36;" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="Menüü">
             <items>
@@ -21,7 +24,7 @@
       </MenuBar>
    </top>
    <center>
-      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+      <TabPane prefHeight="431.0" prefWidth="398.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
           <Tab fx:id="toDoListTab" closable="false" text="To Do List">
                <content>
@@ -46,4 +49,14 @@
         </tabs>
       </TabPane>
    </center>
+   <bottom>
+      <ImageView fitHeight="44.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="BOTTOM_RIGHT">
+         <image>
+            <Image url="@Asset_transparent.png" />
+         </image>
+         <BorderPane.margin>
+            <Insets bottom="5.0" right="5.0" />
+         </BorderPane.margin>
+      </ImageView>
+   </bottom>
 </BorderPane>
