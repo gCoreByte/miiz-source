@@ -15,29 +15,20 @@
    <center>
       <AnchorPane prefHeight="246.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="registerFail" layoutX="214.0" layoutY="38.0" prefHeight="17.0" prefWidth="224.0" textAlignment="CENTER" textFill="RED">
+            <Label fx:id="registerFail" layoutX="181.0" layoutY="33.0" prefHeight="17.0" prefWidth="224.0" textAlignment="CENTER" textFill="RED">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="101.0" layoutY="70.0" text="Kasutajanimi">
-               <font>
-                  <Font name="Times New Roman" size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="149.0" layoutY="115.0" text="Parool">
-               <font>
-                  <Font name="Times New Roman" size="18.0" />
-               </font>
-            </Label>
-            <Button fx:id="registerB" layoutX="258.0" layoutY="158.0" mnemonicParsing="false" onAction="#register" style="-fx-background-color: transperant; -fx-border-color: #000000;" text="Loo kasutaja" />
-            <TextField fx:id="usernameIN" layoutX="221.0" layoutY="68.0" prefHeight="25.0" prefWidth="211.0" promptText="kasutajanimi" />
-            <PasswordField fx:id="passwordIn" layoutX="222.0" layoutY="113.0" prefHeight="25.0" prefWidth="210.0" promptText="parool" />
+            <Button fx:id="registerB" layoutX="321.0" layoutY="151.0" mnemonicParsing="false" onAction="#register" prefHeight="27.0" prefWidth="87.0" style="-fx-background-color: transperant; -fx-border-color: #000000;" text="Loo kasutaja" />
+            <TextField fx:id="usernameIN" layoutX="178.0" layoutY="63.0" prefHeight="25.0" prefWidth="230.0" promptText="kasutajanimi" />
+            <PasswordField fx:id="passwordIn" layoutX="178.0" layoutY="107.0" prefHeight="25.0" prefWidth="230.0" promptText="parool" />
+            <Button fx:id="exitB" layoutX="178.0" layoutY="151.0" mnemonicParsing="false" onAction="#exit" prefWidth="87.0" style="-fx-background-color: transparent; -fx-border-color: #000000;" text="Tagasi" />
          </children>
       </AnchorPane>
    </center>
    <top>
-      <ImageView fitHeight="107.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+      <ImageView fitHeight="107.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="TOP_CENTER">
          <BorderPane.margin>
             <Insets top="15.0" />
          </BorderPane.margin>
