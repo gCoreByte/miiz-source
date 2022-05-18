@@ -3,14 +3,12 @@ package com.miiz;
 import com.miiz.auth.UserAuth;
 import com.miiz.database.Database;
 import com.miiz.group.WindowGroupHandler;
-import com.miiz.song.Song;
 import com.miiz.song.SongHandler;
-import com.miiz.todolist.ToDoList;
 import com.miiz.todolist.ToDoListHandler;
 import java.util.Scanner;
 import static com.miiz.utils.Utils.divider;
 
-public class App {
+public class App{
 
     /**
      * User authentication -> get user input and handle choices
@@ -80,7 +78,7 @@ public class App {
      * Main method
      * @param args - cmdline args
      */
-    public static void main(String[] args) {
+    public static void main(String[] args){
         // apparently there can be issues if multiple scanners read system.in
         // to bypass this we will use the same scanner in all modules
         Scanner scan = new Scanner(System.in);
