@@ -53,7 +53,7 @@
                                        <TextField fx:id="todoTitle" alignment="CENTER" promptText="uus väärtus" VBox.vgrow="ALWAYS" />
                                        <Button alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addValue" prefHeight="25.0" prefWidth="200.0" text="Lisa väärtus" textAlignment="CENTER" />
                                        <Button alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteValue" prefHeight="25.0" prefWidth="200.0" text="Eemalda väärtus" textAlignment="CENTER" VBox.vgrow="ALWAYS" />
-                                       <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#editValue" prefWidth="200.0" text="Muuda väärtust" />
+                                       <Button alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#editValue" prefWidth="200.0" text="Muuda väärtust" />
                                    </children>
                                </VBox>
                            </children>
