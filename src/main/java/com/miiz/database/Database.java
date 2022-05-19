@@ -262,15 +262,18 @@ public class Database extends DatabaseInit {
         }
     }
 
-    public void addUser(User user) {
+    public User addUser(User user) {
         isValid();
         String sql = "INSERT INTO User (username, hashedPw) VALUES (?, ?)";
         try (PreparedStatement statement = createPrepStatement(sql)) {
             statement.setString(1, user.getUsername());
             statement.setString(2, user.getHashedPw());
             statement.executeUpdate();
+            user.setId(getLastRowId());
+            return user;
         } catch (Exception e) {
             e.printStackTrace();
+            return user;
         }
     }
 

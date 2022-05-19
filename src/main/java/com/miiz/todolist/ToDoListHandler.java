@@ -1,9 +1,8 @@
 package com.miiz.todolist;
 
-import com.miiz.App;
+
 import com.miiz.database.Database;
 
-import javax.xml.crypto.Data;
 import java.util.List;
 
 public class ToDoListHandler {
