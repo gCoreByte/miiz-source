@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -19,7 +20,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F8F4E3;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <MenuBar style="-fx-background-color: #CF5C36;" BorderPane.alignment="CENTER">
@@ -60,7 +62,61 @@
           </Tab>
           <Tab fx:id="musicTab" closable="false" text="Muusika">
                <content>
-                  <HBox fx:id="musicHB" prefHeight="100.0" prefWidth="200.0" />
+                   <VBox prefHeight="200.0" prefWidth="100.0">
+                       <children>
+                           <HBox prefHeight="68.0" prefWidth="600.0">
+                               <children>
+                                   <Button fx:id="randomSong" mnemonicParsing="false" onAction="#pickRandomSong" prefHeight="26.0" prefWidth="107.0" style="-fx-background-color: transparent; -fx-border-color: #D3D5D7;" text="Esita juhuslik" HBox.hgrow="ALWAYS">
+                                       <font>
+                                           <Font name="Times New Roman" size="14.0" />
+                                       </font>
+                                       <HBox.margin>
+                                           <Insets bottom="5.0" left="5.0" right="5.0" top="20.0" />
+                                       </HBox.margin>
+                                   </Button>
+                                   <Label prefHeight="27.0" prefWidth="100.0" text="Viimati esitatud:">
+                                       <HBox.margin>
+                                           <Insets left="15.0" top="20.0" />
+                                       </HBox.margin>
+                                       <font>
+                                           <Font name="Times New Roman" size="14.0" />
+                                       </font>
+                                   </Label>
+                                   <Label fx:id="latestSong" prefHeight="28.0" prefWidth="355.0" style="-fx-border-color: #D3D5D7;" text="pealkiri">
+                                       <HBox.margin>
+                                           <Insets left="5.0" top="20.0" />
+                                       </HBox.margin>
+                                       <font>
+                                           <Font name="Times New Roman" size="14.0" />
+                                       </font>
+                                       <padding>
+                                           <Insets left="5.0" />
+                                       </padding>
+                                   </Label>
+                               </children>
+                           </HBox>
+                           <HBox prefHeight="215.0" prefWidth="600.0">
+                               <children>
+                                   <AnchorPane prefHeight="215.0" prefWidth="603.0">
+                                       <children>
+                                           <ChoiceBox fx:id="genrePicker" layoutX="48.0" layoutY="33.0" prefHeight="31.0" prefWidth="187.0" style="-fx-background-color: transparent; -fx-border-color: #D3D5D7;" />
+                                           <ChoiceBox layoutX="358.0" layoutY="33.0" prefHeight="31.0" prefWidth="188.0" style="-fx-background-color: transparent; -fx-border-color: #D3D5D7;" />
+                                           <Label fx:id="songPicker" layoutX="367.0" layoutY="40.0" prefHeight="17.0" prefWidth="186.0" text="Vali lugu">
+                                               <font>
+                                                   <Font name="Times New Roman" size="14.0" />
+                                               </font>
+                                           </Label>
+                                           <Label layoutX="56.0" layoutY="41.0" text="Vali žanr">
+                                               <font>
+                                                   <Font name="Times New Roman" size="14.0" />
+                                               </font>
+                                           </Label>
+                                       </children>
+                                   </AnchorPane>
+                               </children>
+                           </HBox>
+                       </children>
+                   </VBox>
                </content>
           </Tab>
             <Tab fx:id="workSpaceTab" closable="false" text="Töölaud">
