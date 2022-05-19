@@ -14,14 +14,15 @@
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F8F4E3;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <MenuBar style="-fx-background-color: #CF5C36;" BorderPane.alignment="CENTER">
@@ -60,7 +61,7 @@
                      </padding></HBox>
                </content>
           </Tab>
-          <Tab fx:id="musicTab" closable="false" text="Muusika">
+          <Tab fx:id="musicTab" closable="false" onSelectionChanged="#songsChanged" text="Muusika">
                <content>
                    <VBox prefHeight="200.0" prefWidth="100.0">
                        <children>
@@ -99,18 +100,18 @@
                                <children>
                                    <AnchorPane prefHeight="215.0" prefWidth="603.0">
                                        <children>
+                                           <Label layoutX="367.0" layoutY="40.0" mouseTransparent="true" prefHeight="17.0" prefWidth="186.0" text="Vali lugu">
+                                               <font>
+                                                   <Font name="Times New Roman" size="14.0" />
+                                               </font>
+                                           </Label>
                                            <ChoiceBox fx:id="genrePicker" layoutX="48.0" layoutY="33.0" prefHeight="31.0" prefWidth="187.0" style="-fx-background-color: transparent; -fx-border-color: #D3D5D7;" />
-                                           <ChoiceBox layoutX="358.0" layoutY="33.0" prefHeight="31.0" prefWidth="188.0" style="-fx-background-color: transparent; -fx-border-color: #D3D5D7;" />
-                                           <Label fx:id="songPicker" layoutX="367.0" layoutY="40.0" prefHeight="17.0" prefWidth="186.0" text="Vali lugu">
+                                           <Label layoutX="56.0" layoutY="41.0" mouseTransparent="true" text="Vali žanr">
                                                <font>
                                                    <Font name="Times New Roman" size="14.0" />
                                                </font>
                                            </Label>
-                                           <Label layoutX="56.0" layoutY="41.0" text="Vali žanr">
-                                               <font>
-                                                   <Font name="Times New Roman" size="14.0" />
-                                               </font>
-                                           </Label>
+                                           <ChoiceBox fx:id="songPicker" layoutX="358.0" layoutY="33.0" prefHeight="31.0" prefWidth="188.0" style="-fx-background-color: transparent; -fx-border-color: #D3D5D7;" />
                                        </children>
                                    </AnchorPane>
                                </children>

@@ -166,19 +166,28 @@ public class MainController {
         latestSong.setText(title);
     }
 
-    public void pickByGenre(){
+    public void songsChanged() {
         ObservableList<String> o = FXCollections.observableArrayList(Genre.genres);
         genrePicker.setItems(o);
-        String genre = genrePicker.getSelectionModel().getSelectedItem();
-        String title = songHandler.pickSongByGenre(genre);
-        latestSong.setText(title);
-    }
-
-    public void pickSong(){
-        ObservableList<String> o = FXCollections.observableArrayList(songHandler.getSongTitles());
-        songPicker.setItems(o);
-        String songTitle = songPicker.getSelectionModel().getSelectedItem();
-        String title = songHandler.pickSong(songTitle);
-        latestSong.setText(title);
+        genrePicker.getSelectionModel().selectedIndexProperty().addListener((observableValue, number, number2) -> {
+            try {
+                String genre = genrePicker.getItems().get((Integer) number2);
+                String title = songHandler.pickSongByGenre(genre);
+                latestSong.setText(title);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        ObservableList<String> i = FXCollections.observableArrayList(songHandler.getSongTitles());
+        songPicker.setItems(i);
+        songPicker.getSelectionModel().selectedIndexProperty().addListener((observableValue, number, number2) -> {
+            try {
+                String songTitle = songPicker.getItems().get((Integer) number2);
+                String title = songHandler.pickSong(songTitle);
+                latestSong.setText(title);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

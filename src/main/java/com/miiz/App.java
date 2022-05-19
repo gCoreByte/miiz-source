@@ -103,9 +103,6 @@ public class App{
         authentication(scan, userAuth);
 
         // initialise our handlers
-        WindowGroupHandler windowGroupHandler = new WindowGroupHandler(database, userAuth.getUser(), scan);
-        ToDoListHandler toDoListHandler = new ToDoListHandler(database, userAuth.getUser(), scan);
-        SongHandler songHandler = new SongHandler(database, scan);
 
         divider();
 
@@ -120,11 +117,7 @@ public class App{
             String user_input = scan.nextLine().strip();
 
             switch (user_input) {
-                case "1" -> toDoListHandler.main();
 
-                case "2" -> songHandler.main();
-
-                case "3" -> windowGroupHandler.main();
 
                 case "0" -> System.exit(0);
 
