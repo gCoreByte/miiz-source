@@ -4,6 +4,7 @@ import com.miiz.AppNew;
 import com.miiz.auth.UserAuth;
 import com.miiz.group.WindowGroup;
 import com.miiz.group.WindowGroupHandler;
+import com.miiz.group.WindowURL;
 import com.miiz.group.WorkSpace;
 import com.miiz.notepad.NotepadHandler;
 import com.miiz.song.Genre;
@@ -45,9 +46,12 @@ public class MainController {
         this.toDoListHandler = new ToDoListHandler(app.database);
         this.notepadHandler = new NotepadHandler(app.database);
         this.songHandler = new SongHandler(app.database);
+        this.windowGroupHandler = new WindowGroupHandler(app.database);
 
         app.stage.setResizable(true);
     }
+
+
 
     // todolist
 
@@ -77,11 +81,12 @@ public class MainController {
     public void addValue() {
         if (todoTree.getSelectionModel().getSelectedItem() == null) {
             toDoListHandler.addList(todoTitle.getText());
+            todoChanged();
         }
         else if (todoTree.getSelectionModel().getSelectedItem().getValue() instanceof ToDoList) {
             toDoListHandler.addLine((ToDoList) todoTree.getSelectionModel().getSelectedItem().getValue(), todoTitle.getText());
+            todoChanged();
         }
-        todoChanged();
     }
 
     public void deleteValue() {
@@ -90,10 +95,12 @@ public class MainController {
         }
         if (todoTree.getSelectionModel().getSelectedItem().getValue() instanceof ToDoList) {
             toDoListHandler.deleteList((ToDoList) todoTree.getSelectionModel().getSelectedItem().getValue());
+            todoChanged();
         } else if (todoTree.getSelectionModel().getSelectedItem().getValue() instanceof ListLine) {
             toDoListHandler.deleteLine((ToDoList) todoTree.getSelectionModel().getSelectedItem().getParent().getValue(), (ListLine) todoTree.getSelectionModel().getSelectedItem().getValue());
+            todoChanged();
         }
-        todoChanged();
+
     }
 
     public void editValue() {
@@ -102,10 +109,12 @@ public class MainController {
         }
         if (todoTree.getSelectionModel().getSelectedItem().getValue() instanceof ToDoList) {
             toDoListHandler.editList((ToDoList) todoTree.getSelectionModel().getSelectedItem().getValue(), todoTitle.getText());
+            todoChanged();
         } else if (todoTree.getSelectionModel().getSelectedItem().getValue() instanceof ListLine) {
             toDoListHandler.editLine((ToDoList) todoTree.getSelectionModel().getSelectedItem().getParent().getValue(), (ListLine) todoTree.getSelectionModel().getSelectedItem().getValue(), todoTitle.getText());
+            todoChanged();
         }
-        todoChanged();
+
     }
 
     // notepad
@@ -200,8 +209,62 @@ public class MainController {
     @FXML
     private TextField insertValueWS;
 
-    public void workSpace(){
+    public void workspaceChanged() {
+        // TREE TIME
+        TreeItem<WorkSpace> rootNode = new TreeItem<>();
+        rootNode.setExpanded(true);
 
+        List<WindowGroup> lists = windowGroupHandler.getLists();
+        for (WindowGroup list : lists) {
+            TreeItem<WorkSpace> workSpaceTreeItem = new TreeItem<>(list);
+            for (WindowURL url : list.getUrls()) {
+                TreeItem<WorkSpace> urlItem = new TreeItem<>(url);
+                workSpaceTreeItem.getChildren().add(urlItem);
+            }
+            rootNode.getChildren().add(workSpaceTreeItem);
+        }
+        workSpaceTree.setRoot(rootNode);
+    }
+
+    public void addValueWS() {
+        if (workSpaceTree.getSelectionModel().getSelectedItem() == null) {
+            windowGroupHandler.newGroup(insertValueWS.getText());
+            workspaceChanged();
+        }
+        else if (workSpaceTree.getSelectionModel().getSelectedItem().getValue() instanceof WindowGroup) {
+            windowGroupHandler.addGroupUrl((WindowGroup) workSpaceTree.getSelectionModel().getSelectedItem().getValue(), insertValueWS.getText());
+            workspaceChanged();
+        }
+
+    }
+
+    public void deleteValueWS() {
+        if (workSpaceTree.getSelectionModel().getSelectedItem() == null) {
+            return;
+        }
+        if (workSpaceTree.getSelectionModel().getSelectedItem().getValue() instanceof WindowGroup) {
+            windowGroupHandler.deleteGroup((WindowGroup) workSpaceTree.getSelectionModel().getSelectedItem().getValue());
+            workspaceChanged();
+        } else if (workSpaceTree.getSelectionModel().getSelectedItem().getValue() instanceof WindowURL) {
+            windowGroupHandler.deleteGroupUrl((WindowGroup) workSpaceTree.getSelectionModel().getSelectedItem().getParent().getValue(), (WindowURL) workSpaceTree.getSelectionModel().getSelectedItem().getValue());
+            workspaceChanged();
+        }
+    }
+
+    public void openValueWS() {
+        if (workSpaceTree.getSelectionModel().getSelectedItem() == null) {
+            return;
+        }
+        if (workSpaceTree.getSelectionModel().getSelectedItem().getValue() instanceof WindowGroup) {
+            try {
+                windowGroupHandler.openGroup((WindowGroup) workSpaceTree.getSelectionModel().getSelectedItem().getValue());
+            } catch (UnsupportedOperationException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Ei ole toetatud");
+                alert.setContentText("Teie arvuti ei toeta seda funktsionaalsust.");
+                alert.showAndWait();
+            }
+        }
     }
 
 }

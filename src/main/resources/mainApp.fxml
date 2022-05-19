@@ -155,7 +155,7 @@
                    </VBox>
                </content>
           </Tab>
-            <Tab fx:id="workSpaceTab" closable="false" style="-fx-background-color: #70D6FF;" text="Töölaud">
+            <Tab fx:id="workSpaceTab" closable="false" onSelectionChanged="#workspaceChanged" style="-fx-background-color: #70D6FF;" text="Töölaud">
                <content>
                   <HBox fx:id="workSpaceHB" prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -164,13 +164,13 @@
                               <Insets />
                            </opaqueInsets>
                            <children>
-                              <TreeView fx:id="todoTree1" prefHeight="277.0" prefWidth="338.0" style="-fx-border-color: #70D6FF; -fx-border-width: 2;" />
+                              <TreeView fx:id="workSpaceTree" prefHeight="277.0" prefWidth="338.0" style="-fx-border-color: #70D6FF; -fx-border-width: 2;" />
                               <VBox prefHeight="277.0" prefWidth="194.0" spacing="30.0">
                                  <HBox.margin>
                                     <Insets left="20.0" top="50.0" />
                                  </HBox.margin>
                                  <children>
-                                    <TextField fx:id="todoTitle1" alignment="CENTER" prefHeight="28.0" prefWidth="209.0" promptText="uus väärtus" style="-fx-background-color: transperant; -fx-border-color: #3BCEAC;" VBox.vgrow="ALWAYS">
+                                    <TextField fx:id="insertValueWS" alignment="CENTER" prefHeight="28.0" prefWidth="209.0" promptText="uus väärtus" style="-fx-background-color: transperant; -fx-border-color: #3BCEAC;" VBox.vgrow="ALWAYS">
                                        <font>
                                           <Font name="Times New Roman" size="14.0" />
                                        </font>
@@ -178,7 +178,7 @@
                                           <Insets left="5.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <Button alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addValue" prefHeight="28.0" prefWidth="118.0" style="-fx-background-color: transperant; -fx-border-color: #fe9a01;" text="Lisa" textAlignment="CENTER">
+                                    <Button alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addValueWS" prefHeight="28.0" prefWidth="118.0" style="-fx-background-color: transperant; -fx-border-color: #fe9a01;" text="Lisa" textAlignment="CENTER">
                                        <font>
                                           <Font name="Times New Roman" size="14.0" />
                                        </font>
@@ -186,7 +186,7 @@
                                           <Insets left="58.0" right="50.0" />
                                        </VBox.margin>
                                     </Button>
-                                    <Button alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteValue" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: transperant; -fx-border-color: #EE4266;" text="Eemalda" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                                    <Button alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteValueWS" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: transperant; -fx-border-color: #EE4266;" text="Eemalda" textAlignment="CENTER" VBox.vgrow="ALWAYS">
                                        <font>
                                           <Font name="Times New Roman" size="14.0" />
                                        </font>
@@ -194,7 +194,7 @@
                                           <Insets left="58.0" right="50.0" />
                                        </VBox.margin>
                                     </Button>
-                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#editValue" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: transperant; -fx-border-color: #FFD23F;" text="Ava">
+                                    <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#openValueWS" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: transperant; -fx-border-color: #FFD23F;" text="Ava">
                                        <font>
                                           <Font name="Times New Roman" size="14.0" />
                                        </font>

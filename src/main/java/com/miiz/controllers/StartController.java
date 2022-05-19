@@ -25,14 +25,14 @@ public class StartController {
     }
 
 
-    public void loginStart(ActionEvent event) throws Exception {
+    public void loginStart() throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/login.fxml")));
         LoginController loginController = new LoginController(app, userAuth);
         fxmlLoader.setController(loginController);
         app.load(fxmlLoader);
     }
 
-    public void registerStart(ActionEvent event) throws Exception {
+    public void registerStart() throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/register.fxml")));
         RegisterController registerController = new RegisterController(app, userAuth);
         fxmlLoader.setController(registerController);

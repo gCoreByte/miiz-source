@@ -92,11 +92,6 @@ public class WindowGroup implements WorkSpace{
 
     @Override
     public String toString() {
-        StringBuilder s = new StringBuilder();
-        s.append(name);
-        for (WindowURL url : urls) {
-            s.append("\n- ").append(url);
-        }
-        return s.toString();
+        return name;
     }
 }
