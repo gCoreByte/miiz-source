@@ -105,7 +105,7 @@ public class App{
         // initialise our handlers
         WindowGroupHandler windowGroupHandler = new WindowGroupHandler(database, userAuth.getUser(), scan);
         ToDoListHandler toDoListHandler = new ToDoListHandler(database, userAuth.getUser(), scan);
-        SongHandler songHandler = new SongHandler(database);
+        SongHandler songHandler = new SongHandler(database, scan);
 
         divider();
 
@@ -122,7 +122,7 @@ public class App{
             switch (user_input) {
                 case "1" -> toDoListHandler.main();
 
-                //case "2" -> songHandler.main();
+                case "2" -> songHandler.main();
 
                 case "3" -> windowGroupHandler.main();
 

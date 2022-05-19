@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -14,14 +13,12 @@
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F8F4E3;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <top>
@@ -45,17 +42,14 @@
                         <Insets />
                      </opaqueInsets>
                      <children>
-                        <TreeView fx:id="todoTree" prefHeight="277.0" prefWidth="374.0" style="-fx-border-color: #D3D5D7;" />
+                        <TreeView fx:id="todoTree" prefHeight="277.0" prefWidth="374.0" />
                         <VBox prefHeight="277.0" prefWidth="194.0" spacing="50.0">
                            <HBox.margin>
                               <Insets left="20.0" top="50.0" />
                            </HBox.margin>
                            <children>
                               <TextField fx:id="todoTitle" alignment="CENTER" promptText="todolisti pealkiri" VBox.vgrow="ALWAYS" />
-                              <Button fx:id="addList" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="185.0" style="-fx-background-color: transparent; -fx-border-color: #D3D5D7;" text="Lisa uus todolist" textAlignment="CENTER" VBox.vgrow="ALWAYS">
-                                 <font>
-                                    <Font name="Times New Roman" size="14.0" />
-                                 </font></Button>
+                              <Button fx:id="addList" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="185.0" text="Lisa uus todolist" textAlignment="CENTER" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
                      </children>
@@ -66,61 +60,7 @@
           </Tab>
           <Tab fx:id="musicTab" closable="false" text="Muusika">
                <content>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <HBox prefHeight="68.0" prefWidth="600.0">
-                           <children>
-                              <Button fx:id="randomSong" mnemonicParsing="false" onAction="#pickRandomSong" prefHeight="26.0" prefWidth="107.0" style="-fx-background-color: transparent; -fx-border-color: #D3D5D7;" text="Esita juhuslik" HBox.hgrow="ALWAYS">
-                                 <font>
-                                    <Font name="Times New Roman" size="14.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets bottom="5.0" left="5.0" right="5.0" top="20.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Label prefHeight="27.0" prefWidth="100.0" text="Viimati esitatud:">
-                                 <HBox.margin>
-                                    <Insets left="15.0" top="20.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Times New Roman" size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="latestSong" prefHeight="28.0" prefWidth="355.0" style="-fx-border-color: #D3D5D7;" text="pealkiri">
-                                 <HBox.margin>
-                                    <Insets left="5.0" top="20.0" />
-                                 </HBox.margin>
-                                 <font>
-                                    <Font name="Times New Roman" size="14.0" />
-                                 </font>
-                                 <padding>
-                                    <Insets left="5.0" />
-                                 </padding>
-                              </Label>
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="215.0" prefWidth="600.0">
-                           <children>
-                              <AnchorPane prefHeight="215.0" prefWidth="603.0">
-                                 <children>
-                                    <ChoiceBox fx:id="genrePicker" layoutX="48.0" layoutY="33.0" prefHeight="31.0" prefWidth="187.0" style="-fx-background-color: transparent; -fx-border-color: #D3D5D7;" />
-                                    <ChoiceBox layoutX="358.0" layoutY="33.0" prefHeight="31.0" prefWidth="188.0" style="-fx-background-color: transparent; -fx-border-color: #D3D5D7;" />
-                                    <Label fx:id="songPicker" layoutX="367.0" layoutY="40.0" prefHeight="17.0" prefWidth="186.0" text="Vali lugu">
-                                       <font>
-                                          <Font name="Times New Roman" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="56.0" layoutY="41.0" text="Vali žanr">
-                                       <font>
-                                          <Font name="Times New Roman" size="14.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </AnchorPane>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
+                  <HBox fx:id="musicHB" prefHeight="100.0" prefWidth="200.0" />
                </content>
           </Tab>
             <Tab fx:id="workSpaceTab" closable="false" text="Töölaud">
@@ -135,14 +75,11 @@
                         <Insets left="20.0" right="20.0" top="20.0" />
                      </padding>
                      <children>
-                        <TextArea fx:id="fileContent" prefHeight="277.0" prefWidth="409.0" style="-fx-border-color: #D3D5D7;" wrapText="true" HBox.hgrow="ALWAYS">
-                           <font>
-                              <Font name="Times New Roman" size="14.0" />
-                           </font></TextArea>
+                        <TextArea fx:id="fileContent" prefHeight="277.0" prefWidth="409.0" wrapText="true" HBox.hgrow="ALWAYS" />
                         <VBox fillWidth="false" prefHeight="277.0" prefWidth="152.0" spacing="20.0">
                            <children>
                               <TextField fx:id="fileName" promptText="Faili nimi" VBox.vgrow="ALWAYS" />
-                              <ChoiceBox fx:id="filePicker" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #D3D5D7;" />
+                              <ChoiceBox fx:id="filePicker" prefWidth="150.0" />
                               <GridPane prefHeight="131.0" prefWidth="147.0">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -154,14 +91,8 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#saveFile" style="-fx-background-color: transparent; -fx-border-color: #D3D5D7;" text="Salvesta" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                                       <font>
-                                          <Font name="Times New Roman" size="14.0" />
-                                       </font></Button>
-                                    <Button mnemonicParsing="false" onAction="#deleteFile" style="-fx-background-color: transparent; -fx-border-color: #D3D5D7;" text="Kustuta" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                                       <font>
-                                          <Font name="Times New Roman" size="14.0" />
-                                       </font></Button>
+                                    <Button mnemonicParsing="false" onAction="#saveFile" text="Salvesta" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                    <Button mnemonicParsing="false" onAction="#deleteFile" text="Kustuta" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                                  </children>
                               </GridPane>
                            </children>

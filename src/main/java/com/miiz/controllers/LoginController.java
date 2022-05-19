@@ -1,6 +1,5 @@
 package com.miiz.controllers;
 
-import com.miiz.App;
 import com.miiz.AppNew;
 import com.miiz.auth.User;
 import com.miiz.auth.UserAuth;

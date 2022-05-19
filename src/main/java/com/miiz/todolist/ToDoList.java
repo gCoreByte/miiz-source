@@ -4,7 +4,7 @@ package com.miiz.todolist;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ToDoList {
+public class ToDoList implements TodoTree {
 
     private List<ListLine> listLines;
     private String listName;
@@ -76,9 +76,18 @@ public class ToDoList {
         listLines.remove(lineNumber);
     }
 
+    public void deleteLine(ListLine line) {
+        listLines.remove(line);
+    }
+
     public void printListLines(){
         for (int i = 0; i < listLines.size(); i++) {
             System.out.println("  " + i + 1 + ". " + listLines.get(i).getContent());
         }
+    }
+
+    @Override
+    public String toString() {
+        return listName;
     }
 }
