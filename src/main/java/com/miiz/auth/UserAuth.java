@@ -69,7 +69,8 @@ public class UserAuth {
         }
         // BCrypt password hashing
         user = new User(username, BCrypt.withDefaults().hashToString(12, password.toCharArray()));
-        database.addUser(user);
+        user = database.addUser(user);
+        database.setUser(user);
         return true;
 
     }

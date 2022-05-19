@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: ffffff; -fx-border-color: #FFD23F; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="logIn" layoutX="163.0" layoutY="236.0" mnemonicParsing="false" onAction="#loginStart" prefHeight="51.0" prefWidth="274.0" style="-fx-background-color: transparent; -fx-border-color: #EE4266; -fx-border-width: 2;" text="LOGI SISSE">
+         <font>
+            <Font name="Times New Roman Bold" size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="register" layoutX="214.0" layoutY="323.0" mnemonicParsing="false" onAction="#registerStart" prefHeight="5.0" prefWidth="173.0" style="-fx-background-color: transparent; -fx-border-color: #70D6FF; -fx-border-width: 2;" text="LOO KASUTAJA">
+         <font>
+            <Font name="Times New Roman Bold" size="14.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="156.0" fitWidth="160.0" layoutX="222.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Asset_transparent.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>

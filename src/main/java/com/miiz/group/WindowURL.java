@@ -3,7 +3,7 @@ package com.miiz.group;
 /**
  * WindowURL data class
  */
-public class WindowURL {
+public class WindowURL implements WorkSpace {
     private long id;
     private long ownerid;
     private String url;

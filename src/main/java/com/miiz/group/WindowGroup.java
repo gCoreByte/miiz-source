@@ -12,7 +12,7 @@ import java.util.List;
  * It contains methods related to a single WindowGroup and provides ease-of-access from
  * database calls.
  */
-public class WindowGroup {
+public class WindowGroup implements WorkSpace{
     private long id;
     private final long ownerid;
     private String name;
@@ -92,11 +92,6 @@ public class WindowGroup {
 
     @Override
     public String toString() {
-        StringBuilder s = new StringBuilder();
-        s.append(name);
-        for (WindowURL url : urls) {
-            s.append("\n- ").append(url);
-        }
-        return s.toString();
+        return name;
     }
 }
