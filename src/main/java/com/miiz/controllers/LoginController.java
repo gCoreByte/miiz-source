@@ -11,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import javax.xml.crypto.Data;
 import java.io.IOException;
@@ -21,17 +23,30 @@ public class LoginController {
     public UserAuth userAuth;
     private final AppNew app;
 
-    public LoginController(AppNew app, UserAuth userAuth) {
-        this.userAuth = userAuth;
-        this.app = app;
-    }
-
     @FXML
     private Label loginFail;
     @FXML
     private TextField username;
     @FXML
     private PasswordField password;
+
+    public LoginController(AppNew app, UserAuth userAuth) {
+        this.userAuth = userAuth;
+        this.app = app;
+    }
+
+    public void onEnter(KeyEvent event) throws IOException {
+        if (event.getCode() != KeyCode.ENTER) {
+            return;
+        }
+        if (event.getSource() == username) {
+            password.requestFocus();
+            password.selectEnd();
+        } else if (event.getSource() == password) {
+            login();
+        }
+    }
+
 
     public void login() throws IOException { // when button pressed
         if (userAuth.userLogin(username.getText(), password.getText())) {

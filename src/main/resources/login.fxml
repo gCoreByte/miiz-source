@@ -47,11 +47,11 @@
    <center>
       <AnchorPane prefHeight="299.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="username" layoutX="185.0" layoutY="51.0" prefHeight="25.0" prefWidth="230.0" promptText="kasutajanimi">
+            <TextField fx:id="username" layoutX="185.0" layoutY="51.0" onKeyPressed="#onEnter" prefHeight="25.0" prefWidth="230.0" promptText="kasutajanimi">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font></TextField>
-            <PasswordField fx:id="password" layoutX="185.0" layoutY="101.0" prefHeight="25.0" prefWidth="230.0" promptText="parool">
+            <PasswordField fx:id="password" layoutX="185.0" layoutY="101.0" onKeyPressed="#onEnter" prefHeight="25.0" prefWidth="230.0" promptText="parool">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font></PasswordField>

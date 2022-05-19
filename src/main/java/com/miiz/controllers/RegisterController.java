@@ -11,6 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 import javax.xml.crypto.Data;
 import java.io.IOException;
@@ -33,7 +35,19 @@ public class RegisterController {
     @FXML
     private PasswordField password;
 
-    public void register(ActionEvent event) throws IOException { // when button pressed
+    public void onEnter(KeyEvent event) throws IOException {
+        if (event.getCode() != KeyCode.ENTER) {
+            return;
+        }
+        if (event.getSource() == username) {
+            password.requestFocus();
+            password.selectEnd();
+        } else if (event.getSource() == password) {
+            register();
+        }
+    }
+
+    public void register() throws IOException { // when button pressed
         if (userAuth.userRegister(username.getText(), password.getText())) {
             FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/mainApp.fxml")));
             MainController mainController = new MainController(app);
@@ -44,7 +58,7 @@ public class RegisterController {
         }
     }
 
-    public void exit(ActionEvent event) throws IOException {
+    public void exit() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/startScreen.fxml")));
         StartController startController = new StartController(app, userAuth);
         fxmlLoader.setController(startController);

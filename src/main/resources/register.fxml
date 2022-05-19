@@ -21,11 +21,11 @@
                </font>
             </Label>
             <Button fx:id="registerB" layoutX="321.0" layoutY="151.0" mnemonicParsing="false" onAction="#register" prefHeight="27.0" prefWidth="87.0" style="-fx-background-color: transperant; -fx-border-color: #3BCEAC; -fx-border-width: 2;" text="Loo kasutaja" />
-            <TextField fx:id="username" layoutX="178.0" layoutY="63.0" prefHeight="25.0" prefWidth="230.0" promptText="kasutajanimi">
+            <TextField fx:id="username" layoutX="178.0" layoutY="63.0" onKeyPressed="#onEnter" prefHeight="25.0" prefWidth="230.0" promptText="kasutajanimi">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font></TextField>
-            <PasswordField fx:id="password" layoutX="178.0" layoutY="107.0" prefHeight="25.0" prefWidth="230.0" promptText="parool">
+            <PasswordField fx:id="password" layoutX="178.0" layoutY="107.0" onKeyPressed="#onEnter" prefHeight="25.0" prefWidth="230.0" promptText="parool">
                <font>
                   <Font name="Times New Roman" size="14.0" />
                </font></PasswordField>
