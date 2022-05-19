@@ -3,7 +3,11 @@ package com.miiz.controllers;
 import com.miiz.App;
 import com.miiz.AppNew;
 import com.miiz.auth.UserAuth;
+import com.miiz.group.WindowGroupHandler;
 import com.miiz.notepad.NotepadHandler;
+import com.miiz.song.Genre;
+import com.miiz.song.Song;
+import com.miiz.song.SongHandler;
 import com.miiz.todolist.ToDoListHandler;
 import javafx.beans.binding.ListExpression;
 import javafx.beans.value.ChangeListener;
@@ -14,10 +18,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
@@ -29,12 +35,15 @@ public class MainController {
 
     private ToDoListHandler toDoListHandler;
     private NotepadHandler notepadHandler;
+    private SongHandler songHandler;
+    private WindowGroupHandler windowGroupHandler;
 
     private final AppNew app;
     public MainController(AppNew app) {
         this.app = app;
         //this.toDoListHandler = new ToDoListHandler(app.database, app.database.getUser());
         this.notepadHandler = new NotepadHandler(app.database);
+        this.songHandler = new SongHandler(app.database);
 
         app.stage.setResizable(true);
     }
@@ -47,6 +56,18 @@ public class MainController {
 
     @FXML
     private ChoiceBox<String> filePicker;
+
+    @FXML
+    private Button randomSong;
+
+    @FXML
+    private ChoiceBox<String> genrePicker;
+
+    @FXML
+    private ChoiceBox<String> songPicker;
+
+    @FXML
+    private Label latestSong;
 
     public void logout() throws IOException {
         app.database.setUser(null);
@@ -78,5 +99,26 @@ public class MainController {
     public void deleteFile() {
         notepadHandler.deleteFile(filePicker.getValue());
         notesChanged();
+    }
+
+    public void pickRandomSong(){
+        String title = songHandler.pickRandomSong();
+        latestSong.setText(title);
+    }
+
+    public void pickByGenre(){
+        ObservableList<String> o = FXCollections.observableArrayList(Genre.genres);
+        genrePicker.setItems(o);
+        String genre = genrePicker.getSelectionModel().getSelectedItem();
+        String title = songHandler.pickSongByGenre(genre);
+        latestSong.setText(title);
+    }
+
+    public void pickSong(){
+        ObservableList<String> o = FXCollections.observableArrayList(songHandler.getSongTitles());
+        songPicker.setItems(o);
+        String songTitle = songPicker.getSelectionModel().getSelectedItem();
+        String title = songHandler.pickSong(songTitle);
+        latestSong.setText(title);
     }
 }

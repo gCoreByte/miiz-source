@@ -105,7 +105,7 @@ public class App{
         // initialise our handlers
         WindowGroupHandler windowGroupHandler = new WindowGroupHandler(database, userAuth.getUser(), scan);
         ToDoListHandler toDoListHandler = new ToDoListHandler(database, userAuth.getUser(), scan);
-        SongHandler songHandler = new SongHandler(database, scan);
+        SongHandler songHandler = new SongHandler(database);
 
         divider();
 

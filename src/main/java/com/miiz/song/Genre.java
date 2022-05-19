@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Genre {
 
-    static List<String> genres = new ArrayList<>(Arrays.asList(
+    public static List<String> genres = new ArrayList<>(Arrays.asList(
             "CLASSICAL",
             "JAZZ",
             "CHILL",
