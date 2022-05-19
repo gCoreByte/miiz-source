@@ -28,6 +28,32 @@
         <menus>
           <Menu mnemonicParsing="false" text="Menüü">
             <items>
+                  <Menu mnemonicParsing="false" text="Töölaua näidis">
+                     <items>
+                        <MenuItem mnemonicParsing="false">
+                           <graphic>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@workspace.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="To Do List näidis">
+                     <items>
+                        <MenuItem mnemonicParsing="false">
+                           <graphic>
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@todolist.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                     </items>
+                  </Menu>
                   <MenuItem fx:id="logOut" mnemonicParsing="false" onAction="#logout" text="Logi välja" />
             </items>
           </Menu>
