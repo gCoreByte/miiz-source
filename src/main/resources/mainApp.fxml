@@ -14,7 +14,6 @@
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -63,9 +62,9 @@
           </Tab>
           <Tab fx:id="musicTab" closable="false" onSelectionChanged="#songsChanged" text="Muusika">
                <content>
-                   <VBox prefHeight="200.0" prefWidth="100.0">
+                   <VBox fillWidth="false" prefHeight="200.0" prefWidth="100.0">
                        <children>
-                           <HBox prefHeight="68.0" prefWidth="600.0">
+                           <HBox prefHeight="68.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
                                <children>
                                    <Button fx:id="randomSong" mnemonicParsing="false" onAction="#pickRandomSong" prefHeight="26.0" prefWidth="107.0" style="-fx-background-color: transparent; -fx-border-color: #D3D5D7;" text="Esita juhuslik" HBox.hgrow="ALWAYS">
                                        <font>
@@ -83,7 +82,7 @@
                                            <Font name="Times New Roman" size="14.0" />
                                        </font>
                                    </Label>
-                                   <Label fx:id="latestSong" prefHeight="28.0" prefWidth="355.0" style="-fx-border-color: #D3D5D7;" text="pealkiri">
+                                   <Label fx:id="latestSong" prefHeight="28.0" prefWidth="355.0" style="-fx-border-color: #D3D5D7;" text="pealkiri" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                            <Insets left="5.0" top="20.0" />
                                        </HBox.margin>
@@ -96,24 +95,34 @@
                                    </Label>
                                </children>
                            </HBox>
-                           <HBox prefHeight="215.0" prefWidth="600.0">
+                           <HBox prefHeight="215.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
                                <children>
-                                   <AnchorPane prefHeight="215.0" prefWidth="603.0">
-                                       <children>
-                                           <Label layoutX="367.0" layoutY="40.0" mouseTransparent="true" prefHeight="17.0" prefWidth="186.0" text="Vali lugu">
-                                               <font>
-                                                   <Font name="Times New Roman" size="14.0" />
-                                               </font>
-                                           </Label>
-                                           <ChoiceBox fx:id="genrePicker" layoutX="48.0" layoutY="33.0" prefHeight="31.0" prefWidth="187.0" style="-fx-background-color: transparent; -fx-border-color: #D3D5D7;" />
-                                           <Label layoutX="56.0" layoutY="41.0" mouseTransparent="true" text="Vali žanr">
-                                               <font>
-                                                   <Font name="Times New Roman" size="14.0" />
-                                               </font>
-                                           </Label>
-                                           <ChoiceBox fx:id="songPicker" layoutX="358.0" layoutY="33.0" prefHeight="31.0" prefWidth="188.0" style="-fx-background-color: transparent; -fx-border-color: #D3D5D7;" />
-                                       </children>
-                                   </AnchorPane>
+                                     <Label mouseTransparent="true" prefHeight="17.0" prefWidth="59.0" text="Vali lugu">
+                                         <font>
+                                             <Font name="Times New Roman" size="14.0" />
+                                         </font>
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="20.0" right="5.0" top="20.0" />
+                                 </HBox.margin>
+                                     </Label>
+                                     <ChoiceBox fx:id="songPicker" prefHeight="31.0" prefWidth="188.0" style="-fx-background-color: transparent; -fx-border-color: #D3D5D7;">
+                                 <HBox.margin>
+                                    <Insets top="12.0" />
+                                 </HBox.margin>
+                              </ChoiceBox>
+                                     <Label mouseTransparent="true" text="Vali žanr">
+                                         <font>
+                                             <Font name="Times New Roman" size="14.0" />
+                                         </font>
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="20.0" right="5.0" top="20.0" />
+                                 </HBox.margin>
+                                     </Label>
+                                     <ChoiceBox fx:id="genrePicker" prefHeight="31.0" prefWidth="187.0" style="-fx-background-color: transparent; -fx-border-color: #D3D5D7;">
+                                 <HBox.margin>
+                                    <Insets top="12.0" />
+                                 </HBox.margin>
+                              </ChoiceBox>
                                </children>
                            </HBox>
                        </children>
