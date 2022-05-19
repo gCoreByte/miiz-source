@@ -1,6 +1,6 @@
 package com.miiz.controllers;
 
-import com.miiz.AppNew;
+import com.miiz.App;
 import com.miiz.auth.UserAuth;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -11,15 +11,15 @@ import java.util.Objects;
 public class StartController {
 
     // higher app;
-    private final AppNew app;
+    private final App app;
     private final UserAuth userAuth;
-    public StartController(AppNew app) {
+    public StartController(App app) {
         this.app = app;
         this.userAuth = new UserAuth(app.database);
         app.stage.setResizable(false);
     }
 
-    public StartController(AppNew app, UserAuth userAuth) {
+    public StartController(App app, UserAuth userAuth) {
         this.app = app;
         this.userAuth = userAuth;
     }

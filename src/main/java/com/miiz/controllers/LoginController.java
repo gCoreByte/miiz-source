@@ -1,6 +1,6 @@
 package com.miiz.controllers;
 
-import com.miiz.AppNew;
+import com.miiz.App;
 import com.miiz.auth.User;
 import com.miiz.auth.UserAuth;
 import com.miiz.database.Database;
@@ -21,7 +21,7 @@ import java.util.Objects;
 public class LoginController {
 
     public UserAuth userAuth;
-    private final AppNew app;
+    private final App app;
 
     @FXML
     private Label loginFail;
@@ -30,7 +30,7 @@ public class LoginController {
     @FXML
     private PasswordField password;
 
-    public LoginController(AppNew app, UserAuth userAuth) {
+    public LoginController(App app, UserAuth userAuth) {
         this.userAuth = userAuth;
         this.app = app;
     }

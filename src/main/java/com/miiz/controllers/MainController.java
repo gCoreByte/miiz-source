@@ -1,6 +1,6 @@
 package com.miiz.controllers;
 
-import com.miiz.AppNew;
+import com.miiz.App;
 import com.miiz.auth.UserAuth;
 import com.miiz.group.WindowGroup;
 import com.miiz.group.WindowGroupHandler;
@@ -40,8 +40,8 @@ public class MainController {
     private WindowGroupHandler windowGroupHandler;
 
 
-    private final AppNew app;
-    public MainController(AppNew app) {
+    private final App app;
+    public MainController(App app) {
         this.app = app;
         this.toDoListHandler = new ToDoListHandler(app.database);
         this.notepadHandler = new NotepadHandler(app.database);
