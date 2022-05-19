@@ -81,10 +81,12 @@ public class MainController {
     public void addValue() {
         if (todoTree.getSelectionModel().getSelectedItem() == null) {
             toDoListHandler.addList(todoTitle.getText());
+            todoTitle.clear();
             todoChanged();
         }
         else if (todoTree.getSelectionModel().getSelectedItem().getValue() instanceof ToDoList) {
             toDoListHandler.addLine((ToDoList) todoTree.getSelectionModel().getSelectedItem().getValue(), todoTitle.getText());
+            todoTitle.clear();
             todoChanged();
         }
     }
@@ -109,9 +111,11 @@ public class MainController {
         }
         if (todoTree.getSelectionModel().getSelectedItem().getValue() instanceof ToDoList) {
             toDoListHandler.editList((ToDoList) todoTree.getSelectionModel().getSelectedItem().getValue(), todoTitle.getText());
+            todoTitle.clear();
             todoChanged();
         } else if (todoTree.getSelectionModel().getSelectedItem().getValue() instanceof ListLine) {
             toDoListHandler.editLine((ToDoList) todoTree.getSelectionModel().getSelectedItem().getParent().getValue(), (ListLine) todoTree.getSelectionModel().getSelectedItem().getValue(), todoTitle.getText());
+            todoTitle.clear();
             todoChanged();
         }
 
@@ -139,6 +143,8 @@ public class MainController {
 
     public void saveFile() throws IOException {
         notepadHandler.saveFileText(fileContent.getText(), fileName.getText());
+        fileContent.clear();
+        fileName.clear();
         notesChanged();
     }
 
@@ -229,10 +235,12 @@ public class MainController {
     public void addValueWS() {
         if (workSpaceTree.getSelectionModel().getSelectedItem() == null) {
             windowGroupHandler.newGroup(insertValueWS.getText());
+            insertValueWS.clear();
             workspaceChanged();
         }
         else if (workSpaceTree.getSelectionModel().getSelectedItem().getValue() instanceof WindowGroup) {
             windowGroupHandler.addGroupUrl((WindowGroup) workSpaceTree.getSelectionModel().getSelectedItem().getValue(), insertValueWS.getText());
+            insertValueWS.clear();
             workspaceChanged();
         }
 
