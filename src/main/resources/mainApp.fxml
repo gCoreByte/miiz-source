@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <MenuBar style="-fx-background-color: #fe9a01;" BorderPane.alignment="CENTER">
         <menus>
@@ -35,7 +35,7 @@
       </MenuBar>
    </top>
    <center>
-       <TabPane prefHeight="431.0" prefWidth="398.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+       <TabPane prefHeight="430.0" prefWidth="400.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
            <tabs>
                <Tab fx:id="toDoListTab" closable="false" onSelectionChanged="#todoChanged" style="-fx-background-color: #FFD23F;" text="To Do List">
                    <content>
@@ -88,29 +88,29 @@
           </Tab>
           <Tab fx:id="musicTab" closable="false" onSelectionChanged="#songsChanged" style="-fx-background-color: #EE4266;" text="Muusika">
                <content>
-                   <VBox fillWidth="false" prefHeight="200.0" prefWidth="100.0">
+                   <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0">
                        <children>
-                           <HBox prefHeight="68.0" prefWidth="600.0" VBox.vgrow="NEVER">
+                           <HBox prefHeight="137.0" prefWidth="600.0" VBox.vgrow="NEVER">
                                <children>
                                    <Button fx:id="randomSong" mnemonicParsing="false" onAction="#pickRandomSong" prefHeight="26.0" prefWidth="107.0" style="-fx-background-color: transparent; -fx-border-color: #EE4266;" text="Esita juhuslik" HBox.hgrow="ALWAYS">
                                        <font>
                                            <Font name="Times New Roman" size="14.0" />
                                        </font>
                                        <HBox.margin>
-                                           <Insets bottom="5.0" left="5.0" right="5.0" top="20.0" />
+                                           <Insets bottom="5.0" left="5.0" right="5.0" top="45.0" />
                                        </HBox.margin>
                                    </Button>
                                    <Label prefHeight="27.0" prefWidth="100.0" text="Viimati esitatud:">
                                        <HBox.margin>
-                                           <Insets left="15.0" top="20.0" />
+                                           <Insets left="15.0" top="45.0" />
                                        </HBox.margin>
                                        <font>
                                            <Font name="Times New Roman" size="14.0" />
                                        </font>
                                    </Label>
-                                   <Label fx:id="latestSong" prefHeight="28.0" prefWidth="355.0" style="-fx-border-color: #fe9a01;" text="pealkiri" HBox.hgrow="ALWAYS">
+                                   <Label fx:id="latestSong" prefHeight="28.0" prefWidth="355.0" style="-fx-border-color: #fe9a01;" text="pealkiri" textFill="#bfa5a5" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
-                                           <Insets left="5.0" top="20.0" />
+                                           <Insets left="5.0" top="45.0" />
                                        </HBox.margin>
                                        <font>
                                            <Font name="Times New Roman" size="14.0" />
@@ -121,14 +121,14 @@
                                    </Label>
                                </children>
                            </HBox>
-                           <HBox prefHeight="215.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+                           <HBox alignment="TOP_CENTER" prefHeight="190.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
                                <children>
                                      <Label mouseTransparent="true" prefHeight="17.0" prefWidth="59.0" text="Vali lugu">
                                          <font>
                                              <Font name="Times New Roman" size="14.0" />
                                          </font>
                                  <HBox.margin>
-                                    <Insets bottom="5.0" left="20.0" right="5.0" top="20.0" />
+                                    <Insets bottom="5.0" right="5.0" top="20.0" />
                                  </HBox.margin>
                                      </Label>
                                      <ChoiceBox fx:id="songPicker" prefHeight="31.0" prefWidth="188.0" style="-fx-background-color: transparent; -fx-border-color: #FFD23F;">

@@ -32,6 +32,8 @@ public class App extends Application {
 
         primaryStage.setTitle("Miiz");
         primaryStage.setScene(new Scene(startScreen, 600, 400));
+        primaryStage.setMinWidth(620);
+        primaryStage.setMinHeight(440);
         primaryStage.show();
     }
 
