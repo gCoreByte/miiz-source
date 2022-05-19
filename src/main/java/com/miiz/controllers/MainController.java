@@ -121,7 +121,7 @@ public class MainController {
      * Adds a new value to the tree, either a List or a Line
      */
     public void addValue() {
-        if (todoTree.getSelectionModel().getSelectedItem() == null) {
+        if (todoTree.getSelectionModel().getSelectedItem() == null || todoTree.getSelectionModel().getSelectedItem().getValue() instanceof ListLine) {
             toDoListHandler.addList(todoTitle.getText());
             todoTitle.clear();
             todoChanged();
@@ -287,7 +287,7 @@ public class MainController {
      * Adds a value to the tree
      */
     public void addValueWS() {
-        if (workSpaceTree.getSelectionModel().getSelectedItem() == null) {
+        if (workSpaceTree.getSelectionModel().getSelectedItem() == null || workSpaceTree.getSelectionModel().getSelectedItem().getValue() instanceof WindowURL) {
             windowGroupHandler.newGroup(insertValueWS.getText());
             insertValueWS.clear();
             workspaceChanged();
