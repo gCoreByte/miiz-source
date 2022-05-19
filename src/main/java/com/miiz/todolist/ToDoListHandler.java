@@ -1,6 +1,6 @@
 package com.miiz.todolist;
 
-import com.miiz.AppNew;
+import com.miiz.App;
 import com.miiz.database.Database;
 
 import javax.xml.crypto.Data;
