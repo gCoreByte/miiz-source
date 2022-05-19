@@ -97,7 +97,7 @@
                                  <VBox.margin>
                                     <Insets left="58.0" right="50.0" />
                                  </VBox.margin></Button>
-                                       <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#editValue" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: transperant; -fx-border-color: #EE4266;" text="Muuda">
+                                       <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#editValue" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: transperant; -fx-border-color: #EE4266;" text="Muuda" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font name="Times New Roman" size="14.0" />
                                  </font>
