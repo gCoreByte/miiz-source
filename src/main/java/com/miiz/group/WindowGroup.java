@@ -12,7 +12,7 @@ import java.util.List;
  * It contains methods related to a single WindowGroup and provides ease-of-access from
  * database calls.
  */
-public class WindowGroup {
+public class WindowGroup implements WorkSpace{
     private long id;
     private final long ownerid;
     private String name;

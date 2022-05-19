@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F8F4E3;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: ffffff; -fx-border-color: #70D6FF; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <AnchorPane prefHeight="246.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -20,15 +20,21 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button fx:id="registerB" layoutX="321.0" layoutY="151.0" mnemonicParsing="false" onAction="#register" prefHeight="27.0" prefWidth="87.0" style="-fx-background-color: transperant; -fx-border-color: #000000;" text="Loo kasutaja" />
-            <TextField fx:id="username" layoutX="178.0" layoutY="63.0" prefHeight="25.0" prefWidth="230.0" promptText="kasutajanimi" />
-            <PasswordField fx:id="password" layoutX="178.0" layoutY="107.0" prefHeight="25.0" prefWidth="230.0" promptText="parool" />
-            <Button fx:id="exitB" layoutX="178.0" layoutY="151.0" mnemonicParsing="false" onAction="#exit" prefWidth="87.0" style="-fx-background-color: transparent; -fx-border-color: #000000;" text="Tagasi" />
+            <Button fx:id="registerB" layoutX="321.0" layoutY="151.0" mnemonicParsing="false" onAction="#register" prefHeight="27.0" prefWidth="87.0" style="-fx-background-color: transperant; -fx-border-color: #3BCEAC; -fx-border-width: 2;" text="Loo kasutaja" />
+            <TextField fx:id="username" layoutX="178.0" layoutY="63.0" prefHeight="25.0" prefWidth="230.0" promptText="kasutajanimi">
+               <font>
+                  <Font name="Times New Roman" size="14.0" />
+               </font></TextField>
+            <PasswordField fx:id="password" layoutX="178.0" layoutY="107.0" prefHeight="25.0" prefWidth="230.0" promptText="parool">
+               <font>
+                  <Font name="Times New Roman" size="14.0" />
+               </font></PasswordField>
+            <Button fx:id="exitB" layoutX="178.0" layoutY="151.0" mnemonicParsing="false" onAction="#exit" prefWidth="87.0" style="-fx-background-color: transparent; -fx-border-color: #FFD23F; -fx-border-width: 2;" text="Tagasi" />
          </children>
       </AnchorPane>
    </center>
    <top>
-      <ImageView fitHeight="107.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="TOP_CENTER">
+      <ImageView fitHeight="125.0" fitWidth="115.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="TOP_CENTER">
          <BorderPane.margin>
             <Insets top="15.0" />
          </BorderPane.margin>

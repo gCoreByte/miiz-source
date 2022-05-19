@@ -2,6 +2,9 @@ package com.miiz.controllers;
 
 import com.miiz.AppNew;
 import com.miiz.auth.UserAuth;
+import com.miiz.group.WindowGroup;
+import com.miiz.group.WindowGroupHandler;
+import com.miiz.group.WorkSpace;
 import com.miiz.notepad.NotepadHandler;
 import com.miiz.song.Genre;
 import com.miiz.song.SongHandler;
@@ -33,6 +36,7 @@ public class MainController {
     private ToDoListHandler toDoListHandler;
     private NotepadHandler notepadHandler;
     private SongHandler songHandler;
+    private WindowGroupHandler windowGroupHandler;
 
 
     private final AppNew app;
@@ -150,9 +154,6 @@ public class MainController {
     // Songs
 
     @FXML
-    private Button randomSong;
-
-    @FXML
     private ChoiceBox<String> genrePicker;
 
     @FXML
@@ -190,4 +191,17 @@ public class MainController {
             }
         });
     }
+
+    // workspace
+
+    @FXML
+    private TreeView<WorkSpace> workSpaceTree;
+
+    @FXML
+    private TextField insertValueWS;
+
+    public void workSpace(){
+
+    }
+
 }

@@ -22,9 +22,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #F8F4E3;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: ffffff;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <MenuBar style="-fx-background-color: #CF5C36;" BorderPane.alignment="CENTER">
+      <MenuBar style="-fx-background-color: #fe9a01;" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="Menüü">
             <items>
@@ -37,23 +37,47 @@
    <center>
        <TabPane prefHeight="431.0" prefWidth="398.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
            <tabs>
-               <Tab fx:id="toDoListTab" closable="false" onSelectionChanged="#todoChanged" text="To Do List">
+               <Tab fx:id="toDoListTab" closable="false" onSelectionChanged="#todoChanged" style="-fx-background-color: #FFD23F;" text="To Do List">
                    <content>
                        <HBox fx:id="toDoListHB" prefHeight="100.0" prefWidth="200.0">
                            <opaqueInsets>
                                <Insets />
                            </opaqueInsets>
                            <children>
-                               <TreeView fx:id="todoTree" prefHeight="277.0" prefWidth="338.0" />
-                               <VBox prefHeight="277.0" prefWidth="194.0" spacing="30.0">
+                               <TreeView fx:id="todoTree" prefHeight="291.0" prefWidth="342.0" style="-fx-border-color: #70D6FF; -fx-border-width: 2;" />
+                               <VBox prefHeight="220.0" prefWidth="214.0" spacing="25.0">
                                    <HBox.margin>
-                                       <Insets left="20.0" top="50.0" />
+                                       <Insets left="5.0" top="55.0" />
                                    </HBox.margin>
                                    <children>
-                                       <TextField fx:id="todoTitle" alignment="CENTER" promptText="uus väärtus" VBox.vgrow="ALWAYS" />
-                                       <Button alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addValue" prefHeight="25.0" prefWidth="200.0" text="Lisa väärtus" textAlignment="CENTER" />
-                                       <Button alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteValue" prefHeight="25.0" prefWidth="200.0" text="Eemalda väärtus" textAlignment="CENTER" VBox.vgrow="ALWAYS" />
-                                       <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#editValue" prefWidth="200.0" text="Muuda väärtust" />
+                                       <TextField fx:id="todoTitle" alignment="CENTER" prefHeight="28.0" prefWidth="209.0" promptText="uus väärtus" style="-fx-background-color: transperant; -fx-border-color: #3BCEAC;" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Times New Roman" size="14.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="5.0" />
+                                 </VBox.margin></TextField>
+                                       <Button alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addValue" prefHeight="28.0" prefWidth="118.0" style="-fx-background-color: transperant; -fx-border-color: #fe9a01;" text="Lisa" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Times New Roman" size="14.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="58.0" right="50.0" />
+                                 </VBox.margin></Button>
+                                       <Button alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteValue" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: transperant; -fx-border-color: #FFD23F;" text="Eemalda" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Times New Roman" size="14.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="58.0" right="50.0" />
+                                 </VBox.margin></Button>
+                                       <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#editValue" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: transperant; -fx-border-color: #EE4266;" text="Muuda">
+                                 <font>
+                                    <Font name="Times New Roman" size="14.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets left="58.0" right="50.0" />
+                                 </VBox.margin></Button>
                                    </children>
                                </VBox>
                            </children>
@@ -62,13 +86,13 @@
                      </padding></HBox>
                </content>
           </Tab>
-          <Tab fx:id="musicTab" closable="false" onSelectionChanged="#songsChanged" text="Muusika">
+          <Tab fx:id="musicTab" closable="false" onSelectionChanged="#songsChanged" style="-fx-background-color: #EE4266;" text="Muusika">
                <content>
                    <VBox fillWidth="false" prefHeight="200.0" prefWidth="100.0">
                        <children>
-                           <HBox prefHeight="68.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+                           <HBox prefHeight="68.0" prefWidth="600.0" VBox.vgrow="NEVER">
                                <children>
-                                   <Button fx:id="randomSong" mnemonicParsing="false" onAction="#pickRandomSong" prefHeight="26.0" prefWidth="107.0" style="-fx-background-color: transparent; -fx-border-color: #D3D5D7;" text="Esita juhuslik" HBox.hgrow="ALWAYS">
+                                   <Button fx:id="randomSong" mnemonicParsing="false" onAction="#pickRandomSong" prefHeight="26.0" prefWidth="107.0" style="-fx-background-color: transparent; -fx-border-color: #fe9a01;" text="Esita juhuslik" HBox.hgrow="ALWAYS">
                                        <font>
                                            <Font name="Times New Roman" size="14.0" />
                                        </font>
@@ -84,7 +108,7 @@
                                            <Font name="Times New Roman" size="14.0" />
                                        </font>
                                    </Label>
-                                   <Label fx:id="latestSong" prefHeight="28.0" prefWidth="355.0" style="-fx-border-color: #D3D5D7;" text="pealkiri" HBox.hgrow="ALWAYS">
+                                   <Label fx:id="latestSong" prefHeight="28.0" prefWidth="355.0" style="-fx-border-color: #3BCEAC;" text="pealkiri" HBox.hgrow="ALWAYS">
                                        <HBox.margin>
                                            <Insets left="5.0" top="20.0" />
                                        </HBox.margin>
@@ -107,7 +131,7 @@
                                     <Insets bottom="5.0" left="20.0" right="5.0" top="20.0" />
                                  </HBox.margin>
                                      </Label>
-                                     <ChoiceBox fx:id="songPicker" prefHeight="31.0" prefWidth="188.0" style="-fx-background-color: transparent; -fx-border-color: #D3D5D7;">
+                                     <ChoiceBox fx:id="songPicker" prefHeight="31.0" prefWidth="188.0" style="-fx-background-color: transparent; -fx-border-color: #EE4266;">
                                  <HBox.margin>
                                     <Insets top="12.0" />
                                  </HBox.margin>
@@ -120,7 +144,7 @@
                                     <Insets bottom="5.0" left="20.0" right="5.0" top="20.0" />
                                  </HBox.margin>
                                      </Label>
-                                     <ChoiceBox fx:id="genrePicker" prefHeight="31.0" prefWidth="187.0" style="-fx-background-color: transparent; -fx-border-color: #D3D5D7;">
+                                     <ChoiceBox fx:id="genrePicker" prefHeight="31.0" prefWidth="187.0" style="-fx-background-color: transparent; -fx-border-color: #fe9a01;">
                                  <HBox.margin>
                                     <Insets top="12.0" />
                                  </HBox.margin>
@@ -131,24 +155,77 @@
                    </VBox>
                </content>
           </Tab>
-            <Tab fx:id="workSpaceTab" closable="false" text="Töölaud">
+            <Tab fx:id="workSpaceTab" closable="false" style="-fx-background-color: #3BCEAC;" text="Töölaud">
                <content>
-                  <HBox fx:id="workSpaceHB" prefHeight="100.0" prefWidth="200.0" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <TreeView fx:id="workSpaceTree" prefHeight="272.0" prefWidth="341.0" style="-fx-border-color: #fe9a01; -fx-border-width: 2;" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets left="20.0" right="5.0" top="20.0" />
+                           </HBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </TreeView>
+                        <VBox prefHeight="297.0" prefWidth="232.0">
+                           <children>
+                              <TextField fx:id="insertValueWS" alignment="CENTER" prefHeight="28.0" prefWidth="202.0" promptText="uus väärtus" style="-fx-background-color: transperant; -fx-border-color: #FFD23F;" VBox.vgrow="ALWAYS">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="18.0" top="75.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="Times New Roman" size="14.0" />
+                                 </font>
+                              </TextField>
+                              <Button fx:id="add" mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-background-color: transperant; -fx-border-color: #3BCEAC;" text="Lisa" VBox.vgrow="ALWAYS">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="55.0" right="5.0" top="20.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="Times New Roman" size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-border-color: #70D6FF; -fx-background-color: transperant;" text="Eemalda" VBox.vgrow="ALWAYS">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="55.0" right="5.0" top="20.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="Times New Roman" size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="110.0" style="-fx-border-color: #EE4266; -fx-background-color: transperant;" text="Ava" VBox.vgrow="ALWAYS">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="55.0" right="5.0" top="20.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="Times New Roman" size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
                </content>
             </Tab>
-            <Tab fx:id="notePadTab" closable="false" onSelectionChanged="#notesChanged" text="Märkmed">
+            <Tab fx:id="notePadTab" closable="false" onSelectionChanged="#notesChanged" style="-fx-background-color: #70D6FF;" text="Märkmed">
                <content>
                   <HBox prefHeight="264.0" prefWidth="600.0">
                      <padding>
                         <Insets left="20.0" right="20.0" top="20.0" />
                      </padding>
                      <children>
-                        <TextArea fx:id="fileContent" prefHeight="277.0" prefWidth="409.0" wrapText="true" HBox.hgrow="ALWAYS" />
-                        <VBox fillWidth="false" prefHeight="277.0" prefWidth="152.0" spacing="20.0">
+                        <TextArea fx:id="fileContent" prefHeight="277.0" prefWidth="334.0" style="-fx-border-color: #3BCEAC; -fx-border-width: 2;" wrapText="true" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets right="25.0" />
+                           </HBox.margin></TextArea>
+                        <VBox fillWidth="false" prefHeight="277.0" prefWidth="182.0" spacing="20.0">
                            <children>
-                              <TextField fx:id="fileName" promptText="Faili nimi" VBox.vgrow="ALWAYS" />
-                              <ChoiceBox fx:id="filePicker" prefWidth="150.0" />
-                              <GridPane prefHeight="131.0" prefWidth="147.0">
+                              <TextField fx:id="fileName" promptText="Faili nimi" style="-fx-background-color: transparent; -fx-border-color: #FFD23F;" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Times New Roman" size="14.0" />
+                                 </font></TextField>
+                              <ChoiceBox fx:id="filePicker" prefHeight="27.0" prefWidth="178.0" style="-fx-background-color: transparent; -fx-border-color: #fe9a01;" />
+                              <GridPane prefHeight="144.0" prefWidth="201.0">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -159,8 +236,14 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#saveFile" text="Salvesta" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                                    <Button mnemonicParsing="false" onAction="#deleteFile" text="Kustuta" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                                    <Button mnemonicParsing="false" onAction="#saveFile" prefHeight="28.0" prefWidth="71.0" style="-fx-background-color: transparent; -fx-border-color: #EE4266;" text="Salvesta" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                       <font>
+                                          <Font name="Times New Roman" size="14.0" />
+                                       </font></Button>
+                                    <Button mnemonicParsing="false" onAction="#deleteFile" style="-fx-background-color: transparent; -fx-border-color: #FFD23F;" text="Kustuta" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                       <font>
+                                          <Font name="Times New Roman" size="14.0" />
+                                       </font></Button>
                                  </children>
                               </GridPane>
                            </children>
