@@ -35,21 +35,23 @@
    <center>
       <TabPane prefHeight="431.0" prefWidth="398.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
-          <Tab fx:id="toDoListTab" closable="false" text="To Do List">
+          <Tab fx:id="toDoListTab" closable="false" onSelectionChanged="#todoChanged" text="To Do List">
                <content>
                   <HBox fx:id="toDoListHB" prefHeight="100.0" prefWidth="200.0">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                      <children>
-                        <TreeView fx:id="todoTree" prefHeight="277.0" prefWidth="374.0" />
-                        <VBox prefHeight="277.0" prefWidth="194.0" spacing="50.0">
+                        <TreeView fx:id="todoTree" prefHeight="277.0" prefWidth="338.0" />
+                        <VBox prefHeight="277.0" prefWidth="194.0" spacing="30.0">
                            <HBox.margin>
                               <Insets left="20.0" top="50.0" />
                            </HBox.margin>
                            <children>
-                              <TextField fx:id="todoTitle" alignment="CENTER" promptText="todolisti pealkiri" VBox.vgrow="ALWAYS" />
-                              <Button fx:id="addList" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="185.0" text="Lisa uus todolist" textAlignment="CENTER" VBox.vgrow="ALWAYS" />
+                              <TextField fx:id="todoTitle" alignment="CENTER" promptText="uus väärtus" VBox.vgrow="ALWAYS" />
+                              <Button alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addValue" prefHeight="25.0" prefWidth="200.0" text="Lisa väärtus" textAlignment="CENTER" />
+                              <Button alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteValue" prefHeight="25.0" prefWidth="200.0" text="Eemalda väärtus" textAlignment="CENTER" VBox.vgrow="ALWAYS" />
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#editValue" prefWidth="200.0" text="Muuda väärtust" />
                            </children>
                         </VBox>
                      </children>

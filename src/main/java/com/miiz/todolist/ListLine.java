@@ -1,6 +1,6 @@
 package com.miiz.todolist;
 
-public class ListLine {
+public class ListLine implements TodoTree {
     private long id;
     private String content;
     private long parentid;
@@ -36,5 +36,10 @@ public class ListLine {
 
     public long getParentid() {
         return parentid;
+    }
+
+    @Override
+    public String toString() {
+        return content;
     }
 }
