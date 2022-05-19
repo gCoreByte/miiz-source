@@ -1,7 +1,6 @@
 package com.miiz.controllers;
 
 import com.miiz.App;
-import com.miiz.auth.UserAuth;
 import com.miiz.group.WindowGroup;
 import com.miiz.group.WindowGroupHandler;
 import com.miiz.group.WindowURL;
@@ -13,9 +12,6 @@ import com.miiz.todolist.ListLine;
 import com.miiz.todolist.ToDoList;
 import com.miiz.todolist.ToDoListHandler;
 import com.miiz.todolist.TodoTree;
-import javafx.beans.binding.ListExpression;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -24,16 +20,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 
-import java.awt.event.ActionEvent;
-import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.nio.file.Files;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Controls the main layout and handles communication between the user and the program
+ */
 public class MainController {
 
+    /**
+     * All the required handlers, which handle the data
+     */
     private ToDoListHandler toDoListHandler;
     private NotepadHandler notepadHandler;
     private SongHandler songHandler;
@@ -43,6 +41,9 @@ public class MainController {
     private final App app;
     public MainController(App app) {
         this.app = app;
+        /**
+         * Initialising handlers
+         */
         this.toDoListHandler = new ToDoListHandler(app.database);
         this.notepadHandler = new NotepadHandler(app.database);
         this.songHandler = new SongHandler(app.database);
@@ -51,9 +52,42 @@ public class MainController {
         app.stage.setResizable(true);
     }
 
+    /**
+     * Initialises the listeners
+     */
+    public void initialise() {
+        filePicker.getSelectionModel().selectedIndexProperty().addListener((observableValue, number, number2) -> {
+            try {
+                fileContent.setText(notepadHandler.getFileText(filePicker.getItems().get((Integer) number2)));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
+        genrePicker.getSelectionModel().selectedIndexProperty().addListener((observableValue, number, number2) -> {
+            try {
+                String genre = genrePicker.getItems().get((Integer) number2);
+                String title = songHandler.pickSongByGenre(genre);
+                latestSong.setText(title);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 
-    // todolist
+        songPicker.getSelectionModel().selectedIndexProperty().addListener((observableValue, number, number2) -> {
+            try {
+                String songTitle = songPicker.getItems().get((Integer) number2);
+                String title = songHandler.pickSong(songTitle);
+                latestSong.setText(title);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    /**
+     * ToDoList tab
+     */
 
     @FXML
     private TreeView<TodoTree> todoTree;
@@ -61,6 +95,10 @@ public class MainController {
     @FXML
     private TextField todoTitle;
 
+    /**
+     * Redraws the tree whenever called.
+     * Gets called whenever the tab is opened and whenever the tree changes.
+     */
     public void todoChanged() {
         // TREE TIME
         TreeItem<TodoTree> rootNode = new TreeItem<>();
@@ -78,6 +116,10 @@ public class MainController {
         todoTree.setRoot(rootNode);
     }
 
+
+    /**
+     * Adds a new value to the tree, either a List or a Line
+     */
     public void addValue() {
         if (todoTree.getSelectionModel().getSelectedItem() == null) {
             toDoListHandler.addList(todoTitle.getText());
@@ -91,6 +133,9 @@ public class MainController {
         }
     }
 
+    /**
+     * Deletes a value from the tree, either a List or a Line
+     */
     public void deleteValue() {
         if (todoTree.getSelectionModel().getSelectedItem() == null) {
             return;
@@ -105,6 +150,9 @@ public class MainController {
 
     }
 
+    /**
+     * Deletes a value from the tree, either a List or a Line
+     */
     public void editValue() {
         if (todoTree.getSelectionModel().getSelectedItem() == null) {
             return;
@@ -121,7 +169,9 @@ public class MainController {
 
     }
 
-    // notepad
+    /**
+     * Notepad tab
+     */
 
     @FXML
     private TextArea fileContent;
@@ -132,6 +182,10 @@ public class MainController {
     @FXML
     private ChoiceBox<String> filePicker;
 
+    /**
+     * Logs the user out
+     * @throws IOException
+     */
     public void logout() throws IOException {
         app.database.setUser(null);
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/startScreen.fxml")));
@@ -141,6 +195,10 @@ public class MainController {
         app.stage.setScene(new Scene(pane, 600, 400));
     }
 
+    /**
+     * Saves the file the user is editing
+     * @throws IOException
+     */
     public void saveFile() throws IOException {
         notepadHandler.saveFileText(fileContent.getText(), fileName.getText());
         fileContent.clear();
@@ -148,17 +206,13 @@ public class MainController {
         notesChanged();
     }
 
+    /**
+     *  Whenever we open the tab, we want to check for new files
+     */
     public void notesChanged() {
         String[] filesList = notepadHandler.getFiles();
         ObservableList<String> o = FXCollections.observableArrayList(filesList);
         filePicker.setItems(o);
-        filePicker.getSelectionModel().selectedIndexProperty().addListener((observableValue, number, number2) -> {
-            try {
-                fileContent.setText(notepadHandler.getFileText(filePicker.getItems().get((Integer) number2)));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
     }
 
     public void deleteFile() {
@@ -166,7 +220,9 @@ public class MainController {
         notesChanged();
     }
 
-    // Songs
+    /**
+     * Songs tab
+     */
 
     @FXML
     private ChoiceBox<String> genrePicker;
@@ -177,37 +233,29 @@ public class MainController {
     @FXML
     private Label latestSong;
 
+    /**
+     * Plays a random song
+     */
     public void pickRandomSong(){
         String title = songHandler.pickRandomSong();
         latestSong.setText(title);
     }
 
+    /**
+     * Updates song on tab change
+     */
     public void songsChanged() {
         ObservableList<String> o = FXCollections.observableArrayList(Genre.genres);
         genrePicker.setItems(o);
-        genrePicker.getSelectionModel().selectedIndexProperty().addListener((observableValue, number, number2) -> {
-            try {
-                String genre = genrePicker.getItems().get((Integer) number2);
-                String title = songHandler.pickSongByGenre(genre);
-                latestSong.setText(title);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+
         ObservableList<String> i = FXCollections.observableArrayList(songHandler.getSongTitles());
         songPicker.setItems(i);
-        songPicker.getSelectionModel().selectedIndexProperty().addListener((observableValue, number, number2) -> {
-            try {
-                String songTitle = songPicker.getItems().get((Integer) number2);
-                String title = songHandler.pickSong(songTitle);
-                latestSong.setText(title);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
+
     }
 
-    // workspace
+    /**
+     * Workspace tab
+     */
 
     @FXML
     private TreeView<WorkSpace> workSpaceTree;
@@ -215,6 +263,9 @@ public class MainController {
     @FXML
     private TextField insertValueWS;
 
+    /**
+     * Redraws tree on tab change
+     */
     public void workspaceChanged() {
         // TREE TIME
         TreeItem<WorkSpace> rootNode = new TreeItem<>();
@@ -232,6 +283,9 @@ public class MainController {
         workSpaceTree.setRoot(rootNode);
     }
 
+    /**
+     * Adds a value to the tree
+     */
     public void addValueWS() {
         if (workSpaceTree.getSelectionModel().getSelectedItem() == null) {
             windowGroupHandler.newGroup(insertValueWS.getText());
@@ -246,6 +300,9 @@ public class MainController {
 
     }
 
+    /**
+     * Deletes a value
+     */
     public void deleteValueWS() {
         if (workSpaceTree.getSelectionModel().getSelectedItem() == null) {
             return;
@@ -259,6 +316,9 @@ public class MainController {
         }
     }
 
+    /**
+     * Opens a group
+     */
     public void openValueWS() {
         if (workSpaceTree.getSelectionModel().getSelectedItem() == null) {
             return;

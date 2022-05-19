@@ -1,23 +1,21 @@
 package com.miiz.controllers;
 
 import com.miiz.App;
-import com.miiz.auth.User;
 import com.miiz.auth.UserAuth;
-import com.miiz.database.Database;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Controls the login layout and handles communication between the user and the program
+ */
 public class LoginController {
 
     public UserAuth userAuth;
@@ -35,6 +33,11 @@ public class LoginController {
         this.app = app;
     }
 
+    /**
+     * Allows the user to transition to the next element by pressing enter
+     * @param event
+     * @throws IOException
+     */
     public void onEnter(KeyEvent event) throws IOException {
         if (event.getCode() != KeyCode.ENTER) {
             return;
@@ -48,6 +51,11 @@ public class LoginController {
     }
 
 
+    /**
+     * Tries to login
+     * Moves to mainApp.fxml if successful
+     * @throws IOException
+     */
     public void login() throws IOException { // when button pressed
         if (userAuth.userLogin(username.getText(), password.getText())) {
             FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/mainApp.fxml")));
@@ -60,6 +68,10 @@ public class LoginController {
 
     }
 
+    /**
+     * Returns to startScreen.fxml
+     * @throws IOException
+     */
     public void exit() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/startScreen.fxml")));
         StartController startController = new StartController(app, userAuth);
