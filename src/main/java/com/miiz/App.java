@@ -122,7 +122,7 @@ public class App{
             switch (user_input) {
                 case "1" -> toDoListHandler.main();
 
-                case "2" -> songHandler.main();
+                //case "2" -> songHandler.main();
 
                 case "3" -> windowGroupHandler.main();
 
