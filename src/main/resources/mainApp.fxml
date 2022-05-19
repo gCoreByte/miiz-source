@@ -44,7 +44,7 @@
                                <Insets />
                            </opaqueInsets>
                            <children>
-                               <TreeView fx:id="todoTree" prefHeight="277.0" prefWidth="338.0" style="-fx-border-color: #EE4266; -fx-border-width: 2;" />
+                               <TreeView fx:id="todoTree" prefHeight="277.0" prefWidth="338.0" style="-fx-border-color: #EE4266; -fx-border-width: 2;" HBox.hgrow="ALWAYS" />
                                <VBox prefHeight="277.0" prefWidth="194.0" spacing="30.0">
                                    <HBox.margin>
                                        <Insets left="20.0" top="50.0" />
@@ -159,12 +159,12 @@
                <content>
                   <HBox fx:id="workSpaceHB" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <HBox fx:id="toDoListHB1" prefHeight="297.0" prefWidth="621.0">
+                        <HBox fx:id="toDoListHB1" prefHeight="297.0" prefWidth="621.0" HBox.hgrow="ALWAYS">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
                            <children>
-                              <TreeView fx:id="workSpaceTree" prefHeight="277.0" prefWidth="338.0" style="-fx-border-color: #70D6FF; -fx-border-width: 2;" />
+                              <TreeView fx:id="workSpaceTree" prefHeight="277.0" prefWidth="338.0" style="-fx-border-color: #70D6FF; -fx-border-width: 2;" HBox.hgrow="ALWAYS" />
                               <VBox prefHeight="277.0" prefWidth="194.0" spacing="30.0">
                                  <HBox.margin>
                                     <Insets left="20.0" top="50.0" />
