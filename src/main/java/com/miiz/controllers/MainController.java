@@ -221,6 +221,8 @@ public class MainController {
 
     public void deleteFile() {
         notepadHandler.deleteFile(filePicker.getValue());
+        fileContent.clear();
+        fileName.clear();
         notesChanged();
     }
 
