@@ -55,7 +55,7 @@ public class MainController {
     /**
      * Initialises the listeners
      */
-    public void initialise() {
+    public void initialize() {
         filePicker.getSelectionModel().selectedIndexProperty().addListener((observableValue, number, number2) -> {
             try {
                 fileContent.setText(notepadHandler.getFileText(filePicker.getItems().get((Integer) number2)));
@@ -121,6 +121,9 @@ public class MainController {
      * Adds a new value to the tree, either a List or a Line
      */
     public void addValue() {
+        if (todoTitle.getText().equals("")) {
+            return;
+        }
         if (todoTree.getSelectionModel().getSelectedItem() == null || todoTree.getSelectionModel().getSelectedItem().getValue() instanceof ListLine) {
             toDoListHandler.addList(todoTitle.getText());
             todoTitle.clear();
@@ -154,7 +157,7 @@ public class MainController {
      * Deletes a value from the tree, either a List or a Line
      */
     public void editValue() {
-        if (todoTree.getSelectionModel().getSelectedItem() == null) {
+        if (todoTree.getSelectionModel().getSelectedItem() == null || todoTitle.getText().equals("")) {
             return;
         }
         if (todoTree.getSelectionModel().getSelectedItem().getValue() instanceof ToDoList) {
@@ -287,6 +290,9 @@ public class MainController {
      * Adds a value to the tree
      */
     public void addValueWS() {
+        if (insertValueWS.getText().equals("")) {
+            return;
+        }
         if (workSpaceTree.getSelectionModel().getSelectedItem() == null || workSpaceTree.getSelectionModel().getSelectedItem().getValue() instanceof WindowURL) {
             windowGroupHandler.newGroup(insertValueWS.getText());
             insertValueWS.clear();
