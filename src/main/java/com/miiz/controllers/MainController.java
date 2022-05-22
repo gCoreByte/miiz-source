@@ -59,6 +59,7 @@ public class MainController {
         filePicker.getSelectionModel().selectedIndexProperty().addListener((observableValue, number, number2) -> {
             try {
                 fileContent.setText(notepadHandler.getFileText(filePicker.getItems().get((Integer) number2)));
+                fileName.setText(filePicker.getItems().get((Integer) number2));
             } catch (IOException e) {
                 e.printStackTrace();
             }
